@@ -4,7 +4,7 @@ import "../styles/authStyles.css"; // Shared auth styles
 import "@fontsource/barlow-semi-condensed";
 import "@fontsource/raleway";
 
-const Login = () => {
+const Signup = () => {
   return (
     <div className="auth-container">
       {/* Water ripple background */}
@@ -33,11 +33,10 @@ const Login = () => {
             <input type="password" style={{ fontFamily: "Raleway" }} />
           </div>
 
-          <input type="password" placeholder="Confirm Password" />
-          <button style={{ backgroundColor: "#6EE4FF" }}>Sign Up</button>
-          <p>
-            Existing user? <a href="/login">Login</a>
-          </p>
+          <div className="input-group">
+            <label>Confirm Password</label>
+            <input type="password" />
+          </div>
 
           <motion.button
             whileHover={{ scale: 1.03 }}
@@ -45,14 +44,14 @@ const Login = () => {
             className="auth-btn"
             style={{ backgroundColor: "#0AC7A1" }}
           >
-            Login
+            Signup
           </motion.button>
         </form>
 
         <p className="auth-switch">
-          New user?{" "}
-          <a href="/signup" style={{ color: "#FF5C87" }}>
-            Sign up
+          Existing user?{" "}
+          <a href="/?" style={{ color: "#FF5C87" }}>
+            Login
           </a>
         </p>
       </motion.div>
@@ -60,4 +59,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
