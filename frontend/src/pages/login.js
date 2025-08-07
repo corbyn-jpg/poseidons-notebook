@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import "../styles/authStyles.css"; // Shared style
+import Bubbles from "../components/bubbles";
 import '@fontsource/barlow-semi-condensed';
 import '@fontsource/raleway';
 
 const Login = () => {
   return (
     <div className="auth-container">
+      <Bubbles />
 
       {/* Auth card */}
       <motion.div 

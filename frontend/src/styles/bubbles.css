@@ -1,0 +1,39 @@
+
+.bubbles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.8;
+  width: var(--size);
+  height: var(--size);
+  bottom: var(--initial-bottom);
+  background: radial-gradient(
+    ellipse at var(--bg-pos),
+    #6EE4FF 0%,
+    #30b3d3 46%,
+    #20628c 100%
+  );
+  animation: float var(--duration) infinite;
+}
+
+@keyframes float {
+  0% {
+    bottom: -100px;
+    opacity: 0.8;
+  }
+  100% {
+    bottom: var(--final-bottom);
+    transform: translateX(var(--translate-x));
+    opacity: 0;
+  }
+}
