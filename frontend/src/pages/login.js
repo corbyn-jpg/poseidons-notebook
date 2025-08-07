@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import logo from "../assets/logo.png"; 
 import "../styles/authStyles.css"; // Shared style
 import Bubbles from "../components/bubbles";
 import '@fontsource/barlow-semi-condensed';
@@ -16,7 +17,7 @@ const Login = () => {
         animate={{ opacity: 1, y: 0 }}
         className="auth-card"
       >
-        <img src="/logo.svg" alt="Poseidon's Notebook" className="logo" />
+        <img src={logo} alt="Poseidon's Notebook" className="logo" />
         
         <form>
           <div className="input-group">
