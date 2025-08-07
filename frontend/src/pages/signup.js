@@ -1,19 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "../styles/authStyles.css"; // Shared auth styles
+import "../styles/authStyles.css"; // Shared style
 import "@fontsource/barlow-semi-condensed";
 import "@fontsource/raleway";
 
 const Signup = () => {
   return (
     <div className="auth-container">
-      {/* Water ripple background */}
-      <div className="water-bg">
-        <div className="ripple"></div>
-        <div className="ripple delay-1"></div>
-        <div className="foam"></div>
-      </div>
-
       {/* Auth card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
