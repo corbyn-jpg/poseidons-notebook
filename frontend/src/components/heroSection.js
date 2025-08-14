@@ -13,7 +13,7 @@ const HeroSection = () => {
       <div className="hero-overlay">
         <h1>Discover the Depths</h1>
         <p>Log sightings, track species, and contribute to marine science.</p>
-        <Link to="/login">
+        <Link to="/signup">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}

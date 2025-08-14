@@ -1,20 +1,36 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import turtleIcon from '../assets/turtle.png';
+import diverIcon from '../assets/diver.png';
+import seashellIcon from '../assets/seashell.png';
+import '../styles/navbar.css';
 
 const Navbar = () => {
   return (
-    <header className="landing-header">
-      <img src={logo} alt="Poseidon's Notebook" className="landing-logo" />
-      <Link to="/login" className="get-started-btn">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Get Started
-        </motion.button>
-      </Link>
+    <header className="navbar">
+        <Link to="/" className="navbar-logo-link">
+      <img src={logo} alt="Poseidon's Notebook" className="navbar-logo" />
+        </Link>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/logs">
+              <img src={seashellIcon} alt="Logs" className="nav-icon" />
+            </Link>
+          </li>
+          <li>
+            <Link to="/database">
+              <img src={turtleIcon} alt="Species" className="nav-icon" />
+            </Link>
+          </li>
+          <li>
+            <Link to="/signup">
+              <img src={diverIcon} alt="Signup" className="nav-icon" />
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };

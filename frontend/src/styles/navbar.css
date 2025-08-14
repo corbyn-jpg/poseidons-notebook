@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 4%;
+  background: rgba(15, 45, 76, 0.9);
+  position: relative;
+  z-index: 10;
+}
+
+.navbar-logo {
+  height: 10vh;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+
+.nav-icon {
+  height: 5vh;
+  padding-left: 1rem;
+  width: auto;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}   
