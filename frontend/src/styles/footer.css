@@ -1,0 +1,42 @@
+h4{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: #6EE4FF;
+}
+
+/* Social icons container */
+.footer-section:last-child ul {
+  display: flex;
+  gap: 12px; 
+}
+
+.footer-icon {
+  height: 4.5vh;
+  width: auto;
+  padding-left: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+.footer-icon:hover {
+  transform: scale(1.1);
+}
