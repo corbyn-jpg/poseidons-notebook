@@ -59,7 +59,12 @@
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 18px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: transform 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #0fb392;
+  transform: scale(1.05);
 }
 
 .auth-switch {

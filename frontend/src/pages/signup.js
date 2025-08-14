@@ -35,19 +35,17 @@ const Signup = () => {
             <input type="password" />
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             className="auth-btn"
             style={{ backgroundColor: "#0AC7A1" }}
           >
             Signup
-          </motion.button>
+          </button>
         </form>
 
         <p className="auth-switch">
           Existing user?{" "}
-          <a href="/?" style={{ color: "#FF5C87" }}>
+          <a href="/login" style={{ color: "#FF5C87" }}>
             Login
           </a>
         </p>

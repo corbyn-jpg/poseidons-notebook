@@ -30,14 +30,12 @@ const Login = () => {
             <input type="password" style={{ fontFamily: 'Raleway' }} />
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             className="auth-btn"
             style={{ backgroundColor: '#0AC7A1' }}
           >
             Login
-          </motion.button>
+          </button>
         </form>
 
         <p className="auth-switch">
