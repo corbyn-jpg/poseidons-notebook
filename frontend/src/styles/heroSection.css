@@ -1,0 +1,38 @@
+.hero-section {
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  background: rgba(15, 45, 76, 0.5);
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  border-radius: 12px;
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-btn {
+  background-color: #0AC7A1;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10, 199, 161, 0.3);
+}

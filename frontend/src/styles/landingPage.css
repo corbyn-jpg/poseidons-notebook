@@ -1,0 +1,103 @@
+.landing-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #B6F6FF, #0F2D4C);
+  color: #0F2D4C;
+  font-family: 'Raleway', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+  position: relative;
+  z-index: 2;
+}
+
+.landing-logo {
+  height: 80px;
+  width: auto;
+}
+
+.get-started-btn button {
+  background-color: #0AC7A1;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10, 199, 161, 0.3);
+}
+
+.value-props {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 4rem 5%;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.prop-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 300px;
+  box-shadow: 0 8px 24px rgba(15, 45, 76, 0.1);
+  transition: all 0.3s ease;
+}
+
+.prop-card h3 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0AC7A1;
+  margin-bottom: 1rem;
+}
+
+.wave-divider {
+  height: 3px;
+  background: linear-gradient(to right, #6EE4FF, #0AC7A1);
+  margin-top: 1.5rem;
+  width: 50%;
+}
+
+.landing-footer {
+  background: rgba(15, 45, 76, 0.9);
+  color: white;
+  padding: 3rem 5%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-section h4 {
+  color: #0AC7A1;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section a:hover {
+  color: #6EE4FF;
+}
