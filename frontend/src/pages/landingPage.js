@@ -5,6 +5,9 @@ import Card from '../components/card';
 import Footer from '../components/footer';
 import HeroSection from '../components/heroSection';
 import '../styles/landingPage.css';
+import LogSightings from '../assets/LogSightings.jpeg';
+import TrackSpecies from '../assets/TrackSpecies.jpeg';
+import Science from '../assets/Science.jpeg';
 
 const LandingPage = () => {
   return (
@@ -14,9 +17,9 @@ const LandingPage = () => {
       <HeroSection />
 
       <div className="value-props">
-        <Card title="Log Sightings" description="Record marine life encounters in seconds." />
-        <Card title="Track Species" description="Build your personal species database." />
-        <Card title="Contribute to Science" description="Share anonymized data with researchers." />
+        <Card image={LogSightings} title="Log Sightings" description="Record marine life encounters in seconds." />
+        <Card image={TrackSpecies} title="Track Species" description="Build your personal species database." />
+        <Card image={Science} title="Contribute to Science" description="Share anonymized data with researchers." />
       </div>
 
       <Footer />

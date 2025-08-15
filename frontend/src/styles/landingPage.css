@@ -1,6 +1,6 @@
 .landing-container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #B6F6FF, #0F2D4C);
+  background: linear-gradient(to bottom, #0F2D4C, #B6F6FF);
   color: #0F2D4C;
   font-family: 'Raleway', sans-serif;
   position: relative;
@@ -36,7 +36,7 @@
 .value-props {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 8rem;
   padding: 4rem 5%;
   position: relative;
   z-index: 2;
@@ -47,7 +47,7 @@
   background: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
   padding: 2rem;
-  width: 300px;
+  width: 350px;
   box-shadow: 0 8px 24px rgba(15, 45, 76, 0.1);
   transition: all 0.3s ease;
 }
