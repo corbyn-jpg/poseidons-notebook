@@ -19,9 +19,9 @@
   bottom: var(--initial-bottom);
   background: radial-gradient(
     ellipse at var(--bg-pos),
-    #6EE4FF 0%,
-    #30b3d3 46%,
-    #20628c 100%
+    rgb(124, 194, 252) 0%,
+    #336dd8 46%,
+    #27389b 100%
   );
   animation: float var(--duration) infinite;
 }

@@ -1,7 +1,7 @@
 .landing-container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0F2D4C, #B6F6FF);
-  color: #0F2D4C;
+  background: linear-gradient(to bottom, #0f1849, #b8dcff );
+  color: #0f1849;
   font-family: 'Raleway', sans-serif;
   position: relative;
   overflow: hidden;
@@ -48,7 +48,7 @@
   border-radius: 16px;
   padding: 2rem;
   width: 350px;
-  box-shadow: 0 8px 24px rgba(15, 45, 76, 0.1);
+  box-shadow: 0 8px 24px rgb(15, 24, 73, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -60,13 +60,13 @@
 
 .wave-divider {
   height: 3px;
-  background: linear-gradient(to right, #6EE4FF, #0AC7A1);
+  background: linear-gradient(to right, #71c9ff, #0AC7A1);
   margin-top: 1.5rem;
   width: 50%;
 }
 
 .landing-footer {
-  background: rgba(15, 45, 76, 0.9);
+  background: rgb(15, 24, 73, 0.9);
   color: white;
   padding: 3rem 5%;
   display: flex;
@@ -99,5 +99,5 @@
 }
 
 .footer-section a:hover {
-  color: #6EE4FF;
+  color: #71c9ff;
 }
