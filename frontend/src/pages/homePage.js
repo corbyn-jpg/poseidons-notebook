@@ -5,16 +5,16 @@ import Navbar from '../components/navbar';
 import Card from '../components/card';
 import Footer from '../components/footer';
 import HeroSection from '../components/heroSection';
-import '../styles/landingPage.css';
 import heroImage from '../assets/heroImage.gif';
 import LogSightings from '../assets/LogSightings.jpeg';
 import TrackSpecies from '../assets/TrackSpecies.jpeg';
 import Science from '../assets/Science.jpeg';
 import '@fontsource/raleway';
+import '../styles/landingPage.css';
 
-const homePage = () => {
+const HomePage = () => {
   return (
-    <div className="home-container">
+    <div className="container">
       <Bubbles />
       <Navbar />
       <HeroSection 
@@ -36,4 +36,4 @@ const homePage = () => {
   );
 };
 
-export default homePage;
+export default HomePage;

@@ -1,13 +1,13 @@
-.landing-container {
+.container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0f1849, #b8dcff );
+  background: linear-gradient(to bottom, #0f1849, #71c9ff);
   color: #0f1849;
   font-family: 'Raleway', sans-serif;
   position: relative;
   overflow: hidden;
 }
 
-.landing-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@
   z-index: 2;
 }
 
-.landing-logo {
+.logo {
   height: 80px;
   width: auto;
 }
@@ -56,13 +56,6 @@
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #0AC7A1;
   margin-bottom: 1rem;
-}
-
-.wave-divider {
-  height: 3px;
-  background: linear-gradient(to right, #71c9ff, #0AC7A1);
-  margin-top: 1.5rem;
-  width: 50%;
 }
 
 .landing-footer {

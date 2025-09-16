@@ -17,7 +17,7 @@ import "@fontsource/raleway";
 
 const LandingPage = () => {
   return (
-    <div className="landing-container">
+    <div className="container">
       <Bubbles />
       <header className="navbar">
         <Link to="/" className="navbar-logo-link">
