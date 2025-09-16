@@ -1,25 +1,25 @@
+// HeroSection.js
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import heroImage from '../assets/heroImage.png';
 import '../styles/heroSection.css';
 
-const HeroSection = () => {
+const HeroSection = ({ backgroundImage, title, description, buttonText, buttonLink }) => {
   return (
     <section 
       className="hero-section"
-      style={{ backgroundImage: `url(${heroImage})` }}
+      style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="hero-overlay">
-        <h1>Discover the Depths</h1>
-        <p>Log sightings, track species, and contribute to marine science.</p>
-        <Link to="/signup">
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <Link to={buttonLink}>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             className="hero-btn"
           >
-            Get Started
+            {buttonText}
           </motion.button>
         </Link>
       </div>
