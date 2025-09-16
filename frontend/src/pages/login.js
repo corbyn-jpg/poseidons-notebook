@@ -48,8 +48,7 @@ const Login = () => {
 
 const handleLogin = async (e) => {
   e.preventDefault();
-
-  const email = e.target[0].value; 
+  const email = e.target[0].value;
   const password = e.target[1].value;
 
   try {
@@ -61,9 +60,8 @@ const handleLogin = async (e) => {
 
     const data = await res.json();
     if (res.ok) {
-      // Save user info in localStorage or context
+      localStorage.setItem("token", data.token); // save JWT
       localStorage.setItem("user", JSON.stringify(data.user));
-      alert("Login successful!");
       window.location.href = "/home";
     } else {
       alert(data.error);

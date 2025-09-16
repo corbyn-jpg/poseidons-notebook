@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import logo from "../assets/logo.png"; 
+import logo from "../assets/logo.png";
 import "../styles/authStyles.css"; // Shared style
 import Bubbles from "../components/bubbles";
 import "@fontsource/barlow-semi-condensed";
@@ -22,23 +22,40 @@ const Signup = () => {
         <form onSubmit={handleSignup}>
           <div className="input-group">
             <label>Username</label>
-            <input type="text" style={{ fontFamily: "Raleway" }} />
+            <input
+              type="text"
+              name="username"
+              required
+              style={{ fontFamily: "Raleway" }}
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              style={{ fontFamily: "Raleway" }}
+            />
           </div>
 
           <div className="input-group">
             <label>Password</label>
-            <input type="password" style={{ fontFamily: "Raleway" }} />
+            <input
+              type="password"
+              name="password"
+              required
+              style={{ fontFamily: "Raleway" }}
+            />
           </div>
 
           <div className="input-group">
             <label>Confirm Password</label>
-            <input type="password" />
+            <input type="password" name="confirmPassword" required />
           </div>
 
-          <button
-            className="auth-btn"
-            style={{ backgroundColor: "#0AC7A1" }}
-          >
+          <button className="auth-btn" style={{ backgroundColor: "#0AC7A1" }}>
             Signup
           </button>
         </form>
@@ -57,9 +74,10 @@ const Signup = () => {
 const handleSignup = async (e) => {
   e.preventDefault();
 
-  const username = e.target[0].value;
-  const password = e.target[1].value;
-  const confirmPassword = e.target[2].value;
+  const username = e.target.username.value;
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+  const confirmPassword = e.target.confirmPassword.value;
 
   if (password !== confirmPassword) {
     alert("Passwords do not match");
@@ -70,7 +88,12 @@ const handleSignup = async (e) => {
     const res = await fetch("http://localhost:5000/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email: `${username}@test.com`, password })
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+        confirmPassword,
+      }),
     });
 
     const data = await res.json();
