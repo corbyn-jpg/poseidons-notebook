@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import logo from "../assets/logo.png"; 
 import "../styles/authStyles.css";
 import Bubbles from "../components/bubbles";
-import '@fontsource/barlow-semi-condensed';
 import '@fontsource/raleway';
 
 const Login = () => {

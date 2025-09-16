@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 4%;
+  padding: 1.5rem 2%;
   background: rgba(15, 45, 76, 0.9);
   position: relative;
   z-index: 10;
@@ -10,6 +10,13 @@
 
 .navbar-logo {
   height: 9vh;
+}
+
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
 }
 
 .navbar ul {
