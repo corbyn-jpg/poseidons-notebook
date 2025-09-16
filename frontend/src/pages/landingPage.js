@@ -3,7 +3,6 @@ import Bubbles from "../components/bubbles";
 import Card from "../components/card";
 import Footer from "../components/footer";
 import HeroSection from "../components/heroSection";
-import ShrinkingTitle from "../components/shrinkingTitle";
 import heroImage from "../assets/heroImage.gif";
 import LogSightings from "../assets/sighting.jpeg";
 import TrackSpecies from "../assets/species.jpeg";
