@@ -58,6 +58,13 @@
   margin-bottom: 1rem;
 }
 
+.wave-divider {
+  height: 3px;
+  background: linear-gradient(to right, #71c9ff, #0AC7A1);
+  margin-top: 1.5rem;
+  width: 50%;
+}
+
 .landing-footer {
   background: rgb(15, 24, 73, 0.9);
   color: white;

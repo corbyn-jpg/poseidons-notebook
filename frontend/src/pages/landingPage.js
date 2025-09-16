@@ -52,16 +52,19 @@ const LandingPage = () => {
           image={LogSightings}
           title="Log Sightings"
           description="Record marine life encounters in seconds."
+          showButton={false}
         />
         <Card
           image={TrackSpecies}
           title="Track Species"
           description="Build your personal species database."
+          showButton={false}
         />
         <Card
           image={Science}
           title="Contribute to Science"
           description="Share anonymized data with researchers."
+          showButton={false}
         />
       </div>
 
