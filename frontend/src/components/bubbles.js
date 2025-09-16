@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/bubbles.css"; 
+import "../styles/bubbles.css";
 
 const Bubbles = () => {
   // Generate 50 bubbles with random properties
@@ -16,12 +16,12 @@ const Bubbles = () => {
         key={i}
         className="bubble"
         style={{
-          '--size': `${size}px`,
-          '--initial-bottom': `${initialBottom}vh`,
-          '--final-bottom': `${finalBottom}vh`,
-          '--translate-x': `${translateX}px`,
-          '--duration': `${animationDuration}s`,
-          '--bg-pos': isEven ? 'top right' : 'center',
+          "--size": `${size}px`,
+          "--initial-bottom": `${initialBottom}vh`,
+          "--final-bottom": `${finalBottom}vh`,
+          "--translate-x": `${translateX}px`,
+          "--duration": `${animationDuration}s`,
+          "--bg-pos": isEven ? "top right" : "center",
           left: `${Math.floor(Math.random() * 100)}vw`,
         }}
       />

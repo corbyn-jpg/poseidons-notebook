@@ -1,12 +1,18 @@
 // HeroSection.js
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import '../styles/heroSection.css';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import "../styles/heroSection.css";
 
-const HeroSection = ({ backgroundImage, title, description, buttonText, buttonLink }) => {
+const HeroSection = ({
+  backgroundImage,
+  title,
+  description,
+  buttonText,
+  buttonLink,
+}) => {
   return (
-    <section 
+    <section
       className="hero-section"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >

@@ -11,8 +11,8 @@ const Navbar = () => {
   return (
     <header className="navbar">
       <Link to="/" className="navbar-logo-link">
-          <img src={logo} alt="Poseidon's Notebook" className="navbar-logo" />
-          <div className="content">
+        <img src={logo} alt="Poseidon's Notebook" className="navbar-logo" />
+        <div className="content">
           <h1>
             <span className="stroke-text">Poseidon's Notebook</span>
             <span className="fill-text">Poseidon's Notebook</span>
