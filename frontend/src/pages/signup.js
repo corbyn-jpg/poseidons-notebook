@@ -52,7 +52,10 @@ const Signup = () => {
 
           <div className="input-group">
             <label>Confirm Password</label>
-            <input type="password" name="confirmPassword" required />
+            <input 
+            type="password" 
+            name="confirmPassword" 
+            required />
           </div>
 
           <button className="auth-btn" style={{ backgroundColor: "#0AC7A1" }}>

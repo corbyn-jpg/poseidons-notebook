@@ -1,17 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import logo from "../assets/logo.png"; 
-import "../styles/authStyles.css"; // Shared style
+import "../styles/authStyles.css";
 import Bubbles from "../components/bubbles";
 import '@fontsource/barlow-semi-condensed';
 import '@fontsource/raleway';
 
 const Login = () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        window.location.href = "/home";
+      } else {
+        alert(data.error || "Login failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Login failed. Please try again.");
+    }
+  };
+
   return (
     <div className="auth-container">
       <Bubbles />
 
-      {/* Auth card */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -22,17 +47,28 @@ const Login = () => {
         <form onSubmit={handleLogin}>
           <div className="input-group">
             <label>Username</label>
-            <input type="text" style={{ fontFamily: 'Raleway' }} />
+            <input 
+              type="text"
+              name="username"
+              required
+              style={{ fontFamily: 'Raleway' }}
+            />
           </div>
           
           <div className="input-group">
             <label>Password</label>
-            <input type="password" style={{ fontFamily: 'Raleway' }} />
+            <input 
+              type="password" 
+              name="password"
+              required
+              style={{ fontFamily: 'Raleway' }}
+            />
           </div>
 
           <button
             className="auth-btn"
             style={{ backgroundColor: '#0AC7A1' }}
+            type="submit"
           >
             Login
           </button>
@@ -44,32 +80,6 @@ const Login = () => {
       </motion.div>
     </div>
   );
-};
-
-const handleLogin = async (e) => {
-  e.preventDefault();
-  const email = e.target[0].value;
-  const password = e.target[1].value;
-
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      localStorage.setItem("token", data.token); // save JWT
-      localStorage.setItem("user", JSON.stringify(data.user));
-      window.location.href = "/home";
-    } else {
-      alert(data.error);
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Login failed");
-  }
 };
 
 export default Login;
