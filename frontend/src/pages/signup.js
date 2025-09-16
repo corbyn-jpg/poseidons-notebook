@@ -101,7 +101,6 @@ const handleSignup = async (e) => {
 
     const data = await res.json();
     if (res.ok) {
-      alert("Signup successful!");
       window.location.href = "/login"; // redirect
     } else {
       alert(data.error);
