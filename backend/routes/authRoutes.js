@@ -5,7 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const { Op } = require("sequelize"); // Add this import
+const { Op } = require("sequelize");
 
 // Use environment variable in production!
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
@@ -64,7 +64,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    console.log("Login attempt:", { username }); // Debug log
+    console.log("Login attempt:", { username });
 
     if (!username || !password) {
       return res.status(400).json({ error: "Username and password required" });
@@ -72,7 +72,7 @@ router.post("/login", async (req, res) => {
 
     // Find user
     const user = await User.findOne({ where: { username } });
-    console.log("User found:", user ? user.username : "None"); // Debug log
+    console.log("User found:", user ? user.username : "None");
 
     if (!user) {
       return res.status(401).json({ error: "Invalid credentials" });
@@ -80,7 +80,7 @@ router.post("/login", async (req, res) => {
 
     // Check password
     const validPassword = bcrypt.compareSync(password, user.password);
-    console.log("Password valid:", validPassword); // Debug log
+    console.log("Password valid:", validPassword);
 
     if (!validPassword) {
       return res.status(401).json({ error: "Invalid credentials" });
