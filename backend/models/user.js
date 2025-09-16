@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const bcrypt = require('bcryptjs');
 
-const user = sequelize.define('user', {
+const User = sequelize.define('User', {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -26,4 +26,4 @@ const user = sequelize.define('user', {
   }
 });
 
-module.exports = user;
+module.exports = User;

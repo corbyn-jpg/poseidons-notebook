@@ -19,7 +19,7 @@ const Signup = () => {
       >
         <img src={logo} alt="Poseidon's Notebook" className="logo" />
 
-        <form>
+        <form onSubmit={handleSignup}>
           <div className="input-group">
             <label>Username</label>
             <input type="text" style={{ fontFamily: "Raleway" }} />
@@ -52,6 +52,38 @@ const Signup = () => {
       </motion.div>
     </div>
   );
+};
+
+const handleSignup = async (e) => {
+  e.preventDefault();
+
+  const username = e.target[0].value;
+  const password = e.target[1].value;
+  const confirmPassword = e.target[2].value;
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email: `${username}@test.com`, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("Signup successful!");
+      window.location.href = "/login"; // redirect
+    } else {
+      alert(data.error);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Signup failed");
+  }
 };
 
 export default Signup;

@@ -19,7 +19,7 @@ const Login = () => {
       >
         <img src={logo} alt="Poseidon's Notebook" className="logo" />
         
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="input-group">
             <label>Username</label>
             <input type="text" style={{ fontFamily: 'Raleway' }} />
@@ -44,6 +44,34 @@ const Login = () => {
       </motion.div>
     </div>
   );
+};
+
+const handleLogin = async (e) => {
+  e.preventDefault();
+
+  const email = e.target[0].value; 
+  const password = e.target[1].value;
+
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      // Save user info in localStorage or context
+      localStorage.setItem("user", JSON.stringify(data.user));
+      alert("Login successful!");
+      window.location.href = "/home";
+    } else {
+      alert(data.error);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Login failed");
+  }
 };
 
 export default Login;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models/user');
+const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 // Register
@@ -37,5 +37,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+app.use(express.json());
 
 module.exports = router;
