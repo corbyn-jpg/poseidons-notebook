@@ -27,7 +27,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/database">
+            <Link to="/species">
               <img src={turtleIcon} alt="Species" className="nav-icon" />
             </Link>
           </li>
