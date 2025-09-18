@@ -1,8 +1,18 @@
+// Card.jsx
 import React from "react";
-import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // Make sure to import motion
 import "../styles/card.css";
 
-const Card = ({ image, title, description, learn, showButton = true }) => {
+const Card = ({ image, title, description, learn, to, showButton = true }) => {
+  const navigate = useNavigate();
+  
+  const onButtonClick = () => {
+    if (to) {
+      navigate(to);
+    }
+  };
+  
   return (
     <div className="prop-card">
       <motion.div whileHover={{ y: -5 }}>
@@ -10,7 +20,11 @@ const Card = ({ image, title, description, learn, showButton = true }) => {
         <h3>{title}</h3>
         <p>{description}</p>
         <div className="wave-divider"></div>
-        {showButton && <button className="learn-more-btn">{learn}</button>}
+        {showButton && (
+          <button onClick={onButtonClick} className="card-button">
+            {learn}
+          </button>
+        )}
       </motion.div>
     </div>
   );

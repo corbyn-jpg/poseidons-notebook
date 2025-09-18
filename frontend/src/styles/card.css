@@ -5,7 +5,7 @@
     margin-bottom: 1rem;
 }
 
-.learn-more-btn {
+.card-button{
     background-color: #0AC7A1;
     color: white;
     border: none;
@@ -15,4 +15,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 1rem;
+}
+
+a{
+    text-decoration: none;
 }

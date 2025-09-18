@@ -31,53 +31,6 @@ const SpeciesPage = () => {
       } catch (err) {
         console.error('Error fetching species:', err);
         setError('Failed to load species data. Please try again later.');
-        
-        // Fallback to mock data if API fails
-        const mockSpecies = [
-          {
-            species_id: 1,
-            common_name: "Regal Angelfish",
-            scientific_name: "Pygoplites diacanthus",
-            category: "Fish",
-            conservation_status: "LC",
-            avg_depth_range: "1-48m",
-            habitat: "Coral Reef",
-            image_url: "/images/species/Regal Angelfish.jpeg",
-            description: "A strikingly beautiful fish with alternating white and orange-yellow bands edged in blue.",
-            size_range: "15-25 cm",
-            diet: "Omnivore",
-            geographic_range: "Indo-Pacific region"
-          },
-          {
-            species_id: 2,
-            common_name: "Bottlenose Dolphin",
-            scientific_name: "Tursiops truncatus",
-            category: "Marine Mammal",
-            conservation_status: "LC",
-            avg_depth_range: "0-50m",
-            habitat: "Open Ocean",
-            image_url: "/images/species/Bottlenose Dolphin.jpeg",
-            description: "The most familiar dolphin species, known for their intelligence and curved mouth.",
-            size_range: "2-4 m",
-            diet: "Carnivore",
-            geographic_range: "Tropical and temperate oceans worldwide"
-          },
-          {
-            species_id: 3,
-            common_name: "Green Sea Turtle",
-            scientific_name: "Chelonia mydas",
-            category: "Sea Turtle",
-            conservation_status: "EN",
-            avg_depth_range: "0-20m",
-            habitat: "Coral Reef",
-            image_url: "/images/species/Green Sea Turtle.jpeg",
-            description: "Named for the green color of their fat, not their shell. Primarily herbivorous as adults.",
-            size_range: "1-1.2 m",
-            diet: "Herbivore",
-            geographic_range: "Tropical and subtropical oceans worldwide"
-          }
-        ];
-        setSpecies(mockSpecies);
       } finally {
         setLoading(false);
       }

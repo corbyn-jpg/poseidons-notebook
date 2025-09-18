@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Bubbles from "../components/bubbles";
 import Navbar from "../components/navbar";
 import Card from "../components/card";
@@ -30,18 +31,21 @@ const HomePage = () => {
           title="Log New Sightings"
           description="Document your latest marine discoveries with our quick-entry system."
           learn={"Log a Sighting"}
+          to="/sightings"
         />
         <Card
           image={TrackSpecies}
           title="Your Species Collection"
           description="Review and manage the marine life you've encountered on your journeys."
           learn={"View Species"}
+          to="/species"
         />
         <Card
           image={Science}
           title="Your Scientific Impact"
           description="See how your contributions are helping advance marine research worldwide."
           learn={"View Contributions"}
+          to="/contributions"
         />
       </div>
 
