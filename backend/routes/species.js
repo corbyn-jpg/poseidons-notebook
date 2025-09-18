@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Species = require('../models/Species'); // Import the Sequelize model
+const Species = require('../models/species'); // Import the Sequelize model
 
 // Get all species
 router.get('/', async (req, res) => {

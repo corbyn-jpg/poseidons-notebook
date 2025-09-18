@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Species = require('../models/Species');
-const Sighting = require('../models/Sighting');
+const Sighting = require('../models/sightings');
+const Species = require('../models/species');
 
 // Get all sightings
 router.get('/', async (req, res) => {
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         common_name,
         scientific_name,
         category: category || 'Unknown',
-        conservation_status: 'DD', // Data Deficient by default
+        conservation_status: 'DD',
         image_url: image_url || null
       });
       finalSpeciesId = newSpecies.species_id;
