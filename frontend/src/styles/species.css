@@ -9,18 +9,16 @@
 }
 
 .species-content {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 3rem;
+  max-width: 1600px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
-  padding-bottom: 120px; /* Add padding to prevent content from being hidden behind footer */
 }
 
 .species-header {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 2rem 0;
+  margin-bottom: 1rem;
 }
 
 .species-main-title {
