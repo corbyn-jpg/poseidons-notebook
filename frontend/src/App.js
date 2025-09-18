@@ -4,6 +4,7 @@ import Signup from './pages/signup';
 import LandingPage from './pages/landingPage';
 import HomePage from "./pages/homePage";
 import SpeciesPage from './pages/speciesPage';
+import SightingsPage from "./pages/sightingsPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/homePage" element={<HomePage />} />
           <Route path="/species" element={<SpeciesPage />} />
+          <Route path="/sightings" element={<SightingsPage />} />
         </Routes>
       </Router>
     </div>
