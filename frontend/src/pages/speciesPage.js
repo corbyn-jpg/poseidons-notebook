@@ -1,9 +1,5 @@
-// SpeciesPage.jsx
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Bubbles from '../components/bubbles';
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
 import '../styles/species.css';
 
 const SpeciesPage = () => {
@@ -12,56 +8,81 @@ const SpeciesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
- // SpeciesPage.jsx - Updated useEffect with mock data
-useEffect(() => {
-  // Temporary mock data for testing the UI
-  const mockSpecies = [
-    {
-      species_id: 1,
-      common_name: "Clownfish",
-      scientific_name: "Amphiprioninae",
-      category: "Fish",
-      conservation_status: "LC",
-      avg_depth_range: "0-15m",
-      habitat: "Coral Reef",
-      image_url: "/images/species/Clownfish.jpeg",
-      description: "Made famous by the movie 'Finding Nemo', these fish have a symbiotic relationship with sea anemones.",
-      size_range: "8-11 cm",
-      diet: "Omnivore",
-      geographic_range: "Indo-Pacific region"
-    },
-    {
-      species_id: 2,
-      common_name: "Bottlenose Dolphin",
-      scientific_name: "Tursiops truncatus",
-      category: "Marine Mammal",
-      conservation_status: "LC",
-      avg_depth_range: "0-50m",
-      habitat: "Open Ocean",
-      image_url: "/images/species/Bottlenose Dolphin.jpeg",
-      description: "The most familiar dolphin species, known for their intelligence and curved mouth.",
-      size_range: "2-4 m",
-      diet: "Carnivore",
-      geographic_range: "Tropical and temperate oceans worldwide"
-    },
-    {
-      species_id: 3,
-      common_name: "Green Sea Turtle",
-      scientific_name: "Chelonia mydas",
-      category: "Sea Turtle",
-      conservation_status: "EN",
-      avg_depth_range: "0-20m",
-      habitat: "Coral Reef",
-      image_url: "/images/species/Green Sea Turtle.jpeg",
-      description: "Named for the green color of their fat, not their shell. Primarily herbivorous as adults.",
-      size_range: "1-1.2 m",
-      diet: "Herbivore",
-      geographic_range: "Tropical and subtropical oceans worldwide"
-    }
-  ];
-  setSpecies(mockSpecies);
-}, []);
+  // Fetch species data from your backend API
+  useEffect(() => {
+    const fetchSpecies = async () => {
+      try {
+        setLoading(true);
+        // Adjust this URL to match your backend API endpoint
+        const response = await fetch('http://localhost:5000/api/species');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        setSpecies(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching species:', err);
+        setError('Failed to load species data. Please try again later.');
+        
+        // Fallback to mock data if API fails
+        const mockSpecies = [
+          {
+            species_id: 1,
+            common_name: "Regal Angelfish",
+            scientific_name: "Pygoplites diacanthus",
+            category: "Fish",
+            conservation_status: "LC",
+            avg_depth_range: "1-48m",
+            habitat: "Coral Reef",
+            image_url: "/images/species/Regal Angelfish.jpeg",
+            description: "A strikingly beautiful fish with alternating white and orange-yellow bands edged in blue.",
+            size_range: "15-25 cm",
+            diet: "Omnivore",
+            geographic_range: "Indo-Pacific region"
+          },
+          {
+            species_id: 2,
+            common_name: "Bottlenose Dolphin",
+            scientific_name: "Tursiops truncatus",
+            category: "Marine Mammal",
+            conservation_status: "LC",
+            avg_depth_range: "0-50m",
+            habitat: "Open Ocean",
+            image_url: "/images/species/Bottlenose Dolphin.jpeg",
+            description: "The most familiar dolphin species, known for their intelligence and curved mouth.",
+            size_range: "2-4 m",
+            diet: "Carnivore",
+            geographic_range: "Tropical and temperate oceans worldwide"
+          },
+          {
+            species_id: 3,
+            common_name: "Green Sea Turtle",
+            scientific_name: "Chelonia mydas",
+            category: "Sea Turtle",
+            conservation_status: "EN",
+            avg_depth_range: "0-20m",
+            habitat: "Coral Reef",
+            image_url: "/images/species/Green Sea Turtle.jpeg",
+            description: "Named for the green color of their fat, not their shell. Primarily herbivorous as adults.",
+            size_range: "1-1.2 m",
+            diet: "Herbivore",
+            geographic_range: "Tropical and subtropical oceans worldwide"
+          }
+        ];
+        setSpecies(mockSpecies);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSpecies();
+  }, []);
 
   const openModal = (species) => {
     setSelectedSpecies(species);
@@ -90,17 +111,41 @@ useEffect(() => {
     EN: 'Endangered', CR: 'Critically Endangered', DD: 'Data Deficient'
   };
 
+  // Function to get the correct image URL
+  const getImageUrl = (imagePath) => {
+    // If it's already a full URL, return it
+    if (imagePath.startsWith('http')) {
+      return imagePath;
+    }
+    
+    // Otherwise, construct the URL to your backend server
+    // Adjust the base URL according to your backend configuration
+    return `http://localhost:5000${imagePath}`;
+  };
+
+  if (loading) {
+    return (
+      <div className="species-container">
+        <div className="loading-spinner">Loading marine species...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="species-container">
-      <Bubbles />
-      <Navbar />
-      
+        <Bubbles />
       <div className="species-content">
         {/* Header Section */}
         <div className="species-header">
           <h1 className="species-main-title">Marine Species Database</h1>
           <p className="species-subtitle">Discover the incredible diversity of ocean life</p>
         </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
 
         {/* Search and Filter */}
         <div className="species-controls">
@@ -125,6 +170,8 @@ useEffect(() => {
             <option value="Marine Mammal">Marine Mammals</option>
             <option value="Sea Turtle">Sea Turtles</option>
             <option value="Cephalopod">Cephalopods</option>
+            <option value="Crustacean">Crustaceans</option>
+            <option value="Coral">Corals</option>
           </select>
         </div>
 
@@ -134,11 +181,12 @@ useEffect(() => {
             <div key={species.species_id} className="species-card" onClick={() => openModal(species)}>
               <div className="species-image-container">
                 <img 
-                  src={species.image_url} 
+                  src={getImageUrl(species.image_url)} 
                   alt={species.common_name}
                   className="species-image"
                   onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/300x200/0f1849/ffffff?text=Marine+Species';
+                    // Fallback if image fails to load
+                    e.target.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%230f1849\'/%3E%3Ctext x=\'150\' y=\'100\' font-family=\'Arial\' font-size=\'14\' fill=\'%23ffffff\' text-anchor=\'middle\'%3EImage Not Available%3C/text%3E%3C/svg%3E';
                   }}
                 />
                 <div 
@@ -183,9 +231,12 @@ useEffect(() => {
               <div className="modal-body">
                 <div className="modal-image-container">
                   <img 
-                    src={selectedSpecies.image_url} 
+                    src={getImageUrl(selectedSpecies.image_url)} 
                     alt={selectedSpecies.common_name}
                     className="modal-image"
+                    onError={(e) => {
+                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%230f1849\'/%3E%3Ctext x=\'150\' y=\'100\' font-family=\'Arial\' font-size=\'14\' fill=\'%23ffffff\' text-anchor=\'middle\'%3EImage Not Available%3C/text%3E%3C/svg%3E';
+                    }}
                   />
                 </div>
                 
@@ -237,8 +288,6 @@ useEffect(() => {
           </div>
         )}
       </div>
-      
-      <Footer />
     </div>
   );
 };

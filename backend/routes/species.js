@@ -1,12 +1,13 @@
-// routes/species.js
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
+const Species = require('../models/Species'); // Import the Sequelize model
 
 // Get all species
 router.get('/', async (req, res) => {
   try {
-    const [species] = await db.execute('SELECT * FROM species ORDER BY common_name');
+    const species = await Species.findAll({
+      order: [['common_name', 'ASC']]
+    });
     res.json(species);
   } catch (error) {
     console.error('Error fetching species:', error);
@@ -17,16 +18,13 @@ router.get('/', async (req, res) => {
 // Get single species by ID
 router.get('/:id', async (req, res) => {
   try {
-    const [species] = await db.execute(
-      'SELECT * FROM species WHERE species_id = ?',
-      [req.params.id]
-    );
+    const species = await Species.findByPk(req.params.id);
     
-    if (species.length === 0) {
+    if (!species) {
       return res.status(404).json({ error: 'Species not found' });
     }
     
-    res.json(species[0]);
+    res.json(species);
   } catch (error) {
     console.error('Error fetching species:', error);
     res.status(500).json({ error: 'Internal server error' });
