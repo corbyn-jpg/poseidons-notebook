@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Bubbles from '../components/bubbles';
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
+import searchIcon from '../assets/search.png';
 import '../styles/species.css';
 
 const SpeciesPage = () => {
@@ -16,7 +19,6 @@ const SpeciesPage = () => {
     const fetchSpecies = async () => {
       try {
         setLoading(true);
-        // Adjust this URL to match your backend API endpoint
         const response = await fetch('http://localhost:5000/api/species');
         
         if (!response.ok) {
@@ -118,8 +120,6 @@ const SpeciesPage = () => {
       return imagePath;
     }
     
-    // Otherwise, construct the URL to your backend server
-    // Adjust the base URL according to your backend configuration
     return `http://localhost:5000${imagePath}`;
   };
 
@@ -134,6 +134,7 @@ const SpeciesPage = () => {
   return (
     <div className="species-container">
         <Bubbles />
+        <Navbar />
       <div className="species-content">
         {/* Header Section */}
         <div className="species-header">
@@ -157,7 +158,7 @@ const SpeciesPage = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
             />
-            <span className="search-icon">🔍</span>
+            <span className="search-icon"><img src={searchIcon} alt="Species" className="nav-icon" /></span>
           </div>
           
           <select 
@@ -171,7 +172,6 @@ const SpeciesPage = () => {
             <option value="Sea Turtle">Sea Turtles</option>
             <option value="Cephalopod">Cephalopods</option>
             <option value="Crustacean">Crustaceans</option>
-            <option value="Coral">Corals</option>
           </select>
         </div>
 
@@ -288,6 +288,7 @@ const SpeciesPage = () => {
           </div>
         )}
       </div>
+        <Footer />
     </div>
   );
 };
