@@ -13,7 +13,7 @@
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  z-index: 2;
+  z-index: 1; /* Lower z-index than modal */
 }
 
 .sightings-header {
@@ -217,16 +217,24 @@
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem;
   font-weight: bold;
   color: #0F2D4C;
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
 .form-group input,
-.form-group select,
 .form-group textarea {
-  width: 100%;
+  width: 97%;
+  padding: 10px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.form-group select{
+    width: 100%;
   padding: 10px;
   border: 2px solid #71c9ff;
   border-radius: 8px;
@@ -289,101 +297,28 @@
 }
 
 /* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(15, 24, 73, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 2rem;
+
+.modal-cancel{
+    background-color: #0AC7A1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 1rem;
 }
 
-.modal-content {
-  background: white;
-  border-radius: 16px;
-  max-width: 600px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-}
-
-.close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #0F2D4C;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: background 0.3s ease;
-}
-
-.close-button:hover {
-  background: #71c9ff;
-}
-
-.modal-header {
-  padding: 2rem 2rem 1rem;
-  text-align: center;
-  border-bottom: 2px solid #71c9ff;
-}
-
-.modal-header h2 {
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  color: #0F2D4C;
-  margin-bottom: 0.5rem;
-}
-
-.species-modal .modal-header p {
-  color: #0F2D4C;
-  margin-bottom: 0;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
-}
-
-.modal-actions button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: 'Barlow Semi Condensed', sans-serif;
-}
-
-.modal-actions button:first-child {
-  background: #e0e0e0;
-  color: #0F2D4C;
-}
-
-.modal-actions button:first-child:hover {
-  background: #d0d0d0;
-}
-
-.modal-actions button:last-child {
-  background: #71c9ff;
-  color: #0F2D4C;
-}
-
-.modal-actions button:last-child:hover {
-  background: #4db4ff;
+.modal-species{
+    background-color: #0AC7A1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .no-results {
@@ -453,6 +388,10 @@
   
   .sighting-form {
     padding: 0 1rem 1rem;
+  }
+  
+  .modal-overlay {
+    padding: 1rem;
   }
 }
 

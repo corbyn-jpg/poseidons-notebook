@@ -1,8 +1,18 @@
-h4{
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+.footer{
+  background: rgb(15, 24, 73, 0.9);
+  color: white;
+  padding: 3rem 5%;
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  z-index: 1;
+}
+
+
+.footer-section h4 {
+  color: #0AC7A1;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  margin-bottom: 1rem;
 }
 
 .footer-section ul {

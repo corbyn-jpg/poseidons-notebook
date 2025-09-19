@@ -1,4 +1,4 @@
-// src/pages/SightingsPage.js
+// src/pages/sightingsPage.js
 import React, { useState, useEffect } from 'react';
 import Bubbles from '../components/bubbles';
 import Navbar from '../components/navbar';
@@ -16,6 +16,7 @@ const SightingsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [debugInfo, setDebugInfo] = useState('');
   const [formData, setFormData] = useState({
     species_id: '',
     sighting_date: new Date().toISOString().split('T')[0],
@@ -30,7 +31,14 @@ const SightingsPage = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('token');
+        setDebugInfo(`Token found: ${!!token}`);
         
+        if (!token) {
+          setError('Please log in to view sightings');
+          setLoading(false);
+          return;
+        }
+
         // Fetch sightings
         const sightingsResponse = await fetch('http://localhost:5000/api/sightings', {
           headers: {
@@ -38,9 +46,16 @@ const SightingsPage = () => {
           }
         });
         
+        setDebugInfo(prev => prev + ` | Sightings status: ${sightingsResponse.status}`);
+        
         if (!sightingsResponse.ok) {
           if (sightingsResponse.status === 401) {
             throw new Error('Please log in to view sightings');
+          }
+          if (sightingsResponse.status === 500) {
+            // Try to get more details about the error
+            const errorData = await sightingsResponse.text();
+            throw new Error(`Server error: ${errorData}`);
           }
           throw new Error(`HTTP error! status: ${sightingsResponse.status}`);
         }
@@ -50,6 +65,8 @@ const SightingsPage = () => {
         
         // Fetch species for the dropdown
         const speciesResponse = await fetch('http://localhost:5000/api/species');
+        setDebugInfo(prev => prev + ` | Species status: ${speciesResponse.status}`);
+        
         if (!speciesResponse.ok) {
           throw new Error(`HTTP error! status: ${speciesResponse.status}`);
         }
@@ -184,18 +201,18 @@ const SightingsPage = () => {
   const filteredSightings = sightings.filter(sighting => {
     const searchLower = searchTerm.toLowerCase();
     return (
-      sighting.Species.common_name.toLowerCase().includes(searchLower) ||
-      sighting.Species.scientific_name.toLowerCase().includes(searchLower) ||
+      sighting.Species?.common_name?.toLowerCase().includes(searchLower) ||
+      sighting.Species?.scientific_name?.toLowerCase().includes(searchLower) ||
       sighting.location.toLowerCase().includes(searchLower) ||
-      sighting.notes.toLowerCase().includes(searchLower)
+      (sighting.notes && sighting.notes.toLowerCase().includes(searchLower))
     );
   });
 
   const getImageUrl = (imagePath) => {
-    if (imagePath.startsWith('http')) {
+    if (imagePath && imagePath.startsWith('http')) {
       return imagePath;
     }
-    return `http://localhost:5000${imagePath}`;
+    return imagePath ? `http://localhost:5000${imagePath}` : 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%230f1849\'/%3E%3Ctext x=\'150\' y=\'100\' font-family=\'Arial\' font-size=\'14\' fill=\'%23ffffff\' text-anchor=\'middle\'%3EImage Not Available%3C/text%3E%3C/svg%3E';
   };
 
   if (loading) {
@@ -219,7 +236,12 @@ const SightingsPage = () => {
 
         {error && (
           <div className="error-message">
-            {error}
+            <h3>Error Loading Data</h3>
+            <p>{error}</p>
+            <p className="debug-info">Debug: {debugInfo}</p>
+            <button onClick={() => window.location.reload()} className="retry-btn">
+              Retry
+            </button>
           </div>
         )}
 
@@ -248,8 +270,8 @@ const SightingsPage = () => {
             <div key={sighting.sighting_id} className="sighting-card">
               <div className="sighting-image-container">
                 <img 
-                  src={getImageUrl(sighting.Species.image_url)} 
-                  alt={sighting.Species.common_name}
+                  src={getImageUrl(sighting.Species?.image_url)} 
+                  alt={sighting.Species?.common_name || 'Unknown species'}
                   className="sighting-image"
                   onError={(e) => {
                     e.target.src = 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'200\' viewBox=\'0 0 300 200\'%3E%3Crect width=\'300\' height=\'200\' fill=\'%230f1849\'/%3E%3Ctext x=\'150\' y=\'100\' font-family=\'Arial\' font-size=\'14\' fill=\'%23ffffff\' text-anchor=\'middle\'%3EImage Not Available%3C/text%3E%3C/svg%3E';
@@ -258,8 +280,8 @@ const SightingsPage = () => {
               </div>
               
               <div className="sighting-info">
-                <h3 className="species-name">{sighting.Species.common_name}</h3>
-                <p className="scientific-name"><em>{sighting.Species.scientific_name}</em></p>
+                <h3 className="species-name">{sighting.Species?.common_name || 'Unknown Species'}</h3>
+                <p className="scientific-name"><em>{sighting.Species?.scientific_name || 'Species not found'}</em></p>
                 
                 <div className="sighting-details">
                   <div className="detail-item">
@@ -291,7 +313,7 @@ const SightingsPage = () => {
           ))}
         </div>
 
-        {filteredSightings.length === 0 && (
+        {filteredSightings.length === 0 && !error && (
           <div className="no-results">
             {sightings.length === 0 ? (
               <>
@@ -415,9 +437,9 @@ const SightingsPage = () => {
                 <p>This will redirect you to the species page to add a new species to the database.</p>
               </div>
               
-              <div className="modal-actions">
-                <button type="button" onClick={closeSpeciesModal}>Cancel</button>
-                <button type="button" onClick={() => window.location.href = '/species'}>
+              <div className="modal-buttons">
+                <button className='modal-cancel' type="button" onClick={closeSpeciesModal}>Cancel</button>
+                <button className='modal-species' type="button" onClick={() => window.location.href = '/species'}>
                   Go to Species Page
                 </button>
               </div>

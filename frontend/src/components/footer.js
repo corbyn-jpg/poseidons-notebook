@@ -8,7 +8,7 @@ import "../styles/footer.css";
 
 const Footer = () => {
   return (
-    <footer className="landing-footer">
+    <footer className="footer">
       <div className="footer-section">
         <h4>Explore</h4>
         <ul>

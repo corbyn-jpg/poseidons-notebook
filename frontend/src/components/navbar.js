@@ -22,13 +22,13 @@ const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/sightings">
-              <img src={seashellIcon} alt="Logs" className="nav-icon" />
+            <Link to="/species">
+              <img src={turtleIcon} alt="Species" className="nav-icon" />
             </Link>
           </li>
           <li>
-            <Link to="/species">
-              <img src={turtleIcon} alt="Species" className="nav-icon" />
+            <Link to="/sightings">
+              <img src={seashellIcon} alt="Logs" className="nav-icon" />
             </Link>
           </li>
           <li>
