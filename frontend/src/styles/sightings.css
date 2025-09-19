@@ -1,12 +1,8 @@
 .sightings-container {
-  background: linear-gradient(to bottom, #b8dcff, #0f1849);
-  font-family: 'Raleway', sans-serif;
-}
-
-.sightings-content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  background: linear-gradient(to bottom, #b8dcff, #0f1849);
   min-height: 100vh;
 }
 
