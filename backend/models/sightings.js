@@ -39,7 +39,7 @@ const Sighting = sequelize.define('Sighting', {
 });
 
 // Associations
-const Species = require('./species');
+const Species = require('./Species');
 Sighting.belongsTo(Species, { foreignKey: 'species_id' });
 
 module.exports = Sighting;

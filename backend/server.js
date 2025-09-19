@@ -19,6 +19,7 @@ app.use("/api/species", speciesRoutes);
 app.use("/api/sightings", sightingsRoutes);
 app.use(express.static('public'));
 
+
 // DB connection & start server
 sequelize.sync().then(() => {
   const PORT = process.env.PORT || 5000;
