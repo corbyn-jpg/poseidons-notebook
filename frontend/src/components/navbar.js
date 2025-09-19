@@ -22,7 +22,7 @@ const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/logs">
+            <Link to="/sightings">
               <img src={seashellIcon} alt="Logs" className="nav-icon" />
             </Link>
           </li>

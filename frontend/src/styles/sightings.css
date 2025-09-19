@@ -1,0 +1,483 @@
+/* src/styles/sightings.css */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap');
+
+.sightings-container {
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(to bottom, #b8dcff, #0f1849);
+  font-family: 'Raleway', sans-serif;
+}
+
+.sightings-content {
+  padding: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sightings-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sightings-main-title {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 3rem;
+  color: #0F2D4C;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.sightings-subtitle {
+  font-size: 1.2rem;
+  color: #0F2D4C;
+  opacity: 0.9;
+}
+
+.sightings-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 12px 45px 12px 15px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  background: white;
+  color: #0F2D4C;
+  font-size: 16px;
+  width: 300px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.search-input::placeholder {
+  color: #71c9ff;
+}
+
+.search-icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 10px;
+  color: #71c9ff;
+}
+
+.search-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.add-sighting-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 12px 20px;
+  background: #71c9ff;
+  color: #0F2D4C;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.add-sighting-btn:hover {
+  background: #4db4ff;
+}
+
+.sightings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.sighting-card {
+  display: flex;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sighting-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(15, 45, 76, 0.3);
+}
+
+.sighting-image-container {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sighting-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sighting-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.species-name {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 1.4rem;
+  color: #0F2D4C;
+  margin-bottom: 0.5rem;
+}
+
+.scientific-name {
+  font-style: italic;
+  color: #71c9ff;
+  margin-bottom: 1rem;
+}
+
+.sighting-details {
+  margin-bottom: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #0F2D4C;
+  min-width: 80px;
+  margin-right: 0.5rem;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.detail-value {
+  color: #0F2D4C;
+}
+
+.sighting-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn, .delete-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.edit-btn {
+  background: #71c9ff;
+  color: #0F2D4C;
+}
+
+.edit-btn:hover {
+  background: #4db4ff;
+}
+
+.delete-btn {
+  background: #ff6b6b;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+}
+
+/* Form Styles */
+.sighting-form {
+  padding: 0 2rem 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #0F2D4C;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.text-link {
+  background: none;
+  border: none;
+  color: #71c9ff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 0.5rem;
+  font-family: 'Raleway', sans-serif;
+}
+
+.text-link:hover {
+  color: #4db4ff;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.form-actions button:first-child {
+  background: #e0e0e0;
+  color: #0F2D4C;
+}
+
+.form-actions button:first-child:hover {
+  background: #d0d0d0;
+}
+
+.form-actions button:last-child {
+  background: #71c9ff;
+  color: #0F2D4C;
+}
+
+.form-actions button:last-child:hover {
+  background: #4db4ff;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 24, 73, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #0F2D4C;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.close-button:hover {
+  background: #71c9ff;
+}
+
+.modal-header {
+  padding: 2rem 2rem 1rem;
+  text-align: center;
+  border-bottom: 2px solid #71c9ff;
+}
+
+.modal-header h2 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  margin-bottom: 0.5rem;
+}
+
+.species-modal .modal-header p {
+  color: #0F2D4C;
+  margin-bottom: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.modal-actions button:first-child {
+  background: #e0e0e0;
+  color: #0F2D4C;
+}
+
+.modal-actions button:first-child:hover {
+  background: #d0d0d0;
+}
+
+.modal-actions button:last-child {
+  background: #71c9ff;
+  color: #0F2D4C;
+}
+
+.modal-actions button:last-child:hover {
+  background: #4db4ff;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #0F2D4C;
+}
+
+.no-results h3 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.no-results .add-sighting-btn {
+  margin-top: 1rem;
+}
+
+.error-message {
+  background: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 3rem;
+  color: #0F2D4C;
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sightings-content {
+    padding: 1rem;
+    padding-bottom: 120px;
+  }
+  
+  .sightings-main-title {
+    font-size: 2rem;
+  }
+  
+  .sightings-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .sighting-card {
+    flex-direction: column;
+  }
+  
+  .sighting-image-container {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .modal-content {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .sighting-form {
+    padding: 0 1rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sightings-main-title {
+    font-size: 1.8rem;
+  }
+  
+  .sighting-info {
+    padding: 1rem;
+  }
+  
+  .sighting-actions {
+    flex-direction: column;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    margin-bottom: 0.25rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+}
