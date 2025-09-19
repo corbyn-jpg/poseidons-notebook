@@ -4,7 +4,7 @@
 .sightings-container {
   min-height: 100vh;
   position: relative;
-  background: linear-gradient(to bottom, #b8dcff, #0f1849);
+  background: linear-gradient(#71c9ff, #0f1849);
   font-family: 'Raleway', sans-serif;
 }
 
@@ -62,14 +62,6 @@
 }
 
 .search-input::placeholder {
-  color: #71c9ff;
-}
-
-.search-icon {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  right: 10px;
   color: #71c9ff;
 }
 
