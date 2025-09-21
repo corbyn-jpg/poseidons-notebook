@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import turtleIcon from "../assets/turtle.png";
 import diverIcon from "../assets/diver.png";
 import seashellIcon from "../assets/seashell.png";
+import ContributionsIcon from "../assets/contributions.png";
 import "../styles/titleWave.css";
 import "../styles/navbar.css";
 
@@ -28,7 +29,12 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/sightings">
-              <img src={seashellIcon} alt="Logs" className="nav-icon" />
+              <img src={seashellIcon} alt="Sightings" className="nav-icon" />
+            </Link>
+          </li>
+          <li>
+            <Link to="/contributions">
+              <img src={ContributionsIcon} alt="Contributions" className="nav-icon" />
             </Link>
           </li>
           <li>

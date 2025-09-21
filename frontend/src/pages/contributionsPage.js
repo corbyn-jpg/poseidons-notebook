@@ -3,6 +3,14 @@ import React from 'react';
 import Bubbles from '../components/bubbles';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import CommunityIcon from '../assets/community.png';
+import ResearchIcon from '../assets/research.png';
+import EffortsIcon from '../assets/efforts.png';
+import HealthIcon from '../assets/health.png';
+import HeartIcon from '../assets/heart.png';
+import FirstIcon from '../assets/medal1.png';
+import SecondIcon from '../assets/medal2.png';
+import ThirdIcon from '../assets/medal3.png';
 import '../styles/contributions.css';
 
 const ContributionsPage = () => {
@@ -29,7 +37,7 @@ const ContributionsPage = () => {
               Every sighting you report and every species you add helps build our understanding of 
               marine ecosystems and contributes to global conservation efforts.
             </p>
-            <div className="thank-you-icon">💙</div>
+            <div className="thank-you-icon"><img src={HeartIcon} /></div>
           </div>
         </div>
 
@@ -39,7 +47,7 @@ const ContributionsPage = () => {
           <h2>How Your Contributions Help</h2>
           <div className="impact-grid">
             <div className="impact-card">
-              <div className="impact-icon">🔍</div>
+              <div className="icon"><img src={ResearchIcon} /></div>
               <h3>Scientific Research</h3>
               <p>
                 Your sightings provide valuable data for researchers studying marine biodiversity, 
@@ -47,7 +55,7 @@ const ContributionsPage = () => {
               </p>
             </div>
             <div className="impact-card">
-              <div className="impact-icon">🛡️</div>
+              <div className="icon"><img src={EffortsIcon} /></div>
               <h3>Conservation Efforts</h3>
               <p>
                 Data about species locations and behaviors helps identify critical habitats 
@@ -55,7 +63,7 @@ const ContributionsPage = () => {
               </p>
             </div>
             <div className="impact-card">
-              <div className="impact-icon">🌊</div>
+              <div className="icon"><img src={HealthIcon} /></div>
               <h3>Ecosystem Health</h3>
               <p>
                 By tracking species sightings, we can monitor the health of marine ecosystems 
@@ -63,7 +71,7 @@ const ContributionsPage = () => {
               </p>
             </div>
             <div className="impact-card">
-              <div className="impact-icon">👥</div>
+              <div className="icon"><img src={CommunityIcon} /></div>
               <h3>Community Building</h3>
               <p>
                 Your contributions help build a community of citizen scientists who share 
@@ -148,7 +156,7 @@ const ContributionsPage = () => {
             </p>
           </div>
         </div>
-        
+
         {/* Recognition Section */}
         <div className="recognition-section">
           <h2>Contributor Recognition</h2>
@@ -159,17 +167,17 @@ const ContributionsPage = () => {
           </p>
           <div className="recognition-badges">
             <div className="badge">
-              <div className="badge-icon">🥇</div>
+              <div className="icon"> <img src={FirstIcon} /></div>
               <h4>Master Marine Biologist</h4>
               <p>100+ verified contributions</p>
             </div>
             <div className="badge">
-              <div className="badge-icon">🥈</div>
+              <div className="icon"> <img src={SecondIcon} /></div>
               <h4>Ocean Explorer</h4>
               <p>50+ verified contributions</p>
             </div>
             <div className="badge">
-              <div className="badge-icon">🥉</div>
+              <div className="icon"> <img src={ThirdIcon} /></div>
               <h4>Marine enthusiast</h4>
               <p>25+ verified contributions</p>
             </div>
