@@ -9,7 +9,6 @@ import TrackSpecies from "../assets/species.jpeg";
 import Science from "../assets/contributions.jpeg";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import diverIcon from "../assets/diver.png";
 import "../styles/titleWave.css";
 import "../styles/navbar.css";
 import "@fontsource/raleway";
@@ -28,15 +27,6 @@ const LandingPage = () => {
             </h1>
           </div>
         </Link>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/signup">
-                <img src={diverIcon} alt="Signup" className="nav-icon" />
-              </Link>
-            </li>
-          </ul>
-        </nav>
       </header>
       <HeroSection
         backgroundImage={heroImage}

@@ -15,8 +15,8 @@ import "../styles/landingPage.css";
 const HomePage = () => {
   return (
     <div className="container">
-      <Bubbles />
       <Navbar />
+      <Bubbles />
       <HeroSection
         backgroundImage={heroImage}
         title="Your Marine Discoveries Await"
@@ -48,7 +48,6 @@ const HomePage = () => {
           to="/contributions"
         />
       </div>
-
       <Footer />
     </div>
   );
