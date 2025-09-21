@@ -1,0 +1,473 @@
+/* src/styles/contributions.css */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap');
+
+.contributions-container {
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(to bottom, #b8dcff, #0f1849);
+  font-family: 'Raleway', sans-serif;
+}
+
+.contributions-content {
+  padding: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.contributions-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contributions-main-title {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 3rem;
+  color: #0F2D4C;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.contributions-subtitle {
+  font-size: 1.2rem;
+  color: #0F2D4C;
+  opacity: 0.9;
+}
+
+/* Thank You Section */
+.thank-you-section {
+  margin-bottom: 4rem;
+}
+
+.thank-you-card {
+  background: linear-gradient(135deg, #0AC7A1, #0F8DDA);
+  color: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(10, 199, 161, 0.3);
+}
+
+.thank-you-card h2 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.thank-you-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+
+.thank-you-icon {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+/* Impact Section */
+.impact-section {
+  margin-bottom: 4rem;
+}
+
+.impact-section h2 {
+  text-align: center;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.impact-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.impact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
+}
+
+.impact-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.impact-card h3 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  margin-bottom: 1rem;
+}
+
+.impact-card p {
+  color: #0F2D4C;
+  line-height: 1.6;
+}
+
+/* Statistics Section */
+.stats-section {
+  margin-bottom: 4rem;
+}
+
+.stats-section h2 {
+  text-align: center;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
+}
+
+.stat-number {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0AC7A1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: #0F2D4C;
+  font-weight: 500;
+}
+
+/* How to Contribute Section */
+.contribute-section {
+  margin-bottom: 4rem;
+}
+
+.contribute-section h2 {
+  text-align: center;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.contribute-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
+}
+
+.step-number {
+  background: #0AC7A1;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  margin-bottom: 0.5rem;
+}
+
+.step-content p {
+  color: #0F2D4C;
+  line-height: 1.6;
+}
+
+/* Recognition Section */
+.recognition-section {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.recognition-section h2 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #FFF;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.recognition-section p {
+  color: #FFF;
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.recognition-badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.badge {
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.badge:hover {
+  transform: translateY(-5px);
+}
+
+.badge-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.badge h4 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  margin-bottom: 0.5rem;
+}
+
+.badge p {
+  color: #0F2D4C;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+
+/* Donation Section */
+.donation-section {
+  margin-bottom: 4rem;
+}
+
+.donation-card {
+  background: linear-gradient(135deg, #0F8DDA, #0F2D4C);
+  color: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(15, 141, 218, 0.3);
+}
+
+.donation-card h3 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.donation-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.donate-btn {
+  background-color: #0AC7A1;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(10, 199, 161, 0.3);
+  transition: all 0.3s ease;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.donate-btn:hover {
+  background-color: #09b393;
+  box-shadow: 0 6px 16px rgba(10, 199, 161, 0.4);
+  transform: translateY(-2px);
+}
+
+.donation-note {
+  font-size: 0.9rem !important;
+  opacity: 0.9;
+  margin-bottom: 0 !important;
+}
+
+/* Responsive adjustments for donation section */
+@media (max-width: 768px) {
+  .donation-card {
+    padding: 1.5rem;
+  }
+  
+  .donation-card h3 {
+    font-size: 1.5rem;
+  }
+  
+  .donate-btn {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .donation-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .donation-card p {
+    font-size: 1rem;
+  }
+  
+  .donate-btn {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}
+
+/* Call to Action Section */
+.cta-section {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.1);
+}
+
+.cta-section h2 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  color: #0F2D4C;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.cta-btn.primary {
+  background: #0AC7A1;
+  color: white;
+  box-shadow: 0 4px 12px rgba(10, 199, 161, 0.3);
+}
+
+.cta-btn.primary:hover {
+  background: #09b393;
+  box-shadow: 0 6px 16px rgba(10, 199, 161, 0.4);
+  transform: translateY(-2px);
+}
+
+.cta-btn.secondary {
+  background: #0F2D4C;
+  color: white;
+  box-shadow: 0 4px 12px rgba(15, 45, 76, 0.3);
+}
+
+.cta-btn.secondary:hover {
+  background: #0a1f36;
+  box-shadow: 0 6px 16px rgba(15, 45, 76, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contributions-content {
+    padding: 1.5rem;
+  }
+  
+  .contributions-main-title {
+    font-size: 2.2rem;
+  }
+  
+  .thank-you-card {
+    padding: 1.5rem;
+  }
+  
+  .impact-grid,
+  .stats-grid,
+  .recognition-badges {
+    grid-template-columns: 1fr;
+  }
+  
+  .step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contributions-main-title {
+    font-size: 1.8rem;
+  }
+  
+  .thank-you-card h2 {
+    font-size: 1.5rem;
+  }
+  
+  .impact-section h2,
+  .stats-section h2,
+  .contribute-section h2,
+  .recognition-section h2,
+  .cta-section h2 {
+    font-size: 1.8rem;
+  }
+}

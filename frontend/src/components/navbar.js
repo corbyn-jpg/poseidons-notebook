@@ -10,7 +10,7 @@ import "../styles/navbar.css";
 const Navbar = () => {
   return (
     <header className="navbar">
-      <Link to="/" className="navbar-logo-link">
+      <Link to="/homePage" className="navbar-logo-link">
         <img src={logo} alt="Poseidon's Notebook" className="navbar-logo" />
         <div className="content">
           <h1>
