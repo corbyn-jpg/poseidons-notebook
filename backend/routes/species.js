@@ -31,4 +31,47 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//
+router.post('/', async (req, res) => {
+  try {
+    const {
+      common_name,
+      scientific_name,
+      category,
+      conservation_status,
+      avg_depth_range,
+      habitat,
+      image_url,
+      description,
+      size_range,
+      diet,
+      geographic_range
+    } = req.body;
+
+    // Validate required fields
+    if (!common_name || !scientific_name || !category || !conservation_status) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const newSpecies = await Species.create({
+      common_name,
+      scientific_name,
+      category,
+      conservation_status,
+      avg_depth_range: avg_depth_range || null,
+      habitat: habitat || null,
+      image_url: image_url || null,
+      description: description || null,
+      size_range: size_range || null,
+      diet: diet || null,
+      geographic_range: geographic_range || null
+    });
+
+    res.status(201).json(newSpecies);
+  } catch (error) {
+    console.error('Error creating species:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;
