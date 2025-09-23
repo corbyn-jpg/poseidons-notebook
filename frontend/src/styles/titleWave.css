@@ -36,7 +36,7 @@
 }
 
 .title-wrapper.shrink {
-  top: 25px; /* move inside the navbar */
+  top: 25px;
   font-size: 1.5rem;
   color: white;
 }
