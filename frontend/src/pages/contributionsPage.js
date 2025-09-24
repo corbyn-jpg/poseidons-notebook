@@ -3,6 +3,14 @@ import React from 'react';
 import Bubbles from '../components/bubbles';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
+import Card from '../components/card';
+import ResearchImage from '../assets/researchImage.jpeg'; 
+import ConservationImage from '../assets/conservationImage.jpeg';
+import EcosystemImage from '../assets/ecosystemImage.jpeg';
+import CommunityImage from '../assets/communityImage.jpeg';
+import RecognitionImage1 from '../assets/recognition1.jpeg';
+import RecognitionImage2 from '../assets/recognition2.jpeg';
+import RecognitionImage3 from '../assets/recognition3.jpeg';
 import CommunityIcon from '../assets/community.png';
 import ResearchIcon from '../assets/research.png';
 import EffortsIcon from '../assets/efforts.png';
@@ -17,6 +25,63 @@ const ContributionsPage = () => {
   const handleDonateClick = () => {
     window.open('https://www.wwf.org.za/our_work/oceans/', '_blank');
   };
+
+  // Impact card data with proper images and icons
+  const impactCards = [
+    {
+      image: ResearchImage, // Use actual image
+      icon: ResearchIcon,   // Keep icon for inside card
+      title: "Scientific Research",
+      description: "Your sightings provide valuable data for researchers studying marine biodiversity, migration patterns, and population trends.",
+      showButton: false
+    },
+    {
+      image: ConservationImage,
+      icon: EffortsIcon,
+      title: "Conservation Efforts",
+      description: "Data about species locations and behaviors helps identify critical habitats that need protection and informs conservation strategies.",
+      showButton: false
+    },
+    {
+      image: EcosystemImage,
+      icon: HealthIcon,
+      title: "Ecosystem Health",
+      description: "By tracking species sightings, we can monitor the health of marine ecosystems and detect changes or threats early.",
+      showButton: false
+    },
+    {
+      image: CommunityImage,
+      icon: CommunityIcon,
+      title: "Community Building",
+      description: "Your contributions help build a community of citizen scientists who share knowledge and passion for marine conservation.",
+      showButton: false
+    }
+  ];
+
+  // Recognition card data with proper images and icons
+  const recognitionCards = [
+    {
+      image: RecognitionImage1,
+      icon: FirstIcon,
+      title: "Master Marine Biologist",
+      description: "100+ verified contributions",
+      showButton: false
+    },
+    {
+      image: RecognitionImage2,
+      icon: SecondIcon,
+      title: "Ocean Explorer",
+      description: "50+ verified contributions",
+      showButton: false
+    },
+    {
+      image: RecognitionImage3,
+      icon: ThirdIcon,
+      title: "Marine Enthusiast",
+      description: "25+ verified contributions",
+      showButton: false
+    }
+  ];
 
   return (
     <div className="contributions-container">
@@ -37,47 +102,24 @@ const ContributionsPage = () => {
               Every sighting you report and every species you add helps build our understanding of 
               marine ecosystems and contributes to global conservation efforts.
             </p>
-            <div className="thank-you-icon"><img src={HeartIcon} /></div>
+            <div className="thank-you-icon"><img src={HeartIcon} alt="Heart icon" /></div>
           </div>
         </div>
-
 
         {/* Impact Section */}
         <div className="impact-section">
           <h2>How Your Contributions Help</h2>
           <div className="impact-grid">
-            <div className="impact-card">
-              <div className="icon"><img src={ResearchIcon} /></div>
-              <h3>Scientific Research</h3>
-              <p>
-                Your sightings provide valuable data for researchers studying marine biodiversity, 
-                migration patterns, and population trends.
-              </p>
-            </div>
-            <div className="impact-card">
-              <div className="icon"><img src={EffortsIcon} /></div>
-              <h3>Conservation Efforts</h3>
-              <p>
-                Data about species locations and behaviors helps identify critical habitats 
-                that need protection and informs conservation strategies.
-              </p>
-            </div>
-            <div className="impact-card">
-              <div className="icon"><img src={HealthIcon} /></div>
-              <h3>Ecosystem Health</h3>
-              <p>
-                By tracking species sightings, we can monitor the health of marine ecosystems 
-                and detect changes or threats early.
-              </p>
-            </div>
-            <div className="impact-card">
-              <div className="icon"><img src={CommunityIcon} /></div>
-              <h3>Community Building</h3>
-              <p>
-                Your contributions help build a community of citizen scientists who share 
-                knowledge and passion for marine conservation.
-              </p>
-            </div>
+            {impactCards.map((card, index) => (
+              <Card
+                key={index}
+                image={card.image}
+                title={card.title}
+                description={card.description}
+                showButton={card.showButton}
+                icon={card.icon} // Pass icon as prop
+              />
+            ))}
           </div>
         </div>
 
@@ -165,22 +207,17 @@ const ContributionsPage = () => {
             contributions to our marine database. Top contributors receive special recognition 
             and opportunities to collaborate with research partners.
           </p>
-          <div className="recognition-badges">
-            <div className="badge">
-              <div className="icon"> <img src={FirstIcon} /></div>
-              <h4>Master Marine Biologist</h4>
-              <p>100+ verified contributions</p>
-            </div>
-            <div className="badge">
-              <div className="icon"> <img src={SecondIcon} /></div>
-              <h4>Ocean Explorer</h4>
-              <p>50+ verified contributions</p>
-            </div>
-            <div className="badge">
-              <div className="icon"> <img src={ThirdIcon} /></div>
-              <h4>Marine enthusiast</h4>
-              <p>25+ verified contributions</p>
-            </div>
+          <div className="recognition-grid">
+            {recognitionCards.map((card, index) => (
+              <Card
+                key={index}
+                image={card.image}
+                title={card.title}
+                description={card.description}
+                showButton={card.showButton}
+                icon={card.icon} // Pass icon as prop
+              />
+            ))}
           </div>
         </div>
 

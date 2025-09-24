@@ -41,7 +41,7 @@
 }
 
 .thank-you-card {
-  background: linear-gradient(135deg, #0AC7A1, #0F8DDA);
+  background: linear-gradient(0deg, #0F8DDA, #0F2D4C);
   color: white;
   padding: 2.5rem;
   border-radius: 16px;
@@ -114,6 +114,13 @@
 .impact-card p {
   color: #0F2D4C;
   line-height: 1.6;
+}
+
+.impact-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
 }
 
 /* Statistics Section */
@@ -225,7 +232,7 @@
 }
 
 .recognition-section p {
-  color: #FFF;
+  color: #0f1849;
   max-width: 800px;
   margin: 0 auto 2.5rem;
   line-height: 1.6;
@@ -248,25 +255,12 @@
   transition: transform 0.3s ease;
 }
 
-.badge:hover {
-  transform: translateY(-5px);
-}
-
-.badge-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.badge h4 {
-  font-family: 'Barlow Semi Condensed', sans-serif;
-  color: #0F2D4C;
-  margin-bottom: 0.5rem;
-}
-
-.badge p {
-  color: #0F2D4C;
-  font-size: 0.9rem;
-  margin: 0;
+.recognition-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  flex-wrap: wrap;
 }
 
 
@@ -276,7 +270,7 @@
 }
 
 .donation-card {
-  background: linear-gradient(135deg, #0F8DDA, #0F2D4C);
+  background: linear-gradient(0deg, #0F8DDA, #0F2D4C);
   color: white;
   padding: 2.5rem;
   border-radius: 16px;
@@ -359,20 +353,20 @@
 .cta-section {
   text-align: center;
   padding: 3rem 2rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(0deg, #0F8DDA, #0F2D4C);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(15, 45, 76, 0.1);
 }
 
 .cta-section h2 {
   font-family: 'Barlow Semi Condensed', sans-serif;
-  color: #0F2D4C;
+  color: #fff;
   font-size: 2.2rem;
   margin-bottom: 1rem;
 }
 
 .cta-section p {
-  color: #0F2D4C;
+  color: #fff;
   font-size: 1.1rem;
   margin-bottom: 2rem;
 }
@@ -452,6 +446,13 @@
     width: 100%;
     max-width: 250px;
   }
+}
+
+/* Adjust card sizing for these sections */
+.impact-grid .card-container,
+.recognition-grid .card-container {
+  width: 280px;
+  height: 320px;
 }
 
 @media (max-width: 480px) {

@@ -21,7 +21,7 @@
 
 .title-wrapper {
   position: absolute;
-  top: 120px; /* below navbar */
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 3rem;

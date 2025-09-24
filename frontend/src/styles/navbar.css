@@ -35,7 +35,7 @@
   position: relative;
   width: 70px;
   height: 70px;
-  background: 0f1849;
+  background: #0f1849;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border-radius: 60px;
   cursor: pointer;
@@ -106,7 +106,7 @@
 
 .animated-nav .title {
   position: absolute;
-  color: #fff;
+  color: #0f1849;
   font-size: 1em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
