@@ -88,7 +88,7 @@
 
 .impact-card {
   background: white;
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
@@ -98,11 +98,6 @@
 .impact-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
-}
-
-.icon img{
-  height: 9vh;
-  width: auto;
 }
 
 .impact-card h3 {
