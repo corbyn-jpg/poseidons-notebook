@@ -29,8 +29,8 @@ const ContributionsPage = () => {
   // Impact card data with proper images and icons
   const impactCards = [
     {
-      image: ResearchImage, // Use actual image
-      icon: ResearchIcon,   // Keep icon for inside card
+      image: ResearchImage, 
+      icon: ResearchIcon,
       title: "Scientific Research",
       description: "Your sightings provide valuable data for researchers studying marine biodiversity, migration patterns, and population trends.",
       showButton: false
