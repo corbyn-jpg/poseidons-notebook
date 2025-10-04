@@ -1,4 +1,4 @@
-name: Build and deploy full-stack app to Azure Web App
+name: Build and deploy Node.js app to Azure Web App - PoseidonsNotebook
 
 on:
   push:
@@ -20,41 +20,21 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: Install and build frontend
-        run: |
-          cd frontend
-          npm install
-          CI=false npm run build  # Build React app
-
-      - name: Install backend dependencies
+      - name: Install and build backend
         run: |
           cd backend
           npm install
+          npm run build --if-present
 
-      - name: Prepare deployment package
+      - name: Zip backend for deployment
         run: |
-          # Create deployment directory
-          mkdir deployment
-          
-          # Copy backend files
-          cp -r backend/* deployment/
-          
-          # Create public folder and copy built frontend
-          mkdir -p deployment/public
-          cp -r frontend/build/* deployment/public/
-          
-          # Clean up
-          rm -rf deployment/node_modules
-
-      - name: Zip artifact for deployment
-        run: |
-          cd deployment
-          zip -r ../release.zip . -x '*.git*'
+          cd backend
+          zip -r ../release.zip . -x '*.git* node_modules/*'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: fullstack-app
+          name: node-app
           path: release.zip
 
   deploy:
@@ -68,7 +48,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: fullstack-app
+          name: node-app
 
       - name: Unzip artifact
         run: unzip release.zip -d deployment-folder
@@ -81,6 +61,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_95EB0CA4B2CD45ABA4EE0F12CE923D58 }}
 
       - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'PoseidonsNotebook'
