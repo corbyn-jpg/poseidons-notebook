@@ -1,11 +1,9 @@
-name: Build and deploy BACKEND to Azure Web App
+name: Build and deploy full-stack app to Azure Web App
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'backend/**'  # Only run when backend files change
   workflow_dispatch:
 
 jobs:
@@ -20,7 +18,14 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '18.x'  # Changed to 18.x for better compatibility
+
+      - name: Install and build frontend
+        run: |
+          cd frontend
+          npm install
+          CI=false npm run build
+          echo "Frontend build completed"
 
       - name: Install backend dependencies
         run: |
@@ -28,33 +33,41 @@ jobs:
           npm install
           echo "Backend dependencies installed"
 
-      - name: Prepare backend deployment
+      - name: Prepare deployment package
         run: |
-          # Create deployment directory with ONLY backend
-          mkdir backend-deploy
-          cp -r backend/* backend-deploy/
+          # Create deployment directory
+          mkdir deployment
           
-          # Remove node_modules (Azure will install dependencies)
-          rm -rf backend-deploy/node_modules
+          # Copy backend files
+          cp -r backend/* deployment/
           
-          # Verify the backend structure
-          echo "=== Backend deployment structure ==="
-          ls -la backend-deploy/
-          echo "=== Checking key backend files ==="
-          ls -la backend-deploy/package.json
-          ls -la backend-deploy/server.js
-          test -f backend-deploy/server.js && echo "✓ server.js found" || echo "✗ server.js missing"
+          # Copy built frontend to public folder
+          mkdir -p deployment/public
+          cp -r frontend/build/* deployment/public/
+          
+          # Create a simple test file to verify static serving
+          echo "<html><body><h1>Test Page</h1><p>If you see this, static files are working!</p></body></html>" > deployment/public/test.html
+          
+          # Verify the structure
+          echo "=== Deployment structure ==="
+          ls -la deployment/
+          echo "=== Public folder contents ==="
+          ls -la deployment/public/
+          echo "=== Checking key files ==="
+          ls -la deployment/package.json
+          ls -la deployment/server.js
+          ls -la deployment/public/index.html
 
-      - name: Zip backend artifact
+      - name: Zip artifact for deployment
         run: |
-          cd backend-deploy
-          zip -r ../backend-release.zip . -x '*.git*'
+          cd deployment
+          zip -r ../release.zip . -x '*.git* node_modules/*'
 
-      - name: Upload backend artifact
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: backend-app
-          path: backend-release.zip
+          name: fullstack-app
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -64,19 +77,22 @@ jobs:
       contents: read
 
     steps:
-      - name: Download backend artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: backend-app
+          name: fullstack-app
 
-      - name: Unzip backend artifact
+      - name: Unzip artifact and verify
         run: |
-          unzip backend-release.zip -d backend-deploy-folder
-          echo "=== Backend deployment structure ==="
-          ls -la backend-deploy-folder/
-          echo "=== Final file check ==="
-          test -f backend-deploy-folder/server.js && echo "✓ server.js ready for deployment" || echo "✗ server.js missing"
-          test -f backend-deploy-folder/package.json && echo "✓ package.json ready for deployment" || echo "✗ package.json missing"
+          unzip release.zip -d deployment-folder
+          echo "=== Final deployment structure ==="
+          ls -la deployment-folder/
+          echo "=== Checking server.js exists ==="
+          test -f deployment-folder/server.js && echo "✓ server.js found" || echo "✗ server.js missing"
+          echo "=== Checking package.json exists ==="
+          test -f deployment-folder/package.json && echo "✓ package.json found" || echo "✗ package.json missing"
+          echo "=== Checking public/index.html exists ==="
+          test -f deployment-folder/public/index.html && echo "✓ index.html found" || echo "✗ index.html missing"
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -85,15 +101,14 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_119CA0B556034DA6BFA1C69A804B5276 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_95EB0CA4B2CD45ABA4EE0F12CE923D58 }}
 
-      - name: 'Deploy BACKEND to Azure Web App'
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'PoseidonsNotebook-API'  # Changed to clarify this is API
+          app-name: 'PoseidonsNotebook'
           slot-name: 'Production'
-          package: backend-deploy-folder
+          package: deployment-folder
 
-      - name: Verify backend deployment
+      - name: Wait for app to start
         run: |
-          echo "Backend deployed to Azure Web App"
-          echo "API URL: https://poseidonsnotebook-api.azurewebsites.net"
-          echo "Test endpoint: https://poseidonsnotebook-api.azurewebsites.net/api/health"
+          echo "Deployment completed. App should be starting..."
+          sleep 10
