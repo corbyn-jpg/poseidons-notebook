@@ -25,11 +25,34 @@ jobs:
           cd backend
           npm install
           npm run build --if-present
+          # npm run test --if-present  # Uncomment if you have tests
 
-      - name: Zip backend for deployment
+      - name: Install and build frontend
         run: |
-          cd backend
-          zip -r ../release.zip . -x '*.git* node_modules/*'
+          cd frontend
+          npm install
+          npm run build --if-present
+          # npm run test --if-present  # Uncomment if you have tests
+
+      - name: Prepare deployment package
+        run: |
+          # Create a deployment directory
+          mkdir deployment
+          
+          # Copy backend files (assuming your Azure app runs the backend)
+          cp -r backend/* deployment/
+          
+          # If you need to serve frontend from backend, copy built frontend files to backend public folder
+          # mkdir deployment/public
+          # cp -r frontend/dist/* deployment/public/  # Adjust 'dist' to your frontend build folder name
+          
+          # Remove node_modules to avoid including them (they'll be installed on Azure)
+          rm -rf deployment/node_modules
+
+      - name: Zip artifact for deployment
+        run: |
+          cd deployment
+          zip -r ../release.zip . -x '*.git*'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -67,3 +90,4 @@ jobs:
           app-name: 'PoseidonsNotebook'
           slot-name: 'Production'
           package: deployment-folder
+          
