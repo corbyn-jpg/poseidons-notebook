@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const sequelize = require("./config/db");
-const authRoutes = require("./routes/authroutes");
+const authRoutes = require("./routes/authRoutes");
 const speciesRoutes = require("./routes/species"); 
 const sightingsRoutes = require("./routes/sightings");
 
