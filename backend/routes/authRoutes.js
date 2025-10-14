@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { Op } = require("sequelize");
 
-// Use environment variable in production!
-const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
+// Use environment variable only for JWT secret
+const JWT_SECRET = process.env.JWT_SECRET;
 
 /**
  * @route   POST /api/auth/register

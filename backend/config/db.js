@@ -6,7 +6,8 @@ const sequelize = new Sequelize(
   process.env.DB_USER,     // Username
   process.env.DB_PASSWORD, // Password
   {
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST, // Only use environment variable
+    port: process.env.DB_PORT,
     dialect: 'mysql',
     logging: false // Disable SQL query logs in console
   }
