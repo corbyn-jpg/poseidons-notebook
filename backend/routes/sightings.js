@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Sighting = require('../models/sightings');
-const Species = require('../models/Species');
+const Species = require('../models/species');
 const authenticateToken = require('../middleware/auth'); // You'll need to create this
 
 // Get all sightings for the authenticated user
