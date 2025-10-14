@@ -1,0 +1,12 @@
+{
+  "name": "poseidons-notebook",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node backend/server.js",
+    "heroku-postbuild": "cd frontend && npm install --silent && npm run build --silent && cp -r build/* ../backend/public/ || true"
+  }
+}

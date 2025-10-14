@@ -26,8 +26,17 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// DB connection & start server
-sequelize.sync().then(() => {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
+// DB connection & start server with better logging
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connection has been established successfully.');
+    await sequelize.sync();
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  } catch (err) {
+    console.error('Unable to connect to the database:', err);
+    // Exit process so Heroku marks the deploy as failed and we can see the error
+    process.exit(1);
+  }
+})();
