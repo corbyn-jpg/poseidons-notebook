@@ -1,7 +1,7 @@
 // models/sighting.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-const Species = require('./Species'); // Import Species model
+const Species = require('./species'); // Import Species model
 
 const Sighting = sequelize.define('Sighting', {
   sighting_id: {
