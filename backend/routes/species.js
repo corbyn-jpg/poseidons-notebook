@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Species = require('../models/Species');
+const Species = require('../models/species');
 
 // Get all species
 router.get('/', async (req, res) => {
