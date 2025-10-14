@@ -42,6 +42,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 // DB connection & start server
 const PORT = process.env.PORT || 5000;
 
