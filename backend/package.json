@@ -1,12 +1,16 @@
 {
-  "name": "backend",
+  "name": "poseidons-notebook-backend",
   "version": "1.0.0",
+  "description": "Backend for Poseidon's Notebook",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "heroku-postbuild": "cd ../frontend && npm install && npm run build"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
