@@ -91,12 +91,31 @@ try {
 }
 
 try {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  // Safer fallback: register a handler without letting Express parse any string as a route pattern
+  // Express's internal path-to-regexp can throw if given a malformed pattern (e.g. a URL).
+  // We ensure the path pattern is a plain '*' and avoid passing any external string into its parser.
+  app.get('*', function (req, res, next) {
+    try {
+      const indexPath = path.join(__dirname, 'public', 'index.html');
+      if (!indexPath || /https?:\/\//i.test(String(indexPath))) {
+        // Defensive: if something odd is detected, log and return 500 so we can investigate.
+        console.error('Refusing to serve fallback because indexPath looks like a URL:', indexPath);
+        return res.status(500).send('Server configuration error');
+      }
+      res.sendFile(indexPath, (err) => {
+        if (err) {
+          console.error('Error sending index.html in fallback handler:', err);
+          next(err);
+        }
+      });
+    } catch (err) {
+      console.error('Exception in fallback handler:', err);
+      next(err);
+    }
   });
-  console.log('Registered fallback app.get("*") route');
+  console.log('Registered safe fallback app.get("*") route');
 } catch (e) {
-  console.error('Failed to register fallback app.get("*") route:', e);
+  console.error('Failed to register safe fallback app.get("*") route:', e && e.stack ? e.stack : e);
 }
 
 // Capture uncaught exceptions to ensure Heroku logs show the full stack
