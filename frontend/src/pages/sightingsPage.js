@@ -72,7 +72,7 @@ const SightingsPage = () => {
         const token = localStorage.getItem("token");
 
         // Fetch sightings
-        const sightingsResponse = await fetch(apiUrl('/api/sightings'), {
+  const sightingsResponse = await fetch(apiUrl('/sightings'), {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -89,7 +89,7 @@ const SightingsPage = () => {
         setSightings(sightingsData);
 
         // Fetch species for the dropdown
-        const speciesResponse = await fetch(apiUrl('/api/species'));
+  const speciesResponse = await fetch(apiUrl('/species'));
         if (!speciesResponse.ok) {
           throw new Error(`HTTP error! status: ${speciesResponse.status}`);
         }
@@ -191,7 +191,7 @@ const SightingsPage = () => {
       const token = localStorage.getItem("token");
       const url = selectedSighting
         ? apiUrl(`/api/sightings/${selectedSighting.sighting_id}`)
-        : apiUrl('/api/sightings');
+  : apiUrl('/sightings');
 
       const method = selectedSighting ? "PUT" : "POST";
 
@@ -232,7 +232,7 @@ const SightingsPage = () => {
   const handleNewSpeciesSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(apiUrl('/api/species'), {
+  const response = await fetch(apiUrl('/species'), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

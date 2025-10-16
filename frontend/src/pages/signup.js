@@ -85,7 +85,7 @@ const handleSignup = async (e) => {
   }
 
   try {
-    const res = await fetch(apiUrl('/api/auth/register'), {
+  const res = await fetch(apiUrl('/auth/register'), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

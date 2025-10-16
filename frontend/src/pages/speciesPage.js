@@ -20,7 +20,7 @@ const SpeciesPage = () => {
     const fetchSpecies = async () => {
       try {
         setLoading(true);
-  const response = await fetch(apiUrl('/api/species'));
+  const response = await fetch(apiUrl('/species'));
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
