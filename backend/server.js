@@ -3,9 +3,25 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const sequelize = require("./config/db");
-const authRoutes = require("./routes/authRoutes");
-const speciesRoutes = require("./routes/species"); 
-const sightingsRoutes = require("./routes/sightings");
+let authRoutes, speciesRoutes, sightingsRoutes;
+try {
+  authRoutes = require("./routes/authRoutes");
+  console.log('Loaded authRoutes');
+} catch (e) {
+  console.error('Failed to load authRoutes:', e);
+}
+try {
+  speciesRoutes = require("./routes/species");
+  console.log('Loaded speciesRoutes');
+} catch (e) {
+  console.error('Failed to load speciesRoutes:', e);
+}
+try {
+  sightingsRoutes = require("./routes/sightings");
+  console.log('Loaded sightingsRoutes');
+} catch (e) {
+  console.error('Failed to load sightingsRoutes:', e);
+}
 
 dotenv.config();
 const app = express();
@@ -24,9 +40,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/species", speciesRoutes);
-app.use("/api/sightings", sightingsRoutes); 
+if (authRoutes) app.use("/api/auth", authRoutes);
+if (speciesRoutes) app.use("/api/species", speciesRoutes);
+if (sightingsRoutes) app.use("/api/sightings", sightingsRoutes);
 app.use(express.static('public'));
 
 const path = require('path');
