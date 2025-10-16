@@ -91,6 +91,18 @@ try {
 }
 
 try {
+  // Also serve any static images checked into the frontend public folder so
+  // requests to /images/species/... (which are stored in the DB) resolve even
+  // when the CRA build didn't include hashed versions. This is defensive and
+  // safe because it only serves the `images` subtree.
+  const frontendImages = path.join(__dirname, '..', 'frontend', 'public', 'images');
+  app.use('/images', express.static(frontendImages));
+  console.log(`Registered static images from ${frontendImages} at /images`);
+} catch (e) {
+  console.error('Failed to register frontend images static middleware:', e && e.stack ? e.stack : e);
+}
+
+try {
   // Register a minimal GET-only middleware after static so client-side routes are handled without
   // invoking Express's path parsing for a pattern string. This avoids triggering path-to-regexp
   // on any accidental URL-like token in route definitions.
