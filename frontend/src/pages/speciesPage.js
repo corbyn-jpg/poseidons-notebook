@@ -4,6 +4,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import searchIcon from '../assets/search.png';
 import '../styles/species.css';
+import { apiUrl, getImageUrl } from '../api';
 
 const SpeciesPage = () => {
   const [species, setSpecies] = useState([]);
@@ -19,7 +20,7 @@ const SpeciesPage = () => {
     const fetchSpecies = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5000/api/species');
+  const response = await fetch(apiUrl('/api/species'));
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -66,15 +67,7 @@ const SpeciesPage = () => {
     EN: 'Endangered', CR: 'Critically Endangered', DD: 'Data Deficient'
   };
 
-  // Function to get the correct image URL
-  const getImageUrl = (imagePath) => {
-    // If it's already a full URL, return it
-    if (imagePath.startsWith('http')) {
-      return imagePath;
-    }
-    
-    return `http://localhost:5000${imagePath}`;
-  };
+  // use helper getImageUrl from api.js
 
   if (loading) {
     return (

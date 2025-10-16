@@ -40,29 +40,39 @@ app.use(cors());
 app.use(express.json());
 
 // Routes (wrapped to log which registration throws)
-if (authRoutes) {
+// Helper to safely register routes with detailed logging
+function safeRegister(pathValue, handler, name) {
   try {
-    app.use("/api/auth", authRoutes);
-    console.log('Registered /api/auth');
+    const handlerType = handler && handler.constructor ? handler.constructor.name : typeof handler;
+    console.log(`Attempting to register route: path=${String(pathValue)}, handlerType=${handlerType}, name=${name || 'unknown'}`);
+
+    // If pathValue looks like a full URL accidentally, warn (common mistake)
+    if (typeof pathValue === 'string' && /https?:\/\//i.test(pathValue)) {
+      console.warn(`WARNING: route path looks like a URL: ${pathValue}`);
+    }
+
+    // Defensive check: ensure handler is a function or an express router (object with 'use'/'stack')
+    const isRouterLike = handler && (typeof handler === 'function' || (typeof handler === 'object' && (handler.handle || handler.stack || handler.use)));
+    if (!isRouterLike) {
+      console.warn(`Handler for ${pathValue} does not look like a router/middleware. handler:`, handler);
+    }
+
+    app.use(pathValue, handler);
+    console.log(`Registered ${String(pathValue)} successfully`);
   } catch (e) {
-    console.error('Failed to register /api/auth:', e);
+    console.error(`Failed to register ${String(pathValue)}:`, e && e.stack ? e.stack : e);
+    throw e; // rethrow so startup logging/uncaughtException shows full failure
   }
+}
+
+if (authRoutes) {
+  safeRegister('/api/auth', authRoutes, 'authRoutes');
 }
 if (speciesRoutes) {
-  try {
-    app.use("/api/species", speciesRoutes);
-    console.log('Registered /api/species');
-  } catch (e) {
-    console.error('Failed to register /api/species:', e);
-  }
+  safeRegister('/api/species', speciesRoutes, 'speciesRoutes');
 }
 if (sightingsRoutes) {
-  try {
-    app.use("/api/sightings", sightingsRoutes);
-    console.log('Registered /api/sightings');
-  } catch (e) {
-    console.error('Failed to register /api/sightings:', e);
-  }
+  safeRegister('/api/sightings', sightingsRoutes, 'sightingsRoutes');
 }
 // Serve static frontend (wrapped to catch malformed patterns)
 const path = require('path');

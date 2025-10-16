@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import "../styles/authStyles.css";
 import Bubbles from "../components/bubbles";
 import "@fontsource/raleway";
+import { apiUrl } from "../api";
 
 const Login = () => {
   const handleLogin = async (e) => {
@@ -12,7 +13,7 @@ const Login = () => {
     const password = e.target.password.value;
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(apiUrl('/api/auth/login'), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),

@@ -6,6 +6,7 @@ import Footer from "../components/footer";
 import searchIcon from "../assets/search.png";
 import addIcon from "../assets/add.png";
 import "../styles/sightings.css";
+import { apiUrl, getImageUrl } from '../api';
 
 const SightingsPage = () => {
   const [sightings, setSightings] = useState([]);
@@ -71,14 +72,11 @@ const SightingsPage = () => {
         const token = localStorage.getItem("token");
 
         // Fetch sightings
-        const sightingsResponse = await fetch(
-          "http://localhost:5000/api/sightings",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const sightingsResponse = await fetch(apiUrl('/api/sightings'), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!sightingsResponse.ok) {
           if (sightingsResponse.status === 401) {
@@ -91,9 +89,7 @@ const SightingsPage = () => {
         setSightings(sightingsData);
 
         // Fetch species for the dropdown
-        const speciesResponse = await fetch(
-          "http://localhost:5000/api/species"
-        );
+        const speciesResponse = await fetch(apiUrl('/api/species'));
         if (!speciesResponse.ok) {
           throw new Error(`HTTP error! status: ${speciesResponse.status}`);
         }
@@ -194,8 +190,8 @@ const SightingsPage = () => {
     try {
       const token = localStorage.getItem("token");
       const url = selectedSighting
-        ? `http://localhost:5000/api/sightings/${selectedSighting.sighting_id}`
-        : "http://localhost:5000/api/sightings";
+        ? apiUrl(`/api/sightings/${selectedSighting.sighting_id}`)
+        : apiUrl('/api/sightings');
 
       const method = selectedSighting ? "PUT" : "POST";
 
@@ -236,7 +232,7 @@ const SightingsPage = () => {
   const handleNewSpeciesSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/species", {
+      const response = await fetch(apiUrl('/api/species'), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -275,15 +271,12 @@ const SightingsPage = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://localhost:5000/api/sightings/${sightingId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(apiUrl(`/api/sightings/${sightingId}`), {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -307,14 +300,7 @@ const SightingsPage = () => {
     );
   });
 
-  const getImageUrl = (imagePath) => {
-    if (imagePath && imagePath.startsWith("http")) {
-      return imagePath;
-    }
-    return imagePath
-      ? `http://localhost:5000${imagePath}`
-      : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%230f1849'/%3E%3Ctext x='150' y='100' font-family='Arial' font-size='14' fill='%23ffffff' text-anchor='middle'%3EImage Not Available%3C/text%3E%3C/svg%3E";
-  };
+  // use helper getImageUrl from api.js
 
   if (loading) {
     return (
