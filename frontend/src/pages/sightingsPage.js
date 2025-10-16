@@ -707,18 +707,6 @@ const SightingsPage = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="description">Description</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={newSpeciesData.description}
-                    onChange={handleNewSpeciesInputChange}
-                    placeholder="Describe the species..."
-                    rows="3"
-                  />
-                </div>
-
-                <div className="form-group">
                   <label htmlFor="size_range">Size Range</label>
                   <input
                     type="text"
@@ -751,6 +739,18 @@ const SightingsPage = () => {
                     value={newSpeciesData.geographic_range}
                     onChange={handleNewSpeciesInputChange}
                     placeholder="e.g., Indo-Pacific region"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="description">Description</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={newSpeciesData.description}
+                    onChange={handleNewSpeciesInputChange}
+                    placeholder="Describe the species..."
+                    rows="4"
                   />
                 </div>
 
