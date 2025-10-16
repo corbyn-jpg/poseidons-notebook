@@ -16,9 +16,24 @@ function apiUrl(path) {
 
 function getImageUrl(imagePath) {
   if (!imagePath) return null;
-  if (imagePath.startsWith("http")) return imagePath;
-  // imagePath may be like /images/..., so construct full URL
-  return apiUrl(imagePath);
+
+  // Normalize: coerce to string, trim whitespace and remove surrounding quotes
+  let p = String(imagePath).trim();
+  if ((p.startsWith('"') && p.endsWith('"')) || (p.startsWith("'") && p.endsWith("'"))) {
+    p = p.slice(1, -1).trim();
+  }
+
+  // Return data URLs as-is
+  if (p.toLowerCase().startsWith('data:')) return p;
+
+  // Protocol-relative URLs (e.g. //example.com/image.jpg) -> assume https
+  if (p.startsWith('//')) return `https:${p}`;
+
+  // Absolute http(s) URLs -> return as-is
+  if (/^https?:\/\//i.test(p)) return p;
+
+  // imagePath may be like /images/..., so construct full URL via apiUrl
+  return apiUrl(p);
 }
 
 export { API_BASE, apiUrl, getImageUrl };
