@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/card.css";
-import { getImageUrl } from "../api";
 
 const Card = ({ image, title, description, learn, to, showButton = true, icon }) => {
   const navigate = useNavigate();
@@ -30,18 +29,7 @@ const Card = ({ image, title, description, learn, to, showButton = true, icon })
               - If it starts with '/images/' call getImageUrl so backend static middleware can serve it
               - Otherwise assume a module/static import path and use it directly
           */}
-          {(() => {
-            if (!image) return <img src="" alt={title} className="prop-image" />;
-            const s = String(image).trim();
-            if (/^https?:\/\//i.test(s) || s.startsWith('data:') || s.startsWith('//')) {
-              return <img src={s} alt={title} className="prop-image" />;
-            }
-            if (s.startsWith('/images/')) {
-              return <img src={getImageUrl(s)} alt={title} className="prop-image" />;
-            }
-            // fall back to using the provided value (module import / static path)
-            return <img src={s} alt={title} className="prop-image" />;
-          })()}
+          <img src={image || ''} alt={title} className="prop-image" />
           {/* Gradient overlay that slides up */}
           <div className="card-overlay">
             <div className="card-content">
