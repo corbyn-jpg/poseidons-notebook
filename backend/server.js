@@ -10,6 +10,15 @@ const sightingsRoutes = require("./routes/sightings");
 dotenv.config();
 const app = express();
 
+// Debug: log suspicious env vars to help diagnose routing errors on Heroku
+const suspiciousEnv = Object.keys(process.env).filter(k => /https?:|git\.new|DEBUG/i.test(process.env[k] || ''));
+if (suspiciousEnv.length > 0) {
+  console.log('Suspicious env vars detected:');
+  suspiciousEnv.forEach(k => console.log(`${k}=${process.env[k]}`));
+} else {
+  console.log('No suspicious env vars detected at startup.');
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json());
