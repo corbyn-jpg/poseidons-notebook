@@ -106,8 +106,17 @@ router.put('/:id', authenticateToken, async (req, res) => {
       depth_meters: depth_meters || sighting.depth_meters,
       notes: notes || sighting.notes
     });
-    
-    res.json(sighting);
+    // Return the full sighting including Species association so the client
+    // can update its UI without re-fetching the list.
+    const fullSighting = await Sighting.findOne({
+      where: { sighting_id: sighting.sighting_id },
+      include: [{
+        model: Species,
+        attributes: ['common_name', 'scientific_name', 'image_url', 'category']
+      }]
+    });
+
+    res.json(fullSighting);
   } catch (error) {
     console.error('Error updating sighting:', error);
     res.status(500).json({ error: 'Internal server error' });

@@ -190,8 +190,8 @@ const SightingsPage = () => {
     try {
       const token = localStorage.getItem("token");
       const url = selectedSighting
-        ? apiUrl(`/api/sightings/${selectedSighting.sighting_id}`)
-  : apiUrl('/sightings');
+        ? apiUrl(`/sightings/${selectedSighting.sighting_id}`)
+        : apiUrl('/sightings');
 
       const method = selectedSighting ? "PUT" : "POST";
 
@@ -211,7 +211,8 @@ const SightingsPage = () => {
       const result = await response.json();
 
       if (selectedSighting) {
-        // Update existing sighting in the list
+        // Replace the updated sighting in-place with the response returned by
+        // the server (which includes the Species association).
         setSightings((prev) =>
           prev.map((s) =>
             s.sighting_id === selectedSighting.sighting_id ? result : s
@@ -271,7 +272,7 @@ const SightingsPage = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(apiUrl(`/api/sightings/${sightingId}`), {
+      const response = await fetch(apiUrl(`/sightings/${sightingId}`), {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
