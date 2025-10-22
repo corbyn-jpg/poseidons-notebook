@@ -1,14 +1,152 @@
 # Poseidon's Notebook
 
-<img width="596" height="358" alt="logo" src="https://github.com/user-attachments/assets/d9c76bd5-468b-4837-9527-d3e68be56ea8" />
+A full-stack CRUD web app to record, browse and track marine species sightings.
+## Table of contents
+
+- [Key features](#key-features)
+- [Tech stack](#tech-stack)
+## Key features
+
+- 🔐 User authentication (register / login)
+- 📝 Full CRUD for sightings (create, read, update, delete)
+## Tech stack
+
+**Backend**
+
+## Repository structure
+
+```
+poseidons-notebook/
+## Quick start (development)
+
+### Prerequisites
+
+- Node.js v18+ installed
+- MySQL server (local or cloud)
+### Environment
+
+Create a `.env` file in `backend/` with at least:
+
+### Start the apps
+
+```powershell
+# Terminal 1 - Backend
+cd backend
+## Build & serve (production)
+
+1. Build the frontend:
+
+## API overview
+
+Base URL: `/api`
+
+## Database models
+
+### User
+
+```json
+{
+  "user_id": "PrimaryKey",
+  "username": "String",
+  "email": "String",
+  "password": "String (hashed)",
+  "role": "String (recommended: 'user'|'admin')"
+}
+```
+
+### Species
+
+```json
+{
+  "species_id": "PrimaryKey",
+  "common_name": "String",
+  "scientific_name": "String",
+  "category": "String",
+  "conservation_status": "String",
+  "image_url": "String (e.g. '/images/species/green_turtle.jpg')",
+  "description": "Text"
+}
+```
+
+### Sighting
+
+```json
+{
+  "sighting_id": "PrimaryKey",
+  "user_id": "ForeignKey(User)",
+  "species_id": "ForeignKey(Species)",
+  "sighting_date": "Date",
+  "location": "String",
+  "depth_meters": "Float",
+  "notes": "Text"
+}
+```
+
+Sequelize is used for ORM and `sequelize.sync()` runs at server start (dev convenience).
+## Images guide
+
+All UI and species images should live in the frontend `public/images` folder so they are available at predictable runtime URLs and included in builds.
+
+Canonical folders:
+
+- `frontend/public/images/` — UI branding and icons
+- `frontend/public/images/species/` — species photos referenced in the DB
+## Security & roles
+
+Recommended enhancements:
+
+- Add a `role` field to the `User` model (enum `user` | `admin`).
+- Include `role` in the JWT payload when issuing tokens.
+## Demo checklist
+
+For Stand‑Up 3 demonstration, cover the following:
+
+**Feature demonstration**
+
+1. User registration and login flow (show JWT in localStorage)
+2. Full CRUD for sightings (create → read → update → delete)
+3. Species browsing & details (with images)
+4. Search & filter in action
+
+**Technical proof**
+
+1. Show DB relationships (Sighting → Species)
+2. Show authentication middleware working (protected endpoints)
+3. Demonstrate image serving and fallback
+4. Show Git history and README
+## Troubleshooting
+
+- **Images not loading**: confirm files exist in `frontend/public/images/` and that `image_url` in DB points to `/images/species/<filename>`.
+- **Auth errors**: check `JWT_SECRET` in `.env` and ensure the frontend sends `Authorization: Bearer <token>` header.
+- **DB connection**: verify MySQL is running and `.env` DB settings are correct.
+- **Server start issues**: check backend console logs for Sequelize authentication or sync errors.
+## Next steps
+
+High priority
+
+- Add server-side validation (express-validator)
+- Implement role-based access control for admin actions
+- Add ownership checks for editing/deleting sightings
+
+Medium priority
+
+- Add integration tests for API endpoints
+- Optimize images (WebP) and add responsive images
+- Add skeleton loaders to improve UX
+
+Enhancements
+
+- Email verification, password reset, map integration for sightings, data export
+
+---
+
+<div align="center">
+Built with ❤️ for marine conservation — Poseidon's Notebook
+</div>
+
+# Poseidon's Notebook
 
 A small full-stack application for recording marine species sightings. This repository contains a Node/Express backend (MySQL via Sequelize) and a Create React App frontend. The backend exposes a small REST API for authentication, species data and sightings. The frontend is a React single-page app that consumes the API and displays species and sightings, and allows logged-in users to log new sightings.
-
-![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=nodedotjs)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
-![Express](https://img.shields.io/badge/Express.js-000000?logo=express)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)
-![Sequelize](https://img.shields.io/badge/Sequelize-6.0-52B0E7?logo=sequelize)
 
 ## Repository layout
 
@@ -80,29 +218,10 @@ This repo contains the server, database models and the SPA UI for users to sign 
 ## Key features
 
 - User registration and login (JWT auth)
-  <img width="647" height="696" alt="Login" src="https://github.com/user-attachments/assets/3e238a4c-53a0-4df7-9fa1-9a7a73bb302a" />
-  <img width="504" height="724" alt="SignUp" src="https://github.com/user-attachments/assets/a2cd9a7d-c41d-450d-b803-4e309e1bc727" />
-
 - CRUD for sightings (create, read, update, delete)
-  <img width="1289" height="573" alt="SightingsPage" src="https://github.com/user-attachments/assets/6997d109-4f61-40e0-85a8-6e71554ed500" />
-  <img width="946" height="787" alt="LogSighting" src="https://github.com/user-attachments/assets/de5eb2b0-47b9-4b3a-b47c-d6db885e1c15" />
-  
 - Species browsing, detail pages and the ability to add species from the UI
-  <img width="1768" height="875" alt="SpeciesPage" src="https://github.com/user-attachments/assets/c6c4bf2a-8195-4aea-ada9-7d3f0b691687" />
-  <img width="929" height="905" alt="DetailPage" src="https://github.com/user-attachments/assets/0a487015-6803-44ff-b04c-5182ae2834a6" />
-  <img width="835" height="848" alt="AddSpecies" src="https://github.com/user-attachments/assets/01d70d0e-80c0-466e-8478-aa89e237de4a" />
-
 - Image support for species and UI assets
-  ```
-  image_url: {
-  type: DataTypes.STRING(500),
-  allowNull: true, // or false if required
-  comment: 'Path to species image, e.g. /images/species/green_turtle.jpg'
-  }
-
-  
 - Search, filter and loading states on core pages
-  <img width="601" height="68" alt="Search Bar" src="https://github.com/user-attachments/assets/014d7bdd-51d9-453c-9def-fcd7b5392983" />
 
 ---
 
