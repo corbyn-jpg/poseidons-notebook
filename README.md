@@ -42,8 +42,6 @@ Notes:
 
 
 # Poseidon's Notebook
-> Track marine species sightings — sign up, log observations, and explore species information.
-
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=nodedotjs)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)](https://reactjs.org/)
 [![Express](https://img.shields.io/badge/Express-4.x-000000?logo=express)](https://expressjs.com/)
@@ -55,6 +53,10 @@ This repository contains a small full‑stack app:
 - Frontend: React (Create React App)
 
 The app allows users to register, log in, browse species, and create/edit/delete sightings.
+ 
+<div align="center">
+![Poseidon's Notebook logo](https://github.com/user-attachments/assets/d9c76bd5-468b-4837-9527-d3e68be56ea8)
+</div>
 ---
 
 ## Table of contents
@@ -77,10 +79,64 @@ The app allows users to register, log in, browse species, and create/edit/delete
 ## Key features
 
 - User registration and login (JWT)
+  
+  <div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img width="280" alt="Login" src="https://github.com/user-attachments/assets/3e238a4c-53a0-4df7-9fa1-9a7a73bb302a" />
+        <br><strong>Login</strong>
+      </td>
+      <td align="center">
+        <img width="280" alt="SignUp" src="https://github.com/user-attachments/assets/a2cd9a7d-c41d-450d-b803-4e309e1bc727" />
+        <br><strong>Sign Up</strong>
+      </td>
+    </tr>
+  </table>
+  </div>
 - CRUD for sightings (create / read / update / delete)
 - Species browsing and details (with images)
+  
+  <div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img width="500" alt="SpeciesPage" src="https://github.com/user-attachments/assets/c6c4bf2a-8195-4aea-ada9-7d3f0b691687" />
+        <br><strong>Browse Species</strong>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img width="400" alt="DetailPage" src="https://github.com/user-attachments/assets/0a487015-6803-44ff-b04c-5182ae2834a6" />
+        <br><strong>Species Details</strong>
+      </td>
+    </tr>
+  </table>
+  </div>
 - Add new species from the UI
 - Search, filter, and loading states
+  
+  <div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img width="600" alt="SightingsPage" src="https://github.com/user-attachments/assets/6997d109-4f61-40e0-85a8-6e71554ed500" />
+        <br><strong>Sightings Dashboard</strong>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img width="400" alt="LogSighting" src="https://github.com/user-attachments/assets/de5eb2b0-47b9-4b3a-b47c-d6db885e1c15" />
+        <br><strong>Log New Sighting</strong>
+      </td>
+    </tr>
+  </table>
+  </div>
+
+  <div align="center">
+    <img width="400" alt="Search Bar" src="https://github.com/user-attachments/assets/014d7bdd-51d9-453c-9def-fcd7b5392983" />
+    <br><em>Real-time search functionality</em>
+  </div>
 
 ---
 
