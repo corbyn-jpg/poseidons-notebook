@@ -55,7 +55,7 @@ This repository contains a small full‑stack app:
 The app allows users to register, log in, browse species, and create/edit/delete sightings.
  
 <div align="center">
-![Poseidon's Notebook logo](https://github.com/user-attachments/assets/d9c76bd5-468b-4837-9527-d3e68be56ea8)
+<img width="596" height="358" alt="logo" src="https://github.com/user-attachments/assets/6daab944-d099-43c9-b089-72093f9b5c09" />
 </div>
 ---
 
