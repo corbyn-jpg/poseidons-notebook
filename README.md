@@ -1,6 +1,14 @@
 # Poseidon's Notebook
 
+<img width="596" height="358" alt="logo" src="https://github.com/user-attachments/assets/d9c76bd5-468b-4837-9527-d3e68be56ea8" />
+
 A small full-stack application for recording marine species sightings. This repository contains a Node/Express backend (MySQL via Sequelize) and a Create React App frontend. The backend exposes a small REST API for authentication, species data and sightings. The frontend is a React single-page app that consumes the API and displays species and sightings, and allows logged-in users to log new sightings.
+
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=nodedotjs)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![Express](https://img.shields.io/badge/Express.js-000000?logo=express)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)
+![Sequelize](https://img.shields.io/badge/Sequelize-6.0-52B0E7?logo=sequelize)
 
 ## Repository layout
 
@@ -72,10 +80,29 @@ This repo contains the server, database models and the SPA UI for users to sign 
 ## Key features
 
 - User registration and login (JWT auth)
+  <img width="647" height="696" alt="Login" src="https://github.com/user-attachments/assets/3e238a4c-53a0-4df7-9fa1-9a7a73bb302a" />
+  <img width="504" height="724" alt="SignUp" src="https://github.com/user-attachments/assets/a2cd9a7d-c41d-450d-b803-4e309e1bc727" />
+
 - CRUD for sightings (create, read, update, delete)
+  <img width="1289" height="573" alt="SightingsPage" src="https://github.com/user-attachments/assets/6997d109-4f61-40e0-85a8-6e71554ed500" />
+  <img width="946" height="787" alt="LogSighting" src="https://github.com/user-attachments/assets/de5eb2b0-47b9-4b3a-b47c-d6db885e1c15" />
+  
 - Species browsing, detail pages and the ability to add species from the UI
+  <img width="1768" height="875" alt="SpeciesPage" src="https://github.com/user-attachments/assets/c6c4bf2a-8195-4aea-ada9-7d3f0b691687" />
+  <img width="929" height="905" alt="DetailPage" src="https://github.com/user-attachments/assets/0a487015-6803-44ff-b04c-5182ae2834a6" />
+  <img width="835" height="848" alt="AddSpecies" src="https://github.com/user-attachments/assets/01d70d0e-80c0-466e-8478-aa89e237de4a" />
+
 - Image support for species and UI assets
+  ```
+  image_url: {
+  type: DataTypes.STRING(500),
+  allowNull: true, // or false if required
+  comment: 'Path to species image, e.g. /images/species/green_turtle.jpg'
+  }
+
+  
 - Search, filter and loading states on core pages
+  <img width="601" height="68" alt="Search Bar" src="https://github.com/user-attachments/assets/014d7bdd-51d9-453c-9def-fcd7b5392983" />
 
 ---
 
