@@ -22,6 +22,13 @@ try {
 } catch (e) {
   console.error('Failed to load sightingsRoutes:', e);
 }
+let usersRoutes;
+try {
+  usersRoutes = require('./routes/users');
+  console.log('Loaded usersRoutes');
+} catch (e) {
+  console.error('Failed to load usersRoutes:', e);
+}
 
 dotenv.config();
 const app = express();
@@ -73,6 +80,9 @@ if (speciesRoutes) {
 }
 if (sightingsRoutes) {
   safeRegister('/api/sightings', sightingsRoutes, 'sightingsRoutes');
+}
+if (usersRoutes) {
+  safeRegister('/api/users', usersRoutes, 'usersRoutes');
 }
 // Serve static frontend (wrapped to catch malformed patterns)
 const path = require('path');
