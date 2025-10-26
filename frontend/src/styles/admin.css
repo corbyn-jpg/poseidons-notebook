@@ -55,15 +55,8 @@
   .admin-section{ padding:12px }
 }
 
-/* Modal styles */
-.modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; z-index:1000 }
-.modal{ background:white; padding:18px; border-radius:12px; width:90%; max-width:720px; box-shadow:0 10px 40px rgba(0,0,0,0.2) }
-.modal h3{ margin-top:0; color:var(--muted) }
-.modal-body{ display:grid; grid-template-columns:1fr 1fr; gap:10px; max-height:60vh; overflow:auto; padding:6px 0 }
-.modal-body label{ display:block; font-size:14px; color:#123; }
-.modal-body input, .modal-body textarea, .modal-body select{ width:100%; padding:8px; margin-top:6px; border:1px solid #e6eef6; border-radius:6px }
-.modal-body textarea{ min-height:80px }
-.modal-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px }
+/* Modal styles are provided by the site's shared modal CSS (imported from species.css) */
+/* We intentionally avoid redefining .modal-overlay/.modal-content etc so the admin modals match the rest of the site. */
 .btn.small{ padding:6px 10px; font-size:13px }
 
 /* Toasts */

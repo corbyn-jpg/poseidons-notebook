@@ -368,15 +368,44 @@ function AdminPage() {
             <button className="close-button" onClick={closeSightingEditor}>×</button>
             <div className="modal-header"><h2>{sightingEditModal.data.sighting_id ? 'Edit Sighting' : 'Create Sighting'}</h2></div>
             <div className="modal-body">
-              <label>User ID<input value={sightingEditModal.data.user_id || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, user_id: e.target.value } })} /></label>
-              <label>Species<select value={sightingEditModal.data.species_id || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, species_id: Number(e.target.value) } })}>
-                <option value="">Select species</option>
-                {species.map(sp => <option key={sp.species_id} value={sp.species_id}>{sp.common_name}</option>)}
-              </select></label>
-              <label>Date<input type="date" value={sightingEditModal.data.sighting_date || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, sighting_date: e.target.value } })} /></label>
-              <label>Location<input value={sightingEditModal.data.location || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, location: e.target.value } })} /></label>
-              <label>Depth (m)<input type="number" value={sightingEditModal.data.depth_meters || 0} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, depth_meters: e.target.value } })} /></label>
-              <label>Notes<textarea value={sightingEditModal.data.notes || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, notes: e.target.value } })} /></label>
+              <div className="modal-image-container">
+                <img
+                  className="modal-image"
+                  src={species.find(sp => sp.species_id === sightingEditModal.data.species_id)?.image_url || '/images/species/placeholder.png'}
+                  alt={species.find(sp => sp.species_id === sightingEditModal.data.species_id)?.common_name || 'species'}
+                />
+              </div>
+              <div className="modal-details">
+                <div className="detail-row">
+                  <div className="detail-label">User ID</div>
+                  <div className="detail-value"><input value={sightingEditModal.data.user_id || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, user_id: e.target.value } })} /></div>
+                </div>
+                <div className="detail-row">
+                  <div className="detail-label">Species</div>
+                  <div className="detail-value">
+                    <select value={sightingEditModal.data.species_id || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, species_id: Number(e.target.value) } })}>
+                      <option value="">Select species</option>
+                      {species.map(sp => <option key={sp.species_id} value={sp.species_id}>{sp.common_name}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="detail-row">
+                  <div className="detail-label">Date</div>
+                  <div className="detail-value"><input type="date" value={sightingEditModal.data.sighting_date || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, sighting_date: e.target.value } })} /></div>
+                </div>
+                <div className="detail-row">
+                  <div className="detail-label">Location</div>
+                  <div className="detail-value"><input value={sightingEditModal.data.location || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, location: e.target.value } })} /></div>
+                </div>
+                <div className="detail-row">
+                  <div className="detail-label">Depth (m)</div>
+                  <div className="detail-value"><input type="number" value={sightingEditModal.data.depth_meters || 0} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, depth_meters: e.target.value } })} /></div>
+                </div>
+                <div className="detail-row">
+                  <div className="detail-label">Notes</div>
+                  <div className="detail-value"><textarea value={sightingEditModal.data.notes || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, notes: e.target.value } })} /></div>
+                </div>
+              </div>
             </div>
             <div className="modal-actions">
               <button className="btn" onClick={saveSightingEditor}>Save</button>
