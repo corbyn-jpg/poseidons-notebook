@@ -4,6 +4,17 @@ const User = require('../models/user');
 const authenticateToken = require('../middleware/auth');
 const { requireAdmin } = require('../middleware/auth');
 
+// Return current authenticated user's info (any logged-in user)
+router.get('/me', authenticateToken, async (req, res) => {
+  try {
+    // req.user is populated by authenticateToken and contains id, username, email, role
+    res.json({ id: req.user.id, username: req.user.username, email: req.user.email, role: req.user.role });
+  } catch (error) {
+    console.error('Error fetching current user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // List users (admin only)
 router.get('/', authenticateToken, requireAdmin, async (req, res) => {
   try {
