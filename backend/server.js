@@ -10,6 +10,7 @@ try {
 } catch (e) {
   console.error('Failed to load authRoutes:', e);
 }
+let usersRoutes;
 try {
   speciesRoutes = require("./routes/species");
   console.log('Loaded speciesRoutes');
@@ -21,6 +22,12 @@ try {
   console.log('Loaded sightingsRoutes');
 } catch (e) {
   console.error('Failed to load sightingsRoutes:', e);
+}
+try {
+  usersRoutes = require('./routes/users');
+  console.log('Loaded usersRoutes');
+} catch (e) {
+  console.error('Failed to load usersRoutes:', e);
 }
 
 dotenv.config();
@@ -74,8 +81,13 @@ if (speciesRoutes) {
 if (sightingsRoutes) {
   safeRegister('/api/sightings', sightingsRoutes, 'sightingsRoutes');
 }
+if (usersRoutes) {
+  safeRegister('/api/users', usersRoutes, 'usersRoutes');
+}
 // Serve static frontend (wrapped to catch malformed patterns)
 const path = require('path');
+const bcrypt = require('bcryptjs');
+const User = require('./models/user');
 try {
   app.use(express.static('public'));
   console.log('Registered express.static("public")');
@@ -142,6 +154,31 @@ process.on('uncaughtException', (err) => {
     await sequelize.authenticate();
     console.log('Database connection has been established successfully.');
     await sequelize.sync();
+    // Optional: seed an initial admin user if environment vars provided
+    try {
+      const adminUsername = process.env.ADMIN_USERNAME;
+      const adminEmail = process.env.ADMIN_EMAIL;
+      const adminPassword = process.env.ADMIN_PASSWORD;
+      if (adminUsername && adminEmail && adminPassword) {
+        const [admin, created] = await User.findOrCreate({
+          where: { email: adminEmail },
+          defaults: {
+            username: adminUsername,
+            email: adminEmail,
+            password: bcrypt.hashSync(adminPassword, 10),
+            role: 'admin'
+          }
+        });
+        if (created) console.log(`Seeded admin user: ${adminEmail}`);
+        else if (admin.role !== 'admin') {
+          admin.role = 'admin';
+          await admin.save();
+          console.log(`Updated existing user to admin: ${adminEmail}`);
+        }
+      }
+    } catch (seedErr) {
+      console.error('Error during admin seed:', seedErr);
+    }
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (err) {
