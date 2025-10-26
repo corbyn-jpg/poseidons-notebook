@@ -86,9 +86,9 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    // Create JWT (include role so middleware can check permissions)
+    // Create JWT
     const token = jwt.sign(
-      { id: user.id, username: user.username, role: user.role },
+      { id: user.id, username: user.username },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -99,8 +99,7 @@ router.post("/login", async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email,
-        role: user.role || 'user'
+        email: user.email
       }
     });
   } catch (error) {

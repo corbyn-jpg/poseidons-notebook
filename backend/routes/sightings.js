@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Sighting = require('../models/sightings');
 const Species = require('../models/species');
-const { authenticateToken } = require('../middleware/auth');
+const authenticateToken = require('../middleware/auth'); // You'll need to create this
 
 // Get all sightings for the authenticated user
 router.get('/', authenticateToken, async (req, res) => {
@@ -51,7 +51,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
 // Create a new sighting
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    const { species_id, sighting_date, location, depth_meters, notes, user_id } = req.body;
+    const { species_id, sighting_date, location, depth_meters, notes } = req.body;
     
     // Validate required fields
     if (!species_id || !sighting_date || !location || depth_meters === undefined) {
@@ -59,7 +59,7 @@ router.post('/', authenticateToken, async (req, res) => {
     }
     
     const newSighting = await Sighting.create({
-      user_id: (req.user.role === 'admin' && user_id) ? user_id : req.user.id,
+      user_id: req.user.id,
       species_id,
       sighting_date,
       location,
@@ -88,9 +88,12 @@ router.put('/:id', authenticateToken, async (req, res) => {
   try {
     const { species_id, sighting_date, location, depth_meters, notes } = req.body;
     
-    const findWhere = { sighting_id: req.params.id };
-    if (req.user.role !== 'admin') findWhere.user_id = req.user.id;
-    const sighting = await Sighting.findOne({ where: findWhere });
+    const sighting = await Sighting.findOne({
+      where: { 
+        sighting_id: req.params.id,
+        user_id: req.user.id 
+      }
+    });
     
     if (!sighting) {
       return res.status(404).json({ error: 'Sighting not found' });
@@ -123,9 +126,12 @@ router.put('/:id', authenticateToken, async (req, res) => {
 // Delete a sighting
 router.delete('/:id', authenticateToken, async (req, res) => {
   try {
-    const findWhere = { sighting_id: req.params.id };
-    if (req.user.role !== 'admin') findWhere.user_id = req.user.id;
-    const sighting = await Sighting.findOne({ where: findWhere });
+    const sighting = await Sighting.findOne({
+      where: { 
+        sighting_id: req.params.id,
+        user_id: req.user.id 
+      }
+    });
     
     if (!sighting) {
       return res.status(404).json({ error: 'Sighting not found' });

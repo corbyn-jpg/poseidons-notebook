@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Species = require('../models/species');
-const { authenticateToken } = require('../middleware/auth');
-const { isAdmin } = require('../middleware/roles');
 
 // Get all species
 router.get('/', async (req, res) => {
@@ -34,7 +32,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //
-router.post('/', authenticateToken, isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const {
       common_name,
@@ -72,34 +70,6 @@ router.post('/', authenticateToken, isAdmin, async (req, res) => {
     res.status(201).json(newSpecies);
   } catch (error) {
     console.error('Error creating species:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// Update species (admin only)
-router.put('/:id', authenticateToken, isAdmin, async (req, res) => {
-  try {
-    const species = await Species.findByPk(req.params.id);
-    if (!species) return res.status(404).json({ error: 'Species not found' });
-
-    await species.update(req.body);
-    res.json(species);
-  } catch (error) {
-    console.error('Error updating species:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// Delete species (admin only)
-router.delete('/:id', authenticateToken, isAdmin, async (req, res) => {
-  try {
-    const species = await Species.findByPk(req.params.id);
-    if (!species) return res.status(404).json({ error: 'Species not found' });
-
-    await species.destroy();
-    res.json({ message: 'Species deleted successfully' });
-  } catch (error) {
-    console.error('Error deleting species:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

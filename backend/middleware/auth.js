@@ -19,22 +19,4 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// Middleware factory to require a minimum role.
-// Example: requireRole('superadmin') will only allow superadmins.
-const requireRole = (role) => {
-  return (req, res, next) => {
-    if (!req.user) return res.status(401).json({ error: 'Authentication required' });
-    const userRole = req.user.role || 'user';
-    const roleHierarchy = ['user', 'admin', 'superadmin'];
-    const requiredIndex = roleHierarchy.indexOf(role);
-    const userIndex = roleHierarchy.indexOf(userRole);
-    if (requiredIndex === -1) return res.status(500).json({ error: 'Invalid role configured on server' });
-    if (userIndex < requiredIndex) return res.status(403).json({ error: 'Insufficient permissions' });
-    next();
-  };
-};
-
-module.exports = {
-  authenticateToken,
-  requireRole
-};
+module.exports = authenticateToken;
