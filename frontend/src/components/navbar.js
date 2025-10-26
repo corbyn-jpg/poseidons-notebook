@@ -9,6 +9,13 @@ import "../styles/titleWave.css";
 import "../styles/navbar.css";
 
 const Navbar = () => {
+  const storedUser = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+  let currentUser = null;
+  try {
+    currentUser = storedUser ? JSON.parse(storedUser) : null;
+  } catch (e) {
+    currentUser = null;
+  }
   return (
     <header className="navbar">
       <Link to="/homePage" className="navbar-logo-link">
@@ -54,6 +61,16 @@ const Navbar = () => {
               <span className="title">Logout</span>
             </Link>
           </li>
+          {currentUser && currentUser.role === 'admin' && (
+            <li>
+              <Link to="/admin" className="nav-link">
+                <span className="icon">
+                  <img src={turtleIcon} alt="Admin" className="nav-icon" />
+                </span>
+                <span className="title">Admin</span>
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
