@@ -4,7 +4,8 @@ import logo from "../assets/logo.png";
 import turtleIcon from "../assets/turtle.png";
 import diverIcon from "../assets/diver.png";
 import seashellIcon from "../assets/seashell.png";
-import ContributionsIcon from "../assets/contributions.png";
+import contributionsIcon from "../assets/contributions.png";
+import adminIcon from "../assets/admin.png";
 import "../styles/titleWave.css";
 import "../styles/navbar.css";
 
@@ -65,7 +66,7 @@ const Navbar = () => {
           <li>
             <Link to="/contributions" className="nav-link">
               <span className="icon">
-                <img src={ContributionsIcon} alt="Contributions" className="nav-icon" />
+                <img src={contributionsIcon} alt="Contributions" className="nav-icon" />
               </span>
               <span className="title">Contributions</span>
             </Link>
@@ -74,7 +75,7 @@ const Navbar = () => {
             <li>
               <Link to="/admin" className="nav-link">
                 <span className="icon">
-                  <img src={diverIcon} alt="Admin" className="nav-icon" />
+                  <img src={adminIcon} alt="Admin" className="nav-icon" />
                 </span>
                 <span className="title">Admin</span>
               </Link>
