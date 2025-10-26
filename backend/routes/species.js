@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Species = require('../models/species');
+const { authenticateToken, isSuperAdmin } = require('../middleware/auth');
 
 // Get all species
 router.get('/', async (req, res) => {
@@ -32,7 +33,8 @@ router.get('/:id', async (req, res) => {
 });
 
 //
-router.post('/', async (req, res) => {
+ // Create species (superadmin only)
+ router.post('/', authenticateToken, isSuperAdmin, async (req, res) => {
   try {
     const {
       common_name,
@@ -70,6 +72,37 @@ router.post('/', async (req, res) => {
     res.status(201).json(newSpecies);
   } catch (error) {
     console.error('Error creating species:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Update species (superadmin only)
+router.put('/:id', authenticateToken, isSuperAdmin, async (req, res) => {
+  try {
+    const species = await Species.findByPk(req.params.id);
+    if (!species) return res.status(404).json({ error: 'Species not found' });
+
+    const updates = {};
+    const fields = ['common_name','scientific_name','category','conservation_status','avg_depth_range','habitat','image_url','description','size_range','diet','geographic_range'];
+    fields.forEach(f => { if (req.body[f] !== undefined) updates[f] = req.body[f]; });
+
+    await species.update(updates);
+    res.json(species);
+  } catch (error) {
+    console.error('Error updating species:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Delete species (superadmin only)
+router.delete('/:id', authenticateToken, isSuperAdmin, async (req, res) => {
+  try {
+    const species = await Species.findByPk(req.params.id);
+    if (!species) return res.status(404).json({ error: 'Species not found' });
+    await species.destroy();
+    res.json({ message: 'Species deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting species:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
