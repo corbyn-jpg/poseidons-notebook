@@ -15,6 +15,8 @@ function AdminPage() {
   const [editingSpeciesData, setEditingSpeciesData] = useState({});
   const [editingSightingId, setEditingSightingId] = useState(null);
   const [editingSightingData, setEditingSightingData] = useState({});
+  const [confirmModal, setConfirmModal] = useState({ open: false, title: '', message: '', onConfirm: null });
+  const [toasts, setToasts] = useState([]);
 
   useEffect(() => {
     if (!token) return;
@@ -76,29 +78,33 @@ function AdminPage() {
       body: JSON.stringify({ role: 'user' })
     });
     await refreshUsers();
+    showToast('User demoted to user', 'info');
   };
 
   const deleteUser = async (userId) => {
     if (!token) return;
     await fetch(apiUrl(`/users/${userId}`), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
-    setUsers(users.filter(u => u.id !== userId));
+    await refreshUsers();
+    showToast('User deleted', 'danger');
   };
 
   const deleteSpecies = async (id) => {
     if (!token) return;
     await fetch(apiUrl(`/species/${id}`), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
     await refreshSpecies();
+    showToast('Species deleted', 'danger');
   };
 
   const deleteSighting = async (id) => {
     if (!token) return;
     await fetch(apiUrl(`/sightings/${id}`), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
     await refreshSightings();
+    showToast('Sighting deleted', 'danger');
   };
 
   // Species editing
   const startEditSpecies = (s) => {
-    setEditingSpeciesId(s.id);
+    setEditingSpeciesId(s.species_id);
     setEditingSpeciesData({
       common_name: s.common_name || '',
       scientific_name: s.scientific_name || '',
@@ -120,6 +126,7 @@ function AdminPage() {
     });
     setEditingSpeciesId(null);
     await refreshSpecies();
+    showToast('Species updated', 'success');
   };
 
   // Sightings editing
@@ -147,6 +154,28 @@ function AdminPage() {
     });
     setEditingSightingId(null);
     await refreshSightings();
+    showToast('Sighting updated', 'success');
+  };
+
+  // Confirmation modal helper
+  const openConfirm = (title, message, onConfirm) => {
+    setConfirmModal({ open: true, title, message, onConfirm });
+    // prevent background scroll
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeConfirm = () => {
+    setConfirmModal({ open: false, title: '', message: '', onConfirm: null });
+    document.body.style.overflow = '';
+  };
+
+  // Toast helper
+  const showToast = (message, type = 'info', timeout = 3500) => {
+    const id = Date.now();
+    setToasts((t) => [...t, { id, message, type }]);
+    setTimeout(() => {
+      setToasts((t) => t.filter(x => x.id !== id));
+    }, timeout);
   };
 
   if (!me) return <div className="admin-container">Loading...</div>;
@@ -161,25 +190,25 @@ function AdminPage() {
         <div className="admin-section">
           <h3>Users</h3>
           <table className="admin-table">
-          <thead>
-            <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Actions</th></tr>
-          </thead>
-          <tbody>
-            {users.map(u => (
-              <tr key={u.id}>
-                <td>{u.id}</td>
-                <td>{u.username}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-                <td>
-                  {u.role !== 'admin' && <button className="btn" onClick={() => promoteToAdmin(u.id)}>Promote</button>}
-                  {u.role === 'admin' && <button className="btn" onClick={() => demoteToUser(u.id)}>Demote</button>}
-                  <button className="btn danger" onClick={() => deleteUser(u.id)} style={{ marginLeft: 8 }}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <thead>
+              <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              {users.map(u => (
+                <tr key={u.id}>
+                  <td>{u.id}</td>
+                  <td>{u.username}</td>
+                  <td>{u.email}</td>
+                  <td>{u.role}</td>
+                  <td className="admin-actions">
+                    {u.role !== 'admin' && <button className="btn" onClick={() => openConfirm('Promote user', `Promote ${u.username} to admin?`, () => { promoteToAdmin(u.id); closeConfirm(); })}>Promote</button>}
+                    {u.role === 'admin' && <button className="btn" onClick={() => openConfirm('Demote admin', `Demote ${u.username} to user?`, () => { demoteToUser(u.id); closeConfirm(); })}>Demote</button>}
+                    <button className="btn danger" onClick={() => openConfirm('Delete user', `Delete ${u.username}? This cannot be undone.`, () => { deleteUser(u.id); closeConfirm(); })} style={{ marginLeft: 8 }}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <div className="admin-section">
@@ -190,28 +219,28 @@ function AdminPage() {
           </thead>
           <tbody>
             {species.map(s => (
-              <tr key={s.id}>
-                <td>{s.id}</td>
+              <tr key={s.species_id}>
+                <td>{s.species_id}</td>
                 <td>
-                  {editingSpeciesId === s.id ? (
+                  {editingSpeciesId === s.species_id ? (
                     <input className="admin-input" value={editingSpeciesData.common_name} onChange={(e) => setEditingSpeciesData({ ...editingSpeciesData, common_name: e.target.value })} />
                   ) : s.common_name}
                 </td>
                 <td>
-                  {editingSpeciesId === s.id ? (
+                  {editingSpeciesId === s.species_id ? (
                     <input className="admin-input" value={editingSpeciesData.scientific_name} onChange={(e) => setEditingSpeciesData({ ...editingSpeciesData, scientific_name: e.target.value })} />
                   ) : s.scientific_name}
                 </td>
                 <td>
-                  {editingSpeciesId === s.id ? (
+                  {editingSpeciesId === s.species_id ? (
                     <>
-                      <button className="btn" onClick={() => saveEditSpecies(s.id)}>Save</button>
+                      <button className="btn" onClick={() => saveEditSpecies(s.species_id)}>Save</button>
                       <button className="btn" onClick={cancelEditSpecies}>Cancel</button>
                     </>
                   ) : (
                     <>
                       <button className="btn" onClick={() => startEditSpecies(s)}>Edit</button>
-                      <button className="btn danger" onClick={() => deleteSpecies(s.id)}>Delete</button>
+                      <button className="btn danger" onClick={() => openConfirm('Delete species', `Delete ${s.common_name}?`, () => { deleteSpecies(s.species_id); closeConfirm(); })}>Delete</button>
                     </>
                   )}
                 </td>
@@ -234,7 +263,12 @@ function AdminPage() {
                 <td>{s.user_id}</td>
                 <td>
                   {editingSightingId === s.sighting_id ? (
-                    <input className="admin-input" value={editingSightingData.species_id} onChange={(e) => setEditingSightingData({ ...editingSightingData, species_id: e.target.value })} />
+                    <select className="admin-input" value={editingSightingData.species_id} onChange={(e) => setEditingSightingData({ ...editingSightingData, species_id: e.target.value })}>
+                      <option value="">Select species</option>
+                      {species.map(sp => (
+                        <option key={sp.species_id} value={sp.species_id}>{sp.common_name}</option>
+                      ))}
+                    </select>
                   ) : s.species_id}
                 </td>
                 <td>

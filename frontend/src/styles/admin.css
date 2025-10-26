@@ -20,6 +20,10 @@
   margin:0 auto;
 }
 
+/* Ensure admin content sits above background bubbles */
+.admin-inner{ position: relative; z-index: 2 }
+.admin-section{ position: relative; z-index: 3 }
+
 .admin-container h2{ 
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: var(--muted);
