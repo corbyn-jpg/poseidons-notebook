@@ -19,16 +19,4 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// middleware to require superadmin role
-const isSuperAdmin = (req, res, next) => {
-  // req.user should have been set by authenticateToken
-  if (!req.user || !req.user.role) {
-    return res.status(403).json({ error: 'Insufficient permissions' });
-  }
-  if (req.user.role !== 'superadmin') {
-    return res.status(403).json({ error: 'Superadmin access required' });
-  }
-  next();
-};
-
-module.exports = { authenticateToken, isSuperAdmin };
+module.exports = authenticateToken;

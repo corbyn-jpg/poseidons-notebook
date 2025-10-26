@@ -17,7 +17,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
  */
 router.post("/register", async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
+    const { username, email, password } = req.body;
 
     if (!username || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
@@ -46,8 +46,7 @@ router.post("/register", async (req, res) => {
     const newUser = await User.create({
       username,
       email,
-      password: hashedPassword,
-      role: role || 'user'
+      password: hashedPassword
     });
 
     res.status(201).json({ message: "User created successfully!" });
@@ -89,7 +88,7 @@ router.post("/login", async (req, res) => {
 
     // Create JWT
     const token = jwt.sign(
-      { id: user.id, username: user.username, role: user.role },
+      { id: user.id, username: user.username },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -100,8 +99,7 @@ router.post("/login", async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email,
-        role: user.role
+        email: user.email
       }
     });
   } catch (error) {
