@@ -188,11 +188,11 @@
 /* Modal styles are now provided by styles/modals.css (shared, global). */
 
 .sightings-section {
-  margin-top: 1.25rem;
+  margin-top: 1.0rem;
   border-top: 1px solid rgba(15,45,76,0.06);
-  padding-top: 1rem;
+  padding-top: 0.75rem;
   /* Keep the sightings list from pushing content beyond the modal — make it scrollable when long */
-  max-height: 300px;
+  max-height: 40vh;
   overflow-y: auto;
   padding-right: 0.5rem; /* space for scrollbar */
 }

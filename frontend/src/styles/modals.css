@@ -30,6 +30,12 @@
   z-index: 1001;
 }
 
+/* Make modal content a column so header is fixed and body can flex/scroll */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
 .close-button {
   position: absolute;
   top: 1rem;
@@ -51,9 +57,10 @@
 }
 
 .modal-header {
-  padding: 2rem 2rem 1rem;
+  padding: 1.25rem 1.25rem 0.75rem;
   text-align: center;
   border-bottom: 2px solid #71c9ff;
+  flex: 0 0 auto;
 }
 
 .modal-header h2 {
@@ -66,12 +73,12 @@
   display: grid;
   /* increase left column minimum so the image gets more room; keep right column flexible */
   grid-template-columns: minmax(360px, 48%) 1fr;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1.5rem;
+  padding: 1.25rem;
   align-items: start; /* align top so image and details start together */
-  /* allow the body to scroll internally if content exceeds modal height */
+  /* allow the body to flex and scroll internally if content exceeds modal height */
+  flex: 1 1 auto;
   overflow-y: auto;
-  max-height: calc(100vh - 160px); /* leaves room for header and padding so close button stays visible */
 }
 
 .modal-image-container {
@@ -82,8 +89,8 @@
   justify-content: center; /* center the image horizontally */
   align-items: flex-start; /* align top so image starts at the same level as details */
   /* provide a sensible minimum height so the image appears large enough */
-  min-height: 320px;
-  max-height: calc(100vh - 220px);
+  min-height: 340px;
+  max-height: calc(100vh - 260px);
 }
 
 .modal-image {
@@ -124,8 +131,8 @@
 }
 
 .description-section {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
   border-top: 2px solid #71c9ff;
 }
 
