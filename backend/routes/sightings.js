@@ -4,6 +4,24 @@ const router = express.Router();
 const Sighting = require('../models/sightings');
 const Species = require('../models/species');
 const authenticateToken = require('../middleware/auth');
+const { requireAdmin } = require('../middleware/auth');
+
+// Admin-only: get all sightings across users
+router.get('/all', authenticateToken, requireAdmin, async (req, res) => {
+  try {
+    const sightings = await Sighting.findAll({
+      include: [{
+        model: Species,
+        attributes: ['common_name', 'scientific_name', 'image_url']
+      }],
+      order: [['sighting_date', 'DESC']]
+    });
+    res.json(sightings);
+  } catch (error) {
+    console.error('Error fetching all sightings (admin):', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 // Get all sightings for the authenticated user
 router.get('/', authenticateToken, async (req, res) => {

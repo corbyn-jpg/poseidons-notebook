@@ -1,75 +1,187 @@
-:root{
-  --accent:#71c9ff; /* used across species/sightings */
-  --primary:#0AC7A1; /* secondary accent used in other places */
-  --danger:#ff6b6b;
-  --muted:#0F2D4C;
+:root {
+  --accent: #71c9ff; /* used across species/sightings */
+  --primary: #0ac7a1; /* secondary accent used in other places */
+  --danger: #ff6b6b;
+  --muted: #0f2d4c;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap");
 
-.admin-container{
-  min-height:100vh;
-  position:relative;
+.admin-container {
+  min-height: 100vh;
+  position: relative;
   background: linear-gradient(#71c9ff, #0f1849);
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .admin-inner {
-  max-width:1200px;
-  margin:0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Ensure admin content sits above background bubbles */
-.admin-inner{ position: relative; z-index: 2 }
-.admin-section{ position: relative; z-index: 3 }
+.admin-inner {
+  position: relative;
+  z-index: 2;
+}
+.admin-section {
+  position: relative;
+  z-index: 3;
+}
 
-.admin-container h2{ 
-  font-family: 'Barlow Semi Condensed', sans-serif;
+.admin-container h2 {
+  font-family: "Barlow Semi Condensed", sans-serif;
   color: var(--muted);
-  font-size:2.2rem;
-  margin-bottom:12px;
+  font-size: 2.2rem;
+  margin-bottom: 12px;
 }
 
-.admin-section{ 
-  background: white; 
-  padding:20px; 
-  border-radius:16px; 
-  box-shadow: 0 10px 30px rgba(15,45,76,0.12); 
-  margin-bottom:20px;
+.admin-section {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.12);
+  margin-bottom: 20px;
 }
 
-.admin-table{ width:100%; border-collapse:collapse; }
-.admin-table th, .admin-table td{ padding:10px 12px; border-bottom:1px solid #eef2f7; text-align:left }
-.admin-table thead th{ font-weight:700; color:var(--muted); font-family: 'Barlow Semi Condensed', sans-serif }
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.admin-table th,
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+}
+.admin-table thead th {
+  font-weight: 700;
+  color: var(--muted);
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
 
-.btn{ background:var(--accent); color: #0F2D4C; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-family:'Barlow Semi Condensed', sans-serif }
-.btn:hover{ background:#4db4ff }
-.btn.danger{ background:var(--danger); color:white }
-.admin-input{ padding:8px 10px; border:2px solid #71c9ff; border-radius:8px; font-family:'Raleway', sans-serif }
+.btn {
+  background: var(--accent);
+  color: #0f2d4c;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Barlow Semi Condensed", sans-serif;
+}
+.btn:hover {
+  background: #4db4ff;
+}
+.btn.danger {
+  background: var(--danger);
+  color: white;
+}
+.admin-input {
+  padding: 8px 10px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-family: "Raleway", sans-serif;
+}
 
-.admin-actions { display:flex; gap:8px; align-items:center }
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 
 @media (max-width: 768px) {
-  .admin-inner{ padding: 0 1rem }
-  .admin-table th, .admin-table td{ font-size:13px }
-  .admin-section{ padding:12px }
+  .admin-inner {
+    padding: 0 1rem;
+  }
+  .admin-table th,
+  .admin-table td {
+    font-size: 13px;
+  }
+  .admin-section {
+    padding: 12px;
+  }
 }
 
 /* Modal styles */
-.modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; z-index:1000 }
-.modal{ background:white; padding:18px; border-radius:12px; width:90%; max-width:720px; box-shadow:0 10px 40px rgba(0,0,0,0.2) }
-.modal h3{ margin-top:0; color:var(--muted) }
-.modal-body{ display:grid; grid-template-columns:1fr 1fr; gap:10px; max-height:60vh; overflow:auto; padding:6px 0 }
-.modal-body label{ display:block; font-size:14px; color:#123; }
-.modal-body input, .modal-body textarea, .modal-body select{ width:100%; padding:8px; margin-top:6px; border:1px solid #e6eef6; border-radius:6px }
-.modal-body textarea{ min-height:80px }
-.modal-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:12px }
-.btn.small{ padding:6px 10px; font-size:13px }
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 720px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+.modal h3 {
+  margin-top: 0;
+  color: var(--muted);
+}
+.modal-body {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.modal-body label {
+  display: block;
+  font-size: 14px;
+  color: #123;
+}
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #e6eef6;
+  border-radius: 6px;
+}
+.modal-body textarea {
+  min-height: 80px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+.btn.small {
+  padding: 6px 10px;
+  font-size: 13px;
+}
 
 /* Toasts */
-.toasts{ position:fixed; right:20px; bottom:20px; z-index:1100; display:flex; flex-direction:column; gap:8px }
-.toast{ background:#fff; padding:10px 14px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.12); color:var(--muted) }
-.toast.info{ border-left:4px solid var(--accent) }
-.toast.success{ border-left:4px solid #0AC7A1 }
-.toast.danger{ border-left:4px solid var(--danger) }
-
+.toasts {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  color: var(--muted);
+}
+.toast.info {
+  border-left: 4px solid var(--accent);
+}
+.toast.success {
+  border-left: 4px solid #0ac7a1;
+}
+.toast.danger {
+  border-left: 4px solid var(--danger);
+}
