@@ -89,14 +89,14 @@
   justify-content: center; /* center the image horizontally */
   align-items: flex-start; /* align top so image starts at the same level as details */
   min-height: 65vh;
-  max-height: calc(100vh - 260px);
+  max-height: 80vh;
 }
 
 .modal-image {
   /* Fill the width of the left column so image is large and matches other side's visual weight */
   width: 100%;
   height: auto;
-  max-height: calc(100vh - 260px);
+  max-height: 80vh;
   object-fit: contain;
   border-radius: 12px;
   display: block;
