@@ -89,7 +89,7 @@
   justify-content: center; /* center the image horizontally */
   align-items: flex-start; /* align top so image starts at the same level as details */
   /* provide a sensible minimum height so the image appears large enough */
-  min-height: 340px;
+  min-height: 60vh;
   max-height: calc(100vh - 260px);
 }
 
