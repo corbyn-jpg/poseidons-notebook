@@ -140,10 +140,6 @@
   margin-bottom: 1rem;
 }
 
-.species-modal .form-group.full-width {
-  grid-column: span 2;
-}
-
 .species-modal .form-group label {
   display: block;
   margin-bottom: 0.5rem;
@@ -153,8 +149,16 @@
 }
 
 .species-modal .form-group input,
-.species-modal .form-group textarea,
-.species-modal .form-group select {
+.species-modal .form-group textarea {
+  width: 97%;
+  padding: 10px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.species-modal .form-group select{
   width: 100%;
   padding: 10px;
   border: 2px solid #71c9ff;

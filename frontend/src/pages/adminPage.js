@@ -511,6 +511,7 @@ function AdminPage() {
           </table>
         </div>
       </div>
+      
       {/* Species editor modal */}
       {speciesEditModal.open && (
         <div className="modal-overlay">
