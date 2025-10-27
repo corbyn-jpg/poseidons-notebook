@@ -73,13 +73,3 @@
 .toast.success{ border-left:4px solid #0AC7A1 }
 .toast.danger{ border-left:4px solid var(--danger) }
 
-/* Collapsible details/summary styles for admin sections */
-.admin-section summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:0; margin:0 0 12px 0 }
-.admin-section summary h3{ margin:0; font-size:1.2rem; color:var(--muted); }
-.admin-section[open] { padding-bottom:12px }
-.admin-section summary::-webkit-details-marker{ display:none }
-.admin-section summary .count-badge{ background:var(--accent); color:#0F2D4C; padding:4px 8px; border-radius:8px; font-size:0.9rem }
-
-/* Ensure details content keeps existing styles (table card) */
-.admin-section > table { margin-top: 8px }
-

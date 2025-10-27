@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { apiUrl } from '../api';
 import '../styles/admin.css';
-import '../styles/species.css';
 import Bubbles from '../components/bubbles';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
@@ -259,10 +258,8 @@ function AdminPage() {
       <Navbar />
       <div className="admin-inner">
         <h2>Admin Console</h2>
-        <details className="admin-section" open>
-          <summary>
-            <h3>Users</h3>
-          </summary>
+        <div className="admin-section">
+          <h3>Users</h3>
           <table className="admin-table">
             <thead>
               <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Actions</th></tr>
@@ -283,12 +280,10 @@ function AdminPage() {
               ))}
             </tbody>
           </table>
-        </details>
+        </div>
 
-        <details className="admin-section" open>
-          <summary>
-            <h3>Species <button className="btn small" style={{ marginLeft: 12 }} onClick={() => openSpeciesEditor({})}>Create</button></h3>
-          </summary>
+        <div className="admin-section">
+          <h3>Species <button className="btn small" style={{ marginLeft: 12 }} onClick={() => openSpeciesEditor({})}>Create</button></h3>
           <table className="admin-table">
           <thead>
             <tr><th>ID</th><th>Common Name</th><th>Scientific</th><th>Actions</th></tr>
@@ -307,12 +302,10 @@ function AdminPage() {
             ))}
           </tbody>
         </table>
-  </details>
+        </div>
 
-        <details className="admin-section" open>
-          <summary>
-            <h3>Sightings <button className="btn small" style={{ marginLeft: 12 }} onClick={() => openSightingEditor({})}>Create</button></h3>
-          </summary>
+        <div className="admin-section">
+          <h3>Sightings <button className="btn small" style={{ marginLeft: 12 }} onClick={() => openSightingEditor({})}>Create</button></h3>
           <table className="admin-table">
           <thead>
             <tr><th>ID</th><th>User</th><th>Species ID</th><th>Date</th><th>Actions</th></tr>
@@ -332,14 +325,13 @@ function AdminPage() {
             ))}
           </tbody>
           </table>
-  </details>
+        </div>
       </div>
       {/* Species editor modal */}
       {speciesEditModal.open && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="close-button" onClick={closeSpeciesEditor}>×</button>
-            <div className="modal-header"><h2>{speciesEditModal.data.species_id ? 'Edit Species' : 'Create Species'}</h2></div>
+          <div className="modal">
+            <h3>{speciesEditModal.data.species_id ? 'Edit Species' : 'Create Species'}</h3>
             <div className="modal-body">
               <label>Common name<input value={speciesEditModal.data.common_name || ''} onChange={(e) => setSpeciesEditModal({ ...speciesEditModal, data: { ...speciesEditModal.data, common_name: e.target.value } })} /></label>
               <label>Scientific name<input value={speciesEditModal.data.scientific_name || ''} onChange={(e) => setSpeciesEditModal({ ...speciesEditModal, data: { ...speciesEditModal.data, scientific_name: e.target.value } })} /></label>
@@ -364,9 +356,8 @@ function AdminPage() {
       {/* Sighting editor modal */}
       {sightingEditModal.open && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="close-button" onClick={closeSightingEditor}>×</button>
-            <div className="modal-header"><h2>{sightingEditModal.data.sighting_id ? 'Edit Sighting' : 'Create Sighting'}</h2></div>
+          <div className="modal">
+            <h3>{sightingEditModal.data.sighting_id ? 'Edit Sighting' : 'Create Sighting'}</h3>
             <div className="modal-body">
               <label>User ID<input value={sightingEditModal.data.user_id || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, user_id: e.target.value } })} /></label>
               <label>Species<select value={sightingEditModal.data.species_id || ''} onChange={(e) => setSightingEditModal({ ...sightingEditModal, data: { ...sightingEditModal.data, species_id: Number(e.target.value) } })}>
@@ -388,9 +379,9 @@ function AdminPage() {
 
       {/* Confirm modal */}
       {confirmModal.open && (
-      <div className="modal-overlay">
-          <div className="modal-content">
-            <div className="modal-header"><h2>{confirmModal.title}</h2></div>
+        <div className="modal-overlay">
+          <div className="modal">
+            <h3>{confirmModal.title}</h3>
             <div className="modal-body">{confirmModal.message}</div>
             <div className="modal-actions">
               <button className="btn danger" onClick={() => { confirmModal.onConfirm && confirmModal.onConfirm(); closeConfirm(); }}>Confirm</button>
