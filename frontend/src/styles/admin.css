@@ -215,17 +215,18 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Remove old modal styles that conflict */
-.modal {
-  display: none; /* Hide the old modal style */
+/* Remove old admin-only modal styles that conflict with other pages.
+   Scoped to .admin-container so site-wide modals (e.g. species modal) are unaffected. */
+.admin-container .modal {
+  display: none; /* Hide the old modal style inside admin only */
 }
 
-.modal-body {
-  display: none; /* Hide the old modal body style */
+.admin-container .modal-body {
+  display: none; /* Hide the old modal body style inside admin only */
 }
 
-.modal-actions {
-  display: none; /* Hide the old modal actions style */
+.admin-container .modal-actions {
+  display: none; /* Hide the old modal actions style inside admin only */
 }
 
 /* Responsive Design for Admin Modals */
