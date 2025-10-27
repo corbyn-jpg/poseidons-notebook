@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Sighting = require('../models/sightings');
 const Species = require('../models/species');
+const User = require('../models/user');
 const authenticateToken = require('../middleware/auth');
 const { requireAdmin } = require('../middleware/auth');
 
@@ -158,6 +159,29 @@ router.delete('/:id', authenticateToken, async (req, res) => {
     res.json({ message: 'Sighting deleted successfully' });
   } catch (error) {
     console.error('Error deleting sighting:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Public: get newest (top 5) sightings for a species and total count
+router.get('/species/:speciesId', async (req, res) => {
+  try {
+    const speciesId = req.params.speciesId;
+
+    // total number of sightings for this species
+    const total = await Sighting.count({ where: { species_id: speciesId } });
+
+    // top 5 newest sightings with the reporting user's username (if available)
+    const sightings = await Sighting.findAll({
+      where: { species_id: speciesId },
+      include: [{ model: User, attributes: ['username'] }],
+      order: [['sighting_date', 'DESC']],
+      limit: 5
+    });
+
+    res.json({ total, sightings });
+  } catch (error) {
+    console.error('Error fetching species sightings:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
