@@ -1,6 +1,9 @@
-:root {
-  --accent: #71c9ff; /* used across species/sightings */
-  --primary: #0ac7a1; /* secondary accent used in other places */
+/* (no global :root changes) */
+
+/* Admin-scoped CSS variables so they don't change global :root values */
+.admin-container {
+  --accent: #71c9ff; /* used across admin components */
+  --primary: #0ac7a1; /* secondary accent used in admin */
   --danger: #ff6b6b;
   --muted: #0f2d4c;
 }
@@ -60,7 +63,7 @@
   font-family: "Barlow Semi Condensed", sans-serif;
 }
 
-.btn {
+.admin-container .btn {
   background: var(--accent);
   color: #0f2d4c;
   border: none;
@@ -69,21 +72,21 @@
   cursor: pointer;
   font-family: "Barlow Semi Condensed", sans-serif;
 }
-.btn:hover {
+.admin-container .btn:hover {
   background: #4db4ff;
 }
-.btn.danger {
+.admin-container .btn.danger {
   background: var(--danger);
   color: white;
 }
-.admin-input {
+.admin-container .admin-input {
   padding: 8px 10px;
   border: 2px solid #71c9ff;
   border-radius: 8px;
   font-family: "Raleway", sans-serif;
 }
 
-.admin-actions {
+.admin-container .admin-actions {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -102,7 +105,7 @@
   }
 }
 /* Admin Modal Styles */
-.species-modal {
+.admin-container .species-modal {
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
@@ -111,36 +114,36 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
-.species-modal .modal-header {
+.admin-container .species-modal .modal-header {
   padding: 2rem 2rem 0;
   text-align: center;
 }
 
-.species-modal .modal-header h2 {
+.admin-container .species-modal .modal-header h2 {
   font-family: 'Barlow Semi Condensed', sans-serif;
   font-size: 2rem;
   color: #0F2D4C;
   margin-bottom: 0.5rem;
 }
 
-.species-modal .modal-header p {
+.admin-container .species-modal .modal-header p {
   color: #0F2D4C;
   opacity: 0.8;
   margin-bottom: 1rem;
 }
 
-.species-modal .sighting-form {
+.admin-container .species-modal .sighting-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   padding: 0 2rem 2rem;
 }
 
-.species-modal .form-group {
+.admin-container .species-modal .form-group {
   margin-bottom: 1rem;
 }
 
-.species-modal .form-group label {
+.admin-container .species-modal .form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
@@ -148,8 +151,8 @@
   font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
-.species-modal .form-group input,
-.species-modal .form-group textarea {
+.admin-container .species-modal .form-group input,
+.admin-container .species-modal .form-group textarea {
   width: 97%;
   padding: 10px;
   border: 2px solid #71c9ff;
@@ -158,7 +161,7 @@
   font-family: 'Raleway', sans-serif;
 }
 
-.species-modal .form-group select{
+.admin-container .species-modal .form-group select{
   width: 100%;
   padding: 10px;
   border: 2px solid #71c9ff;
@@ -167,12 +170,12 @@
   font-family: 'Raleway', sans-serif;
 }
 
-.species-modal .form-group textarea {
+.admin-container .species-modal .form-group textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-.species-modal .form-actions {
+.admin-container .species-modal .form-actions {
   grid-column: span 2;
   display: flex;
   justify-content: flex-end;
@@ -180,7 +183,7 @@
   margin-top: 1rem;
 }
 
-.modal-save button {
+.admin-container .modal-save button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -191,12 +194,12 @@
   color: #0F2D4C;
 }
 
-.modal-save button:hover {
+.admin-container .modal-save button:hover {
   background: #d0d0d0;
 }
 
 /* Update existing modal styles */
-.modal-overlay {
+.admin-container .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
@@ -207,7 +210,7 @@
   padding: 1rem;
 }
 
-.modal-content {
+.admin-container .modal-content {
   background: white;
   border-radius: 16px;
   width: 90%;
@@ -231,39 +234,39 @@
 
 /* Responsive Design for Admin Modals */
 @media (max-width: 768px) {
-  .species-modal .sighting-form {
+  .admin-container .species-modal .sighting-form {
     grid-template-columns: 1fr;
     padding: 0 1rem 1rem;
   }
   
-  .species-modal .form-group.full-width {
+  .admin-container .species-modal .form-group.full-width {
     grid-column: span 1;
   }
   
-  .species-modal .form-actions {
+  .admin-container .species-modal .form-actions {
     grid-column: span 1;
     flex-direction: column;
   }
   
-  .species-modal .modal-header {
+  .admin-container .species-modal .modal-header {
     padding: 1rem 1rem 0;
   }
 }
 
 @media (max-width: 480px) {
-  .species-modal {
+  .admin-container .species-modal {
     margin: 0;
     width: 100%;
     max-height: 100vh;
     border-radius: 0;
   }
   
-  .modal-overlay {
+  .admin-container .modal-overlay {
     padding: 0;
   }
 }
-/* Toasts */
-.toasts {
+/* Toasts (admin only) */
+.admin-container .toasts {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -272,19 +275,19 @@
   flex-direction: column;
   gap: 8px;
 }
-.toast {
+.admin-container .toast {
   background: #fff;
   padding: 10px 14px;
   border-radius: 8px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   color: var(--muted);
 }
-.toast.info {
+.admin-container .toast.info {
   border-left: 4px solid var(--accent);
 }
-.toast.success {
+.admin-container .toast.success {
   border-left: 4px solid #0ac7a1;
 }
-.toast.danger {
+.admin-container .toast.danger {
   border-left: 4px solid var(--danger);
 }
