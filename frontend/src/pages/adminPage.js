@@ -511,7 +511,7 @@ function AdminPage() {
           </table>
         </div>
       </div>
-      
+
       {/* Species editor modal */}
       {speciesEditModal.open && (
         <div className="modal-overlay">
@@ -739,7 +739,7 @@ function AdminPage() {
                 </button>
                 <button
                   type="button"
-                  className="modal-species"
+                  className="modal-save"
                   onClick={saveSpeciesEditor}
                 >
                   Save
@@ -894,7 +894,7 @@ function AdminPage() {
                 </button>
                 <button
                   type="button"
-                  className="modal-species"
+                  className="modal-save"
                   onClick={saveSightingEditor}
                 >
                   Save
