@@ -180,31 +180,19 @@
   margin-top: 1rem;
 }
 
-.form-actions button {
+.modal-save button {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   font-family: 'Barlow Semi Condensed', sans-serif;
-}
-
-.form-actions button:first-child {
   background: #e0e0e0;
   color: #0F2D4C;
 }
 
-.form-actions button:first-child:hover {
+.modal-save button:hover {
   background: #d0d0d0;
-}
-
-.form-actions button:last-child {
-  background: #71c9ff;
-  color: #0F2D4C;
-}
-
-.form-actions button:last-child:hover {
-  background: #4db4ff;
 }
 
 /* Update existing modal styles */
