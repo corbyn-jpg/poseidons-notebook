@@ -297,29 +297,17 @@
   background: #4db4ff;
 }
 
-/* Modal Styles */
-
-.modal-cancel{
-    background-color: #0AC7A1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 1rem;
-}
+/* Modal-specific button styles — keep page-unique buttons; shared modal layout is in styles/modals.css */
 
 .modal-species{
-    background-color: #0AC7A1;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #0AC7A1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .no-results {
@@ -442,10 +430,7 @@
 }
 
 @media (max-width: 480px) {
-  .new-species-modal .modal-content {
-    padding: 1rem;
-  }
-  
+  /* .new-species-modal .modal-content is handled by styles/modals.css; keep sighting-form spacing here */
   .new-species-modal .sighting-form {
     padding: 0 0.5rem 0.5rem;
   }
@@ -479,18 +464,13 @@
     height: 200px;
   }
   
-  .modal-content {
-    margin: 1rem;
-    max-width: calc(100% - 2rem);
-  }
+  /* modal-content spacing handled by styles/modals.css */
   
   .sighting-form {
     padding: 0 1rem 1rem;
   }
   
-  .modal-overlay {
-    padding: 1rem;
-  }
+  /* modal-overlay handled by styles/modals.css */
 }
 
 @media (max-width: 480px) {

@@ -5,6 +5,7 @@ import LandingPage from './pages/landingPage';
 import HomePage from "./pages/homePage";
 import SpeciesPage from './pages/speciesPage';
 import SightingsPage from "./pages/sightingsPage";
+import './styles/modals.css';
 import ContributionsPage from "./pages/contributionsPage";
 import AdminPage from './pages/adminPage';
 
