@@ -2,7 +2,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const Species = require('./species'); // Import Species model
-const User = require('./user'); // Import User model for reporter info
+const User = require('./user'); // Import User model to associate sightings with a user
 
 const Sighting = sequelize.define('Sighting', {
   sighting_id: {
@@ -44,8 +44,7 @@ const Sighting = sequelize.define('Sighting', {
 
 // Define association
 Sighting.belongsTo(Species, { foreignKey: 'species_id' });
+// Associate a sighting with a user (who reported it)
+Sighting.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = Sighting;
-
-// Link to User so we can include reporter info when querying sightings
-Sighting.belongsTo(User, { foreignKey: 'user_id' });
