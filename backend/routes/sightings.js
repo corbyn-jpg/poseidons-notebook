@@ -4,16 +4,12 @@ const router = express.Router();
 const Sighting = require('../models/sightings');
 const Species = require('../models/species');
 const authenticateToken = require('../middleware/auth');
-const { requireAdmin } = require('../middleware/auth');
 
 // Get all sightings for the authenticated user
 router.get('/', authenticateToken, async (req, res) => {
   try {
-    const where = {};
-    // Admins can view all sightings
-    if (req.user.role !== 'admin') {
-      where.user_id = req.user.id;
-    }
+    // Always return sightings belonging to the requesting user
+    const where = { user_id: req.user.id };
     const sightings = await Sighting.findAll({
       where,
       include: [{
@@ -42,8 +38,8 @@ router.get('/:id', authenticateToken, async (req, res) => {
     
     if (!sighting) return res.status(404).json({ error: 'Sighting not found' });
 
-    // If not admin, ensure the sighting belongs to the user
-    if (req.user.role !== 'admin' && sighting.user_id !== req.user.id) {
+    // Ensure the sighting belongs to the requesting user
+    if (sighting.user_id !== req.user.id) {
       return res.status(403).json({ error: 'Not authorized to view this sighting' });
     }
     
@@ -100,7 +96,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'Sighting not found' });
     }
 
-    if (req.user.role !== 'admin' && sighting.user_id !== req.user.id) {
+    if (sighting.user_id !== req.user.id) {
       return res.status(403).json({ error: 'Not authorized to update this sighting' });
     }
     
@@ -136,7 +132,7 @@ router.delete('/:id', authenticateToken, async (req, res) => {
     if (!sighting) {
       return res.status(404).json({ error: 'Sighting not found' });
     }
-    if (req.user.role !== 'admin' && sighting.user_id !== req.user.id) {
+    if (sighting.user_id !== req.user.id) {
       return res.status(403).json({ error: 'Not authorized to delete this sighting' });
     }
 
