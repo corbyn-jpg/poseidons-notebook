@@ -10,14 +10,12 @@ const SpeciesPage = () => {
   const [species, setSpecies] = useState([]);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sightings, setSightings] = useState([]);
-  const [sightingsTotal, setSightingsTotal] = useState(0);
-  const [sightingsLoading, setSightingsLoading] = useState(false);
-  const [sightingsError, setSightingsError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sightings, setSightings] = useState([]);
+  const [sightingsTotal, setSightingsTotal] = useState(null);
 
   // Fetch species data from your backend API
   useEffect(() => {
@@ -49,42 +47,33 @@ const SpeciesPage = () => {
     setIsModalOpen(true);
   };
 
-  // Fetch sightings for the selected species when modal opens
-  useEffect(() => {
-    const fetchSightings = async (speciesId) => {
-      try {
-        setSightingsLoading(true);
-        setSightingsError(null);
-        const res = await fetch(apiUrl(`/sightings/species/${speciesId}`));
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        const data = await res.json();
-        // expected { total, sightings }
-        setSightings(data.sightings || []);
-        setSightingsTotal(data.total || 0);
-      } catch (err) {
-        console.error('Error fetching sightings for species:', err);
-        setSightingsError('Failed to load sightings');
-        setSightings([]);
-        setSightingsTotal(0);
-      } finally {
-        setSightingsLoading(false);
-      }
-    };
-
-    if (isModalOpen && selectedSpecies && selectedSpecies.species_id) {
-      fetchSightings(selectedSpecies.species_id);
-    } else {
-      // clear when modal closed
-      setSightings([]);
-      setSightingsTotal(0);
-      setSightingsError(null);
-    }
-  }, [isModalOpen, selectedSpecies]);
-
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSpecies(null);
+    setSightings([]);
+    setSightingsTotal(null);
   };
+
+  // When a species is selected, fetch recent sightings + total count
+  useEffect(() => {
+    const fetchSightings = async () => {
+      if (!selectedSpecies || !isModalOpen) return;
+      try {
+        const res = await fetch(apiUrl(`/species/${selectedSpecies.species_id}/sightings`));
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setSightings(data.recent || []);
+        setSightingsTotal(typeof data.total === 'number' ? data.total : null);
+      } catch (err) {
+        // Non-fatal: just leave sightings empty
+        console.warn('Failed to load sightings for species:', err);
+        setSightings([]);
+        setSightingsTotal(null);
+      }
+    };
+
+    fetchSightings();
+  }, [selectedSpecies, isModalOpen]);
 
   const filteredSpecies = species.filter(sp => {
     const matchesSearch = sp.common_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -264,33 +253,25 @@ const SpeciesPage = () => {
                     <h4>Description</h4>
                     <p>{selectedSpecies.description}</p>
                   </div>
-                  {/* Sightings summary: total + top 5 newest (date, person, location) */}
+
                   <div className="sightings-section">
-                    <h4>Sightings</h4>
-                    <div className="detail-row">
-                      <span className="detail-label">Total sightings:</span>
-                      <span className="detail-value">{sightingsTotal}</span>
-                    </div>
-
-                    {sightingsLoading && <div className="loading-small">Loading sightings...</div>}
-                    {sightingsError && <div className="error-message">{sightingsError}</div>}
-
-                    {!sightingsLoading && !sightingsError && (
-                      <div>
-                        {sightings && sightings.length > 0 ? (
-                          <ul className="sightings-list">
-                            {sightings.map((s) => (
-                              <li key={s.sighting_id} className="sighting-item">
-                                <div className="sighting-date">{new Date(s.sighting_date).toLocaleDateString()}</div>
-                                <div className="sighting-person">{(s.User && s.User.username) ? s.User.username : `User ${s.user_id}`}</div>
-                                <div className="sighting-location">{s.location}</div>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <div className="no-sightings">No sightings recorded for this species.</div>
-                        )}
-                      </div>
+                    <h4>
+                      Sightings {sightingsTotal !== null && <span className="muted">(total: {sightingsTotal})</span>}
+                    </h4>
+                    {sightings && sightings.length > 0 ? (
+                      <ul className="sightings-list">
+                        {sightings.map((s) => (
+                          <li key={s.sighting_id} className="sighting-item">
+                            <span className="sighting-date">{new Date(s.sighting_date).toLocaleDateString()}</span>
+                            {' — '}
+                            <strong className="sighting-user">{s.username || 'Unknown'}</strong>
+                            {' at '}
+                            <span className="sighting-location">{s.location}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="no-sightings">No recent sightings recorded.</p>
                     )}
                   </div>
                 </div>
