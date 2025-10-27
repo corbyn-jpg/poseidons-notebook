@@ -3,6 +3,8 @@ const router = express.Router();
 const Species = require('../models/species');
 const authenticateToken = require('../middleware/auth');
 const { requireAdmin } = require('../middleware/auth');
+const Sighting = require('../models/sightings');
+const User = require('../models/user');
 
 // Get all species
 router.get('/', async (req, res) => {
@@ -105,3 +107,26 @@ router.delete('/:id', authenticateToken, requireAdmin, async (req, res) => {
 });
 
 module.exports = router;
+
+// Get recent sightings for a species (public)
+// Returns: { total: number, latest: [ { sighting_date, location, reporter: { username } } ] }
+router.get('/:id/sightings', async (req, res) => {
+  try {
+    const speciesId = req.params.id;
+
+    // Latest 5 sightings for this species (most recent first)
+    const latest = await Sighting.findAll({
+      where: { species_id: speciesId },
+      include: [{ model: User, attributes: ['username'], as: 'reporter' }],
+      order: [['sighting_date', 'DESC']],
+      limit: 5
+    });
+
+    const total = await Sighting.count({ where: { species_id: speciesId } });
+
+    res.json({ total, latest });
+  } catch (error) {
+    console.error('Error fetching species sightings:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});

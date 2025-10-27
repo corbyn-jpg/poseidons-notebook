@@ -10,6 +10,8 @@ const SpeciesPage = () => {
   const [species, setSpecies] = useState([]);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sightingsList, setSightingsList] = useState([]);
+  const [sightingsTotal, setSightingsTotal] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [loading, setLoading] = useState(true);
@@ -48,7 +50,31 @@ const SpeciesPage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSpecies(null);
+    setSightingsList([]);
+    setSightingsTotal(0);
   };
+
+  // Fetch recent sightings when a species is selected
+  useEffect(() => {
+    const fetchSightings = async () => {
+      if (!selectedSpecies) return;
+      try {
+        const res = await fetch(apiUrl(`/species/${selectedSpecies.species_id}/sightings`));
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+        const data = await res.json();
+        setSightingsList(data.latest || []);
+        setSightingsTotal(data.total || 0);
+      } catch (err) {
+        console.error('Failed to fetch sightings for species:', err);
+        setSightingsList([]);
+        setSightingsTotal(0);
+      }
+    };
+
+    fetchSightings();
+  }, [selectedSpecies]);
 
   const filteredSpecies = species.filter(sp => {
     const matchesSearch = sp.common_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -227,6 +253,24 @@ const SpeciesPage = () => {
                   <div className="description-section">
                     <h4>Description</h4>
                     <p>{selectedSpecies.description}</p>
+                  </div>
+                  <div className="sightings-section">
+                    <h4>Sightings ({sightingsTotal})</h4>
+                    {sightingsList.length === 0 ? (
+                      <p>No sightings recorded for this species yet.</p>
+                    ) : (
+                      <ul className="sightings-list">
+                        {sightingsList.map((s) => (
+                          <li key={s.sighting_id} className="sighting-item">
+                            <div className="sighting-row">
+                              <span className="sighting-date">{new Date(s.sighting_date).toLocaleDateString()}</span>
+                              <span className="sighting-who">{s.reporter && s.reporter.username ? `By: ${s.reporter.username}` : 'By: Anonymous'}</span>
+                            </div>
+                            <div className="sighting-location">Where: {s.location}</div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </div>
