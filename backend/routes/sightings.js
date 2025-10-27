@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Sighting = require('../models/sightings');
 const Species = require('../models/species');
+const User = require('../models/user');
 const authenticateToken = require('../middleware/auth');
 const { requireAdmin } = require('../middleware/auth');
 
@@ -19,6 +20,35 @@ router.get('/all', authenticateToken, requireAdmin, async (req, res) => {
     res.json(sightings);
   } catch (error) {
     console.error('Error fetching all sightings (admin):', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Public: get recent sightings for a given species and total count
+// Returns { total: number, recent: [ { sighting_id, sighting_date, location, username } ] }
+router.get('/public/species/:id', async (req, res) => {
+  try {
+    const speciesId = req.params.id;
+    // recent 5 sightings for this species (newest first)
+    const recentSightings = await Sighting.findAll({
+      where: { species_id: speciesId },
+      include: [{ model: User, attributes: ['username'] }],
+      order: [['sighting_date', 'DESC']],
+      limit: 5
+    });
+
+    const total = await Sighting.count({ where: { species_id: speciesId } });
+
+    const recent = recentSightings.map(s => ({
+      sighting_id: s.sighting_id,
+      sighting_date: s.sighting_date,
+      location: s.location,
+      username: (s.User && s.User.username) ? s.User.username : null
+    }));
+
+    res.json({ total, recent });
+  } catch (error) {
+    console.error('Error fetching public sightings by species:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

@@ -10,12 +10,12 @@ const SpeciesPage = () => {
   const [species, setSpecies] = useState([]);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sightingsRecent, setSightingsRecent] = useState([]);
+  const [sightingsTotal, setSightingsTotal] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sightings, setSightings] = useState([]);
-  const [sightingsTotal, setSightingsTotal] = useState(null);
 
   // Fetch species data from your backend API
   useEffect(() => {
@@ -45,35 +45,68 @@ const SpeciesPage = () => {
   const openModal = (species) => {
     setSelectedSpecies(species);
     setIsModalOpen(true);
+    // Fetch recent sightings for this species (public endpoint)
+    fetchSightings(species.species_id);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedSpecies(null);
-    setSightings([]);
-    setSightingsTotal(null);
+    setSightingsRecent([]);
+    setSightingsTotal(0);
   };
 
-  // When a species is selected, fetch recent sightings + total count
-  useEffect(() => {
-    const fetchSightings = async () => {
-      if (!selectedSpecies || !isModalOpen) return;
-      try {
-        const res = await fetch(apiUrl(`/species/${selectedSpecies.species_id}/sightings`));
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        setSightings(data.recent || []);
-        setSightingsTotal(typeof data.total === 'number' ? data.total : null);
-      } catch (err) {
-        // Non-fatal: just leave sightings empty
-        console.warn('Failed to load sightings for species:', err);
-        setSightings([]);
-        setSightingsTotal(null);
+  const fetchSightings = async (speciesId) => {
+    try {
+      // Fetch public recent sightings
+      const publicRes = await fetch(apiUrl(`/sightings/public/species/${speciesId}`));
+      let publicData = null;
+      if (publicRes.ok) {
+        publicData = await publicRes.json();
+      } else {
+        console.warn('Failed to fetch public sightings for species', speciesId, publicRes.status);
       }
-    };
 
-    fetchSightings();
-  }, [selectedSpecies, isModalOpen]);
+      // Try to fetch the current user's sightings (requires token). If available, we'll prioritize them.
+      let userSightings = [];
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          const userRes = await fetch(apiUrl('/sightings'), { headers: { Authorization: `Bearer ${token}` } });
+          if (userRes.ok) {
+            const allUserSightings = await userRes.json();
+            // Filter to this species and map to the same shape as public endpoint
+            userSightings = (Array.isArray(allUserSightings) ? allUserSightings : [])
+              .filter(s => s.species_id === speciesId)
+              .map(s => ({
+                sighting_id: s.sighting_id,
+                sighting_date: s.sighting_date,
+                location: s.location,
+                username: s.User ? s.User.username : null
+              }));
+          }
+        }
+      } catch (innerErr) {
+        // Don't block on auth failures
+        console.warn('Could not fetch user sightings (likely not authenticated):', innerErr);
+      }
+
+      const publicRecent = (publicData && Array.isArray(publicData.recent)) ? publicData.recent : [];
+      const total = publicData && typeof publicData.total === 'number' ? publicData.total : (publicRecent.length + userSightings.length);
+
+      // Merge: put user's sightings first (sorted by date desc), then public recent (excluding duplicates), maintaining newest-first order
+      const sortByDateDesc = (a, b) => new Date(b.sighting_date) - new Date(a.sighting_date);
+      userSightings.sort(sortByDateDesc);
+      const seenIds = new Set(userSightings.map(s => s.sighting_id));
+      const merged = [...userSightings];
+      publicRecent.sort(sortByDateDesc).forEach(s => { if (!seenIds.has(s.sighting_id)) merged.push(s); });
+
+      setSightingsTotal(total || 0);
+      setSightingsRecent(merged.slice(0, 5));
+    } catch (err) {
+      console.error('Error fetching sightings for species:', err);
+    }
+  };
 
   const filteredSpecies = species.filter(sp => {
     const matchesSearch = sp.common_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -253,25 +286,21 @@ const SpeciesPage = () => {
                     <h4>Description</h4>
                     <p>{selectedSpecies.description}</p>
                   </div>
-
                   <div className="sightings-section">
-                    <h4>
-                      Sightings {sightingsTotal !== null && <span className="muted">(total: {sightingsTotal})</span>}
-                    </h4>
-                    {sightings && sightings.length > 0 ? (
+                    <h4>Sightings</h4>
+                    <p>Total sightings: <strong>{sightingsTotal}</strong></p>
+                    {sightingsRecent && sightingsRecent.length > 0 ? (
                       <ul className="sightings-list">
-                        {sightings.map((s) => (
+                        {sightingsRecent.map(s => (
                           <li key={s.sighting_id} className="sighting-item">
-                            <span className="sighting-date">{new Date(s.sighting_date).toLocaleDateString()}</span>
-                            {' — '}
-                            <strong className="sighting-user">{s.username || 'Unknown'}</strong>
-                            {' at '}
-                            <span className="sighting-location">{s.location}</span>
+                            <div className="sighting-date">{new Date(s.sighting_date).toLocaleDateString()}</div>
+                            <div className="sighting-person">By: {s.username || 'Anonymous'}</div>
+                            <div className="sighting-location">Where: {s.location}</div>
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="no-sightings">No recent sightings recorded.</p>
+                      <p className="no-sightings">No recent public sightings</p>
                     )}
                   </div>
                 </div>
