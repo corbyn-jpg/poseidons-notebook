@@ -19,11 +19,11 @@
 .modal-content {
   background: white;
   border-radius: 16px;
-  max-width: 900px;
+  max-width: 1000px;
   width: 100%;
   /* Keep the modal constrained so it never fills the whole viewport.
      Let the internal body scroll when content is long. */
-  max-height: calc(100vh - 4rem);
+  max-height: calc(100vh - 2rem);
   overflow: hidden;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -64,14 +64,14 @@
 
 .modal-body {
   display: grid;
-  /* left column has a sensible minimum so the image won't shrink too small; right column is flexible */
-  grid-template-columns: minmax(320px, 45%) 1fr;
+  /* increase left column minimum so the image gets more room; keep right column flexible */
+  grid-template-columns: minmax(360px, 48%) 1fr;
   gap: 2rem;
   padding: 2rem;
   align-items: start; /* align top so image and details start together */
   /* allow the body to scroll internally if content exceeds modal height */
   overflow-y: auto;
-  max-height: calc(100vh - 180px); /* leaves room for header and padding so close button stays visible */
+  max-height: calc(100vh - 160px); /* leaves room for header and padding so close button stays visible */
 }
 
 .modal-image-container {
@@ -80,18 +80,17 @@
   width: 100%;
   display: flex;
   justify-content: center; /* center the image horizontally */
-  align-items: center; /* center vertically within the container */
-  /* let the container size itself to the image but cap its height so it doesn't force the modal taller */
-  max-height: calc(100vh - 240px);
+  align-items: flex-start; /* align top so image starts at the same level as details */
+  /* provide a sensible minimum height so the image appears large enough */
+  min-height: 320px;
+  max-height: calc(100vh - 220px);
 }
 
 .modal-image {
-  /* keep the image as large as possible while fitting the available column
-     and not exceeding the modal body height; use 'contain' so the whole image is visible */
-  max-width: 100%;
-  max-height: calc(100vh - 300px);
-  width: auto;
+  /* Fill the width of the left column so image is large and matches other side's visual weight */
+  width: 100%;
   height: auto;
+  max-height: calc(100vh - 260px);
   object-fit: contain;
   border-radius: 12px;
   display: block;
