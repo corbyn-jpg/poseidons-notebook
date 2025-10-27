@@ -101,8 +101,82 @@
     padding: 12px;
   }
 }
+/* Admin Modal Styles */
+.species-modal {
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
 
-/* Modal styles */
+.species-modal .modal-header {
+  padding: 2rem 2rem 0;
+  text-align: center;
+}
+
+.species-modal .modal-header h2 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 2rem;
+  color: #0F2D4C;
+  margin-bottom: 0.5rem;
+}
+
+.species-modal .modal-header p {
+  color: #0F2D4C;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.species-modal .sighting-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0 2rem 2rem;
+}
+
+.species-modal .form-group {
+  margin-bottom: 1rem;
+}
+
+.species-modal .form-group.full-width {
+  grid-column: span 2;
+}
+
+.species-modal .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #0F2D4C;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.species-modal .form-group input,
+.species-modal .form-group textarea,
+.species-modal .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.species-modal .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.species-modal .form-actions {
+  grid-column: span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Update existing modal styles */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -111,54 +185,63 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-}
-.modal {
-  background: white;
-  padding: 18px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 720px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-.modal h3 {
-  margin-top: 0;
-  color: var(--muted);
-}
-.modal-body {
-  grid-column: span 2;
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.modal-body label {
-  display: block;
-  font-size: 14px;
-  color: #123;
-}
-.modal-body input,
-.modal-body textarea,
-.modal-body select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 6px;
-  border: 1px solid #e6eef6;
-  border-radius: 6px;
-}
-.modal-body textarea {
-  min-height: 80px;
-}
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 12px;
-}
-.btn.small {
-  padding: 6px 10px;
-  font-size: 13px;
+  padding: 1rem;
 }
 
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Remove old modal styles that conflict */
+.modal {
+  display: none; /* Hide the old modal style */
+}
+
+.modal-body {
+  display: none; /* Hide the old modal body style */
+}
+
+.modal-actions {
+  display: none; /* Hide the old modal actions style */
+}
+
+/* Responsive Design for Admin Modals */
+@media (max-width: 768px) {
+  .species-modal .sighting-form {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 1rem;
+  }
+  
+  .species-modal .form-group.full-width {
+    grid-column: span 1;
+  }
+  
+  .species-modal .form-actions {
+    grid-column: span 1;
+    flex-direction: column;
+  }
+  
+  .species-modal .modal-header {
+    padding: 1rem 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .species-modal {
+    margin: 0;
+    width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .modal-overlay {
+    padding: 0;
+  }
+}
 /* Toasts */
 .toasts {
   position: fixed;

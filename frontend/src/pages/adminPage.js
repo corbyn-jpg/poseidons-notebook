@@ -477,7 +477,11 @@ function AdminPage() {
                     {species.find((sp) => sp.species_id === s.species_id)
                       ?.common_name || s.species_id}
                   </td>
-                  <td>{new Date(s.date).toLocaleDateString()}</td>
+                  <td>
+                    {s.sighting_date
+                      ? new Date(s.sighting_date).toLocaleDateString()
+                      : "No date"}
+                  </td>
                   <td className="admin-actions">
                     <button
                       className="btn"
@@ -510,16 +514,25 @@ function AdminPage() {
       {/* Species editor modal */}
       {speciesEditModal.open && (
         <div className="modal-overlay">
-          <div className="modal">
-            <h3>
-              {speciesEditModal.data.species_id
-                ? "Edit Species"
-                : "Create Species"}
-            </h3>
-            <div className="modal-body">
-              <label>
-                Common name
+          <div className="modal-content species-modal">
+            <div className="modal-header">
+              <h2>
+                {speciesEditModal.data.species_id
+                  ? "Edit Species"
+                  : "Create Species"}
+              </h2>
+              <p>
+                {speciesEditModal.data.species_id
+                  ? "Update species information"
+                  : "Add a new species to the database"}
+              </p>
+            </div>
+
+            <div className="sighting-form">
+              <div className="form-group">
+                <label htmlFor="common_name">Common Name</label>
                 <input
+                  id="common_name"
                   value={speciesEditModal.data.common_name || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -530,11 +543,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., Blue Spotted Stingray"
                 />
-              </label>
-              <label>
-                Scientific name
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="scientific_name">Scientific Name</label>
                 <input
+                  id="scientific_name"
                   value={speciesEditModal.data.scientific_name || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -545,11 +561,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., Taeniura lymma"
                 />
-              </label>
-              <label>
-                Category
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="category">Category</label>
                 <input
+                  id="category"
                   value={speciesEditModal.data.category || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -560,11 +579,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., Fish, Marine Mammal"
                 />
-              </label>
-              <label>
-                Conservation status
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="conservation_status">Conservation Status</label>
                 <input
+                  id="conservation_status"
                   value={speciesEditModal.data.conservation_status || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -575,11 +597,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., LC, NT, VU"
                 />
-              </label>
-              <label>
-                Avg depth range
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="avg_depth_range">Average Depth Range</label>
                 <input
+                  id="avg_depth_range"
                   value={speciesEditModal.data.avg_depth_range || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -590,11 +615,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., 1-20m"
                 />
-              </label>
-              <label>
-                Habitat
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="habitat">Habitat</label>
                 <input
+                  id="habitat"
                   value={speciesEditModal.data.habitat || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -605,11 +633,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., Coral Reef, Sandy Bottom"
                 />
-              </label>
-              <label>
-                Image URL
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="image_url">Image URL</label>
                 <input
+                  id="image_url"
                   value={speciesEditModal.data.image_url || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -620,26 +651,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., /images/species/species-name.jpeg"
                 />
-              </label>
-              <label>
-                Description
-                <textarea
-                  value={speciesEditModal.data.description || ""}
-                  onChange={(e) =>
-                    setSpeciesEditModal({
-                      ...speciesEditModal,
-                      data: {
-                        ...speciesEditModal.data,
-                        description: e.target.value,
-                      },
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Size range
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="size_range">Size Range</label>
                 <input
+                  id="size_range"
                   value={speciesEditModal.data.size_range || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -650,23 +669,32 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., 30-35 cm disc width"
                 />
-              </label>
-              <label>
-                Diet
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="diet">Diet</label>
                 <input
+                  id="diet"
                   value={speciesEditModal.data.diet || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
                       ...speciesEditModal,
-                      data: { ...speciesEditModal.data, diet: e.target.value },
+                      data: {
+                        ...speciesEditModal.data,
+                        diet: e.target.value,
+                      },
                     })
                   }
+                  placeholder="e.g., Carnivore, Omnivore, Herbivore"
                 />
-              </label>
-              <label>
-                Geographic range
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="geographic_range">Geographic Range</label>
                 <input
+                  id="geographic_range"
                   value={speciesEditModal.data.geographic_range || ""}
                   onChange={(e) =>
                     setSpeciesEditModal({
@@ -677,16 +705,45 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="e.g., Indo-Pacific region"
                 />
-              </label>
-            </div>
-            <div className="modal-actions">
-              <button className="btn" onClick={saveSpeciesEditor}>
-                Save
-              </button>
-              <button className="btn" onClick={closeSpeciesEditor}>
-                Cancel
-              </button>
+              </div>
+
+              <div className="form-group full-width">
+                <label htmlFor="description">Description</label>
+                <textarea
+                  id="description"
+                  value={speciesEditModal.data.description || ""}
+                  onChange={(e) =>
+                    setSpeciesEditModal({
+                      ...speciesEditModal,
+                      data: {
+                        ...speciesEditModal.data,
+                        description: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="Describe the species..."
+                  rows="4"
+                />
+              </div>
+
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="modal-cancel"
+                  onClick={closeSpeciesEditor}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="modal-species"
+                  onClick={saveSpeciesEditor}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -695,16 +752,25 @@ function AdminPage() {
       {/* Sighting editor modal */}
       {sightingEditModal.open && (
         <div className="modal-overlay">
-          <div className="modal">
-            <h3>
-              {sightingEditModal.data.sighting_id
-                ? "Edit Sighting"
-                : "Create Sighting"}
-            </h3>
-            <div className="modal-body">
-              <label>
-                User ID
+          <div className="modal-content species-modal">
+            <div className="modal-header">
+              <h2>
+                {sightingEditModal.data.sighting_id
+                  ? "Edit Sighting"
+                  : "Create Sighting"}
+              </h2>
+              <p>
+                {sightingEditModal.data.sighting_id
+                  ? "Update sighting information"
+                  : "Add a new sighting to the database"}
+              </p>
+            </div>
+
+            <div className="sighting-form">
+              <div className="form-group">
+                <label htmlFor="user_id">User ID</label>
                 <input
+                  id="user_id"
                   value={sightingEditModal.data.user_id || ""}
                   onChange={(e) =>
                     setSightingEditModal({
@@ -715,11 +781,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="Enter user ID"
                 />
-              </label>
-              <label>
-                Species
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="species_id">Species</label>
                 <select
+                  id="species_id"
                   value={sightingEditModal.data.species_id || ""}
                   onChange={(e) =>
                     setSightingEditModal({
@@ -738,10 +807,12 @@ function AdminPage() {
                     </option>
                   ))}
                 </select>
-              </label>
-              <label>
-                Date
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="sighting_date">Date</label>
                 <input
+                  id="sighting_date"
                   type="date"
                   value={sightingEditModal.data.sighting_date || ""}
                   onChange={(e) =>
@@ -754,10 +825,12 @@ function AdminPage() {
                     })
                   }
                 />
-              </label>
-              <label>
-                Location
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="location">Location</label>
                 <input
+                  id="location"
                   value={sightingEditModal.data.location || ""}
                   onChange={(e) =>
                     setSightingEditModal({
@@ -768,11 +841,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="Enter location"
                 />
-              </label>
-              <label>
-                Depth (m)
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="depth_meters">Depth (m)</label>
                 <input
+                  id="depth_meters"
                   type="number"
                   value={sightingEditModal.data.depth_meters || 0}
                   onChange={(e) =>
@@ -784,11 +860,14 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="Enter depth in meters"
                 />
-              </label>
-              <label>
-                Notes
+              </div>
+
+              <div className="form-group full-width">
+                <label htmlFor="notes">Notes</label>
                 <textarea
+                  id="notes"
                   value={sightingEditModal.data.notes || ""}
                   onChange={(e) =>
                     setSightingEditModal({
@@ -799,16 +878,27 @@ function AdminPage() {
                       },
                     })
                   }
+                  placeholder="Add notes about the sighting..."
+                  rows="4"
                 />
-              </label>
-            </div>
-            <div className="modal-actions">
-              <button className="btn" onClick={saveSightingEditor}>
-                Save
-              </button>
-              <button className="btn" onClick={closeSightingEditor}>
-                Cancel
-              </button>
+              </div>
+
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="modal-cancel"
+                  onClick={closeSightingEditor}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="modal-species"
+                  onClick={saveSightingEditor}
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </div>
