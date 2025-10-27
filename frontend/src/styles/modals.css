@@ -88,7 +88,7 @@
   display: flex;
   justify-content: center; /* center the image horizontally */
   align-items: flex-start; /* align top so image starts at the same level as details */
-  min-height: 70vh;
+  min-height: 65vh;
   max-height: calc(100vh - 260px);
 }
 
