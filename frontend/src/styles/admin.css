@@ -1,108 +1,61 @@
-:root {
-  --accent: #71c9ff; /* used across species/sightings */
-  --primary: #0ac7a1; /* secondary accent used in other places */
-  --danger: #ff6b6b;
-  --muted: #0f2d4c;
+:root{
+  --accent:#71c9ff; /* used across species/sightings */
+  --primary:#0AC7A1; /* secondary accent used in other places */
+  --danger:#ff6b6b;
+  --muted:#0F2D4C;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap');
 
-.admin-container {
-  min-height: 100vh;
-  position: relative;
+.admin-container{
+  min-height:100vh;
+  position:relative;
   background: linear-gradient(#71c9ff, #0f1849);
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .admin-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width:1200px;
+  margin:0 auto;
 }
 
 /* Ensure admin content sits above background bubbles */
-.admin-inner {
-  position: relative;
-  z-index: 2;
-}
-.admin-section {
-  position: relative;
-  z-index: 3;
-}
+.admin-inner{ position: relative; z-index: 2 }
+.admin-section{ position: relative; z-index: 3 }
 
-.admin-container h2 {
-  font-family: "Barlow Semi Condensed", sans-serif;
+.admin-container h2{ 
+  font-family: 'Barlow Semi Condensed', sans-serif;
   color: var(--muted);
-  font-size: 2.2rem;
-  margin-bottom: 12px;
+  font-size:2.2rem;
+  margin-bottom:12px;
 }
 
-.admin-section {
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.12);
-  margin-bottom: 20px;
+.admin-section{ 
+  background: white; 
+  padding:20px; 
+  border-radius:16px; 
+  box-shadow: 0 10px 30px rgba(15,45,76,0.12); 
+  margin-bottom:20px;
 }
 
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.admin-table th,
-.admin-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #eef2f7;
-  text-align: left;
-}
-.admin-table thead th {
-  font-weight: 700;
-  color: var(--muted);
-  font-family: "Barlow Semi Condensed", sans-serif;
-}
+.admin-table{ width:100%; border-collapse:collapse; }
+.admin-table th, .admin-table td{ padding:10px 12px; border-bottom:1px solid #eef2f7; text-align:left }
+.admin-table thead th{ font-weight:700; color:var(--muted); font-family: 'Barlow Semi Condensed', sans-serif }
 
-.btn {
-  background: var(--accent);
-  color: #0f2d4c;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: "Barlow Semi Condensed", sans-serif;
-}
-.btn:hover {
-  background: #4db4ff;
-}
-.btn.danger {
-  background: var(--danger);
-  color: white;
-}
-.admin-input {
-  padding: 8px 10px;
-  border: 2px solid #71c9ff;
-  border-radius: 8px;
-  font-family: "Raleway", sans-serif;
-}
+.btn{ background:var(--accent); color: #0F2D4C; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-family:'Barlow Semi Condensed', sans-serif }
+.btn:hover{ background:#4db4ff }
+.btn.danger{ background:var(--danger); color:white }
+.admin-input{ padding:8px 10px; border:2px solid #71c9ff; border-radius:8px; font-family:'Raleway', sans-serif }
 
-.admin-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+.admin-actions { display:flex; gap:8px; align-items:center }
 
 @media (max-width: 768px) {
-  .admin-inner {
-    padding: 0 1rem;
-  }
-  .admin-table th,
-  .admin-table td {
-    font-size: 13px;
-  }
-  .admin-section {
-    padding: 12px;
-  }
+  .admin-inner{ padding: 0 1rem }
+  .admin-table th, .admin-table td{ font-size:13px }
+  .admin-section{ padding:12px }
 }
 
-/* Admin Sighting Editor Modal - Consistent with New Species Modal */
+/* Modal styles - match sightings new-species modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -120,9 +73,8 @@
 .modal-content {
   background: white;
   border-radius: 16px;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
-  max-height: 90vh;
   overflow-y: auto;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -133,7 +85,7 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #0f2d4c;
+  background: #0F2D4C;
   border: none;
   color: white;
   font-size: 1.25rem;
@@ -156,62 +108,23 @@
 }
 
 .modal-header h2 {
-  font-family: "Barlow Semi Condensed", sans-serif;
-  color: #0f2d4c;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
   margin-bottom: 0.5rem;
-  font-size: 2rem;
 }
 
-.modal-header p {
-  color: #0f2d4c;
-  opacity: 0.8;
-  margin: 0;
-}
-
-/* Form Styles - Consistent with New Species Modal */
-.sighting-form {
+.modal-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding: 0 2rem 2rem;
+  gap: 2rem;
+  padding: 2rem;
 }
 
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #0f2d4c;
-  font-family: "Barlow Semi Condensed", sans-serif;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #71c9ff;
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: "Raleway", sans-serif;
-  box-sizing: border-box;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-/* Image Preview */
-.sighting-image-container {
+.modal-image-container {
   border-radius: 12px;
   overflow: hidden;
-  height: 200px;
-  width: 100%;
-  margin-bottom: 1rem;
+  height: 65vh;
+  width: 30vw;
 }
 
 .modal-image {
@@ -219,17 +132,66 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  border: 2px solid #71c9ff;
 }
 
-/* Full-width form elements */
-.form-group:has(.sighting-image-container),
-.form-group:has(textarea) {
-  grid-column: span 2;
+.modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-/* Form Actions */
-.form-actions {
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #0F2D4C;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.detail-value {
+  color: #0F2D4C;
+}
+
+.description-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #71c9ff;
+}
+
+.description-section h4 {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
+  margin-bottom: 0.5rem;
+}
+
+.description-section p {
+  line-height: 1.6;
+  color: #0F2D4C;
+}
+
+/* New-species modal (reused for admin forms) */
+.new-species-modal {
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.new-species-modal .sighting-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.new-species-modal .form-group {
+  margin-bottom: 1rem;
+}
+
+.new-species-modal .form-actions {
   grid-column: span 2;
   display: flex;
   justify-content: flex-end;
@@ -237,149 +199,94 @@
   margin-top: 1rem;
 }
 
-.form-actions button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-family: "Barlow Semi Condensed", sans-serif;
-  transition: all 0.3s ease;
+.species-options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  align-items: center;
 }
 
-.form-actions button[type="button"] {
-  background-color: #e0e0e0;
-  color: #0f2d4c;
-}
-
-.form-actions button[type="button"]:hover {
-  background-color: #d0d0d0;
-  transform: translateY(-2px);
-}
-
-.form-actions button[type="submit"] {
-  background-color: #0ac7a1;
+.species-option-btn {
+  background-color: #0AC7A1;
   color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
   box-shadow: 0 4px 12px rgba(10, 199, 161, 0.3);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 250px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
-.form-actions button[type="submit"]:hover {
+.species-option-btn:hover {
   background-color: #09b393;
   box-shadow: 0 6px 16px rgba(10, 199, 161, 0.4);
   transform: translateY(-2px);
 }
 
-/* Responsive Design */
-@media (max-width: 900px) {
-  .modal-content {
-    margin: 1rem;
-    max-width: calc(100% - 2rem);
-  }
-
-  .sighting-form {
-    grid-template-columns: 1fr;
-  }
-
-  .form-group:has(.sighting-image-container),
-  .form-group:has(textarea) {
-    grid-column: span 1;
-  }
-
-  .form-actions {
-    grid-column: span 1;
-  }
+.species-option-cancel-btn {
+  background-color: #e0e0e0;
+  color: #0F2D4C;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 250px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
-@media (max-width: 480px) {
-  .modal-overlay {
-    padding: 1rem;
-  }
+.species-option-cancel-btn:hover {
+  background-color: #d0d0d0;
+  transform: translateY(-2px);
+}
 
-  .modal-content {
-    padding: 0.5rem;
-  }
+/* Modal buttons used by sightings.css */
+.modal-cancel{
+    background-color: #0AC7A1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 1rem;
+}
 
-  .sighting-form {
-    padding: 0 0.5rem 0.5rem;
-  }
-
-  .modal-header {
-    padding: 1.5rem 1rem 0.5rem;
-  }
-
-  .modal-header h2 {
-    font-size: 1.5rem;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .form-actions button {
-    width: 100%;
-  }
+.modal-species{
+    background-color: #0AC7A1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 /* Toasts */
-.toasts {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 1100;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.toast {
-  background: #fff;
-  padding: 10px 14px;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-  color: var(--muted);
-}
-.toast.info {
-  border-left: 4px solid var(--accent);
-}
-.toast.success {
-  border-left: 4px solid #0ac7a1;
-}
-.toast.danger {
-  border-left: 4px solid var(--danger);
-}
+.toasts{ position:fixed; right:20px; bottom:20px; z-index:1100; display:flex; flex-direction:column; gap:8px }
+.toast{ background:#fff; padding:10px 14px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.12); color:var(--muted) }
+.toast.info{ border-left:4px solid var(--accent) }
+.toast.success{ border-left:4px solid #0AC7A1 }
+.toast.danger{ border-left:4px solid var(--danger) }
 
 /* Collapsible details/summary styles for admin sections */
-.admin-section summary {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0;
-  margin: 0 0 12px 0;
-}
-.admin-section summary h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: var(--muted);
-}
-.admin-section[open] {
-  padding-bottom: 12px;
-}
-.admin-section summary::-webkit-details-marker {
-  display: none;
-}
-.admin-section summary .count-badge {
-  background: var(--accent);
-  color: #0f2d4c;
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
+.admin-section summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:0; margin:0 0 12px 0 }
+.admin-section summary h3{ margin:0; font-size:1.2rem; color:var(--muted); }
+.admin-section[open] { padding-bottom:12px }
+.admin-section summary::-webkit-details-marker{ display:none }
+.admin-section summary .count-badge{ background:var(--accent); color:#0F2D4C; padding:4px 8px; border-radius:8px; font-size:0.9rem }
 
 /* Ensure details content keeps existing styles (table card) */
-.admin-section > table {
-  margin-top: 8px;
-}
+.admin-section > table { margin-top: 8px }
 
 /* Responsive adjustments copied from sightings.css */
 @media (max-width: 768px) {
@@ -416,3 +323,4 @@
     padding: 0 0.5rem 0.5rem;
   }
 }
+
