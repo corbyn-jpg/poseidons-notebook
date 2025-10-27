@@ -2,6 +2,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 const Species = require('./species'); // Import Species model
+const User = require('./user'); // Import User for association (so we can include username)
 
 const Sighting = sequelize.define('Sighting', {
   sighting_id: {
@@ -43,5 +44,7 @@ const Sighting = sequelize.define('Sighting', {
 
 // Define association
 Sighting.belongsTo(Species, { foreignKey: 'species_id' });
+// Also link to User so we can include the reporting user's username in public APIs
+Sighting.belongsTo(User, { foreignKey: 'user_id' });
 
 module.exports = Sighting;
