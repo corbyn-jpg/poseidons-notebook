@@ -13,7 +13,7 @@ function apiUrl(path) {
 }
 
 function getImageUrl(imagePath) {
-  // original behavior: if it's an absolute URL return it, otherwise build via apiUrl
+
   if (!imagePath) return null;
   if (typeof imagePath === 'string' && (imagePath.startsWith('http://') || imagePath.startsWith('https://'))) {
     return imagePath;

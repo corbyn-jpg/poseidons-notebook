@@ -1,10 +1,6 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-// Support multiple ways to configure a MySQL connection in production
-// 1) Full URL provided by an add-on: JAWSDB_URL or DATABASE_URL
-// 2) Individual env vars: DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
-
 let sequelize;
 if (process.env.JAWSDB_URL || process.env.DATABASE_URL) {
   const url = process.env.JAWSDB_URL || process.env.DATABASE_URL;
