@@ -120,12 +120,14 @@ function AdminPage() {
         },
         body: JSON.stringify({ role: "admin" }),
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        );
       }
-      
+
       await refreshUsers();
       showToast("User promoted to admin", "success");
     } catch (error) {
@@ -145,12 +147,14 @@ function AdminPage() {
         },
         body: JSON.stringify({ role: "user" }),
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        );
       }
-      
+
       await refreshUsers();
       showToast("User demoted to user", "info");
     } catch (error) {
@@ -166,12 +170,14 @@ function AdminPage() {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        );
       }
-      
+
       await refreshUsers();
       showToast("User deleted", "danger");
     } catch (error) {
@@ -187,12 +193,14 @@ function AdminPage() {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        );
       }
-      
+
       await refreshSpecies();
       showToast("Species deleted", "danger");
     } catch (error) {
@@ -208,12 +216,14 @@ function AdminPage() {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        );
       }
-      
+
       await refreshSightings();
       showToast("Sighting deleted", "danger");
     } catch (error) {
@@ -988,21 +998,53 @@ function AdminPage() {
       {/* Confirm modal */}
       {confirmModal.open && (
         <div className="modal-overlay">
-          <div className="modal">
-            <h3>{confirmModal.title}</h3>
-            <div className="modal-body">{confirmModal.message}</div>
-            <div className="modal-actions">
-              <button
-                className="btn danger"
-                onClick={() => {
-                  confirmModal.onConfirm && confirmModal.onConfirm();
-                  closeConfirm();
+          <div className="modal-content">
+            <button className="close-button" onClick={closeConfirm}>
+              ×
+            </button>
+            <div className="modal-header">
+              <h2>{confirmModal.title}</h2>
+            </div>
+            <div className="modal-body">
+              <div
+                style={{
+                  padding: "1rem",
+                  textAlign: "center",
+                  color: "#0F2D4C",
+                  fontSize: "1.1rem",
+                  lineHeight: "1.5",
                 }}
               >
-                Confirm
-              </button>
-              <button className="btn" onClick={closeConfirm}>
+                {confirmModal.message}
+              </div>
+            </div>
+            <div
+              className="form-actions"
+              style={{
+                padding: "0 2rem 2rem",
+                justifyContent: "center",
+                gap: "1rem",
+              }}
+            >
+              <button className="modal-cancel" onClick={closeConfirm}>
                 Cancel
+              </button>
+              <button
+                className="modal-save danger"
+                onClick={async () => {
+                  try {
+                    if (confirmModal.onConfirm) {
+                      await confirmModal.onConfirm();
+                    }
+                  } catch (error) {
+                    console.error("Error in confirmation action:", error);
+                  } finally {
+                    closeConfirm();
+                  }
+                }}
+                style={{ background: "#ff6b6b", color: "white" }}
+              >
+                Confirm
               </button>
             </div>
           </div>
