@@ -1,0 +1,44 @@
+# Deployment Information
+
+## Live Application URL
+http://www.poseidonsnotebook.co.za/
+
+## Test Credentials (if needed)
+**Admin Account:**
+- Username: admin
+- Email: admin@poseidons.com
+- Password: ManchesterUnitedRules
+
+**Regular User Account:**
+- Username: testuser
+- Email: test@example.com
+- Password: GiveChloe100%
+
+## Deployment Platform
+Platform Used: Heroku
+Date Deployed: 14 October 2025
+
+## Database Information
+- Production database: JawsDB
+- Contains sample data: No
+
+## Important Notes
+- Application may take 30 seconds to wake up if using free Heroku tier
+- All CRUD operations (Create, Read, Update, Delete) are functional
+- JWT authentication is working
+- Image uploads/display functional
+
+## Features to Test
+1. User registration and login
+2. Browse species catalog
+3. View species details
+4. Create new sighting (requires login)
+5. Edit your own sightings
+6. Delete your own sightings
+7. Search and filter functionality
+
+## Known Issues (if any)
+- Image paths must be very specific and are better if from the internet ie. https://i.pinimg.com/1200x/67/ad/36/67ad360f48cbedafd1ca4a145d5c55d8.jpg so ensure you use the image address when adding an image.
+
+## Support
+If the deployment is down or not working, contact: 241040@virtualwindow.co.za

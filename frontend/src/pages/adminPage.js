@@ -61,85 +61,165 @@ function AdminPage() {
   }, [token]);
 
   const refreshUsers = async () => {
-    const res = await fetch(apiUrl("/users"), {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await res.json();
-    setUsers(data);
+    try {
+      const res = await fetch(apiUrl("/users"), {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error refreshing users:", error);
+      showToast("Failed to refresh users", "danger");
+    }
   };
 
   const refreshSpecies = async () => {
-    const res = await fetch(apiUrl("/species"), {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await res.json();
-    setSpecies(data);
+    try {
+      const res = await fetch(apiUrl("/species"), {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      setSpecies(data);
+    } catch (error) {
+      console.error("Error refreshing species:", error);
+      showToast("Failed to refresh species", "danger");
+    }
   };
 
   const refreshSightings = async () => {
-    // When used in admin console, refresh uses the admin endpoint
-    const res = await fetch(apiUrl("/sightings/all"), {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const data = await res.json();
-    setSightings(data);
+    try {
+      // When used in admin console, refresh uses the admin endpoint
+      const res = await fetch(apiUrl("/sightings/all"), {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      setSightings(data);
+    } catch (error) {
+      console.error("Error refreshing sightings:", error);
+      showToast("Failed to refresh sightings", "danger");
+    }
   };
 
   const promoteToAdmin = async (userId) => {
     if (!token) return;
-    await fetch(apiUrl(`/users/${userId}`), {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ role: "admin" }),
-    });
-    await refreshUsers();
+    try {
+      const response = await fetch(apiUrl(`/users/${userId}`), {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ role: "admin" }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      await refreshUsers();
+      showToast("User promoted to admin", "success");
+    } catch (error) {
+      console.error("Error promoting user to admin:", error);
+      showToast(`Failed to promote user: ${error.message}`, "danger");
+    }
   };
 
   const demoteToUser = async (userId) => {
     if (!token) return;
-    await fetch(apiUrl(`/users/${userId}`), {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ role: "user" }),
-    });
-    await refreshUsers();
-    showToast("User demoted to user", "info");
+    try {
+      const response = await fetch(apiUrl(`/users/${userId}`), {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ role: "user" }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      await refreshUsers();
+      showToast("User demoted to user", "info");
+    } catch (error) {
+      console.error("Error demoting user:", error);
+      showToast(`Failed to demote user: ${error.message}`, "danger");
+    }
   };
 
   const deleteUser = async (userId) => {
     if (!token) return;
-    await fetch(apiUrl(`/users/${userId}`), {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    await refreshUsers();
-    showToast("User deleted", "danger");
+    try {
+      const response = await fetch(apiUrl(`/users/${userId}`), {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      await refreshUsers();
+      showToast("User deleted", "danger");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      showToast(`Failed to delete user: ${error.message}`, "danger");
+    }
   };
 
   const deleteSpecies = async (id) => {
     if (!token) return;
-    await fetch(apiUrl(`/species/${id}`), {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    await refreshSpecies();
-    showToast("Species deleted", "danger");
+    try {
+      const response = await fetch(apiUrl(`/species/${id}`), {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      await refreshSpecies();
+      showToast("Species deleted", "danger");
+    } catch (error) {
+      console.error("Error deleting species:", error);
+      showToast(`Failed to delete species: ${error.message}`, "danger");
+    }
   };
 
   const deleteSighting = async (id) => {
     if (!token) return;
-    await fetch(apiUrl(`/sightings/${id}`), {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    await refreshSightings();
-    showToast("Sighting deleted", "danger");
+    try {
+      const response = await fetch(apiUrl(`/sightings/${id}`), {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      await refreshSightings();
+      showToast("Sighting deleted", "danger");
+    } catch (error) {
+      console.error("Error deleting sighting:", error);
+      showToast(`Failed to delete sighting: ${error.message}`, "danger");
+    }
   };
 
   // Species editing via modal (full fields)
