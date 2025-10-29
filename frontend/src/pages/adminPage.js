@@ -10,7 +10,6 @@ function AdminPage() {
   const [users, setUsers] = useState([]);
   const [species, setSpecies] = useState([]);
   const [sightings, setSightings] = useState([]);
-  const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const [editingSpeciesId, setEditingSpeciesId] = useState(null);
   const [editingSpeciesData, setEditingSpeciesData] = useState({});
@@ -111,14 +110,8 @@ function AdminPage() {
   };
 
   const promoteToAdmin = async (userId) => {
-    console.log("promoteToAdmin called with userId:", userId);
-    if (!token) {
-      console.error("No token available");
-      return;
-    }
-    setLoading(true);
+    if (!token) return;
     try {
-      console.log("Making API call to:", apiUrl(`/users/${userId}`));
       const response = await fetch(apiUrl(`/users/${userId}`), {
         method: "PUT",
         headers: {
@@ -128,34 +121,22 @@ function AdminPage() {
         body: JSON.stringify({ role: "admin" }),
       });
       
-      console.log("Response status:", response.status);
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("API error response:", errorData);
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
       
-      const result = await response.json();
-      console.log("API success response:", result);
       await refreshUsers();
       showToast("User promoted to admin", "success");
     } catch (error) {
       console.error("Error promoting user to admin:", error);
       showToast(`Failed to promote user: ${error.message}`, "danger");
-    } finally {
-      setLoading(false);
     }
   };
 
   const demoteToUser = async (userId) => {
-    console.log("demoteToUser called with userId:", userId);
-    if (!token) {
-      console.error("No token available");
-      return;
-    }
-    setLoading(true);
+    if (!token) return;
     try {
-      console.log("Making API call to:", apiUrl(`/users/${userId}`));
       const response = await fetch(apiUrl(`/users/${userId}`), {
         method: "PUT",
         headers: {
@@ -165,55 +146,37 @@ function AdminPage() {
         body: JSON.stringify({ role: "user" }),
       });
       
-      console.log("Response status:", response.status);
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("API error response:", errorData);
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
       
-      const result = await response.json();
-      console.log("API success response:", result);
       await refreshUsers();
       showToast("User demoted to user", "info");
     } catch (error) {
       console.error("Error demoting user:", error);
       showToast(`Failed to demote user: ${error.message}`, "danger");
-    } finally {
-      setLoading(false);
     }
   };
 
   const deleteUser = async (userId) => {
-    console.log("deleteUser called with userId:", userId);
-    if (!token) {
-      console.error("No token available");
-      return;
-    }
-    setLoading(true);
+    if (!token) return;
     try {
-      console.log("Making API call to:", apiUrl(`/users/${userId}`));
       const response = await fetch(apiUrl(`/users/${userId}`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
       
-      console.log("Response status:", response.status);
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("API error response:", errorData);
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
       
-      const result = await response.json();
-      console.log("API success response:", result);
       await refreshUsers();
       showToast("User deleted", "danger");
     } catch (error) {
       console.error("Error deleting user:", error);
       showToast(`Failed to delete user: ${error.message}`, "danger");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -455,55 +418,52 @@ function AdminPage() {
                     {u.role !== "admin" && (
                       <button
                         className="btn"
-                        disabled={loading}
                         onClick={() =>
                           openConfirm(
                             "Promote user",
                             `Promote ${u.username} to admin?`,
-                            async () => {
-                              await promoteToAdmin(u.id);
+                            () => {
+                              promoteToAdmin(u.id);
                               closeConfirm();
                             }
                           )
                         }
                       >
-                        {loading ? "Processing..." : "Promote"}
+                        Promote
                       </button>
                     )}
                     {u.role === "admin" && (
                       <button
                         className="btn"
-                        disabled={loading}
                         onClick={() =>
                           openConfirm(
                             "Demote admin",
                             `Demote ${u.username} to user?`,
-                            async () => {
-                              await demoteToUser(u.id);
+                            () => {
+                              demoteToUser(u.id);
                               closeConfirm();
                             }
                           )
                         }
                       >
-                        {loading ? "Processing..." : "Demote"}
+                        Demote
                       </button>
                     )}
                     <button
                       className="btn danger"
-                      disabled={loading}
                       onClick={() =>
                         openConfirm(
                           "Delete user",
                           `Delete ${u.username}? This cannot be undone.`,
-                          async () => {
-                            await deleteUser(u.id);
+                          () => {
+                            deleteUser(u.id);
                             closeConfirm();
                           }
                         )
                       }
                       style={{ marginLeft: 8 }}
                     >
-                      {loading ? "Processing..." : "Delete"}
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -1034,10 +994,9 @@ function AdminPage() {
             <div className="modal-actions">
               <button
                 className="btn danger"
-                onClick={async () => {
-                  if (confirmModal.onConfirm) {
-                    await confirmModal.onConfirm();
-                  }
+                onClick={() => {
+                  confirmModal.onConfirm && confirmModal.onConfirm();
+                  closeConfirm();
                 }}
               >
                 Confirm
