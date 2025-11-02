@@ -234,6 +234,9 @@ const SightingsPage = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
+      console.log("Token retrieved:", token ? "Present" : "Missing");
+      console.log("API URL:", apiUrl('/species'));
+      
       const response = await fetch(apiUrl('/species'), {
         method: "POST",
         headers: {
