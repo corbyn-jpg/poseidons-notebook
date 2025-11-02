@@ -93,7 +93,6 @@ const SpeciesPage = () => {
     EN: 'Endangered', CR: 'Critically Endangered', DD: 'Data Deficient'
   };
 
-  // use helper getImageUrl from api.js
 
   if (loading) {
     return (

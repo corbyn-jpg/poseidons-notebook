@@ -11,9 +11,10 @@
   background: rgba(15, 24, 73, 0.85);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: 1000;
   padding: 2rem;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -24,7 +25,7 @@
   /* Keep the modal constrained so it never fills the whole viewport.
      Let the internal body scroll when content is long. */
   max-height: calc(100vh - 2rem);
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   z-index: 1001;

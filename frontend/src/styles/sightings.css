@@ -343,8 +343,9 @@
 
 .new-species-modal {
   max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: none;
+  margin: 2rem auto;
+  overflow-y: visible;
 }
 
 .new-species-modal .sighting-form {
