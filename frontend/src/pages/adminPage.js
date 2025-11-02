@@ -407,7 +407,8 @@ function AdminPage() {
         <h2>Admin Console</h2>
         <div className="admin-section">
           <h3>Users</h3>
-          <table className="admin-table">
+          <div className="table-container">
+            <table className="admin-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -420,11 +421,11 @@ function AdminPage() {
             <tbody>
               {users.map((u) => (
                 <tr key={u.id}>
-                  <td>{u.id}</td>
-                  <td>{u.username}</td>
-                  <td>{u.email}</td>
-                  <td>{u.role}</td>
-                  <td className="admin-actions">
+                  <td data-label="ID">{u.id}</td>
+                  <td data-label="Username">{u.username}</td>
+                  <td data-label="Email">{u.email}</td>
+                  <td data-label="Role">{u.role}</td>
+                  <td data-label="Actions" className="admin-actions">
                     {u.role !== "admin" && (
                       <button
                         className="btn"
@@ -480,6 +481,7 @@ function AdminPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
 
         <div className="admin-section">
@@ -493,7 +495,8 @@ function AdminPage() {
               Create
             </button>
           </h3>
-          <table className="admin-table">
+          <div className="table-container">
+            <table className="admin-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -505,10 +508,10 @@ function AdminPage() {
             <tbody>
               {species.map((s) => (
                 <tr key={s.species_id}>
-                  <td>{s.species_id}</td>
-                  <td>{s.common_name}</td>
-                  <td>{s.scientific_name}</td>
-                  <td className="admin-actions">
+                  <td data-label="ID">{s.species_id}</td>
+                  <td data-label="Common Name">{s.common_name}</td>
+                  <td data-label="Scientific">{s.scientific_name}</td>
+                  <td data-label="Actions" className="admin-actions">
                     <button
                       className="btn"
                       onClick={() => openSpeciesEditor(s)}
@@ -535,6 +538,7 @@ function AdminPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
 
         <div className="admin-section">
@@ -548,7 +552,8 @@ function AdminPage() {
               Create
             </button>
           </h3>
-          <table className="admin-table">
+          <div className="table-container">
+            <table className="admin-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -561,18 +566,18 @@ function AdminPage() {
             <tbody>
               {sightings.map((s) => (
                 <tr key={s.sighting_id}>
-                  <td>{s.sighting_id}</td>
-                  <td>{s.user_id}</td>
-                  <td>
+                  <td data-label="ID">{s.sighting_id}</td>
+                  <td data-label="User">{s.user_id}</td>
+                  <td data-label="Species ID">
                     {species.find((sp) => sp.species_id === s.species_id)
                       ?.common_name || s.species_id}
                   </td>
-                  <td>
+                  <td data-label="Date">
                     {s.sighting_date
                       ? new Date(s.sighting_date).toLocaleDateString()
                       : "No date"}
                   </td>
-                  <td className="admin-actions">
+                  <td data-label="Actions" className="admin-actions">
                     <button
                       className="btn"
                       onClick={() => openSightingEditor(s)}
@@ -599,6 +604,7 @@ function AdminPage() {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
 
