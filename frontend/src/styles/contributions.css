@@ -9,7 +9,7 @@
 }
 
 .contributions-content {
-  padding: 3rem;
+  padding: 3rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -23,14 +23,14 @@
 
 .contributions-main-title {
   font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   color: #0F2D4C;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .contributions-subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   color: #0F2D4C;
   opacity: 0.9;
 }
@@ -43,7 +43,7 @@
 .thank-you-card {
   background: linear-gradient(0deg, #0F8DDA, #0F2D4C);
   color: white;
-  padding: 2.5rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(10, 199, 161, 0.3);
@@ -51,19 +51,19 @@
 
 .thank-you-card h2 {
   font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   margin-bottom: 1rem;
 }
 
 .thank-you-card p {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 1.5rem;
 }
 
 .thank-you-icon {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   margin-top: 1rem;
 }
 
@@ -76,15 +76,18 @@
   text-align: center;
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #0F2D4C;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   margin-bottom: 2.5rem;
 }
 
 .impact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  justify-items: center;
 }
+
+/* Remove conflicting flexbox styles for impact-grid */
 
 .impact-card {
   background: white;
@@ -111,12 +114,7 @@
   line-height: 1.6;
 }
 
-.impact-grid {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 2rem 0;
-}
+/* Remove duplicate flexbox impact-grid styles that conflict with grid */
 
 /* Statistics Section */
 .stats-section {
@@ -127,27 +125,33 @@
   text-align: center;
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #0F2D4C;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   margin-bottom: 2.5rem;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
 }
 
 .stat-item {
   background: rgba(255, 255, 255, 0.9);
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
 }
 
 .stat-number {
   font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: bold;
   color: #0AC7A1;
   margin-bottom: 0.5rem;
@@ -156,6 +160,7 @@
 .stat-label {
   color: #0F2D4C;
   font-weight: 500;
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 /* How to Contribute Section */
@@ -168,20 +173,19 @@
   max-width: 800px;
   margin: 0 auto 2.5rem;
   line-height: 1.6;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 .contribute-section h2 {
   text-align: center;
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #fff;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   margin-bottom: 2.5rem;
 }
 
 .contribute-steps {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1.5rem;
 }
 
@@ -193,6 +197,12 @@
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(15, 45, 76, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(15, 45, 76, 0.15);
 }
 
 .step-number {
@@ -214,11 +224,13 @@
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #0F2D4C;
   margin-bottom: 0.5rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
 }
 
 .step-content p {
   color: #0F2D4C;
   line-height: 1.6;
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 /* Recognition Section */
@@ -230,16 +242,17 @@
 .recognition-section h2 {
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #FFF;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   margin-bottom: 1.5rem;
 }
 
 .recognition-section p {
-  color: #0F2D4C;
+  color: #FFF;
   max-width: 800px;
   margin: 0 auto 2.5rem;
   line-height: 1.6;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  opacity: 0.9;
 }
 
 .recognition-badges {
@@ -259,11 +272,11 @@
 }
 
 .recognition-grid {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  justify-items: center;
   padding: 2rem 0;
-  flex-wrap: wrap;
 }
 
 /* Donation Section */
@@ -282,12 +295,12 @@
 
 .donation-card h3 {
   font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 3.5vw, 1.8rem);
   margin-bottom: 1.5rem;
 }
 
 .donation-card p {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto 2rem;
@@ -363,13 +376,13 @@
 .cta-section h2 {
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #fff;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
   margin-bottom: 1rem;
 }
 
 .cta-section p {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   margin-bottom: 2rem;
 }
 
@@ -415,62 +428,140 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .contributions-content {
-    padding: 1.5rem;
-  }
-  
-  .contributions-main-title {
-    font-size: 2.2rem;
-  }
-  
-  .thank-you-card {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
   
   .impact-grid,
-  .stats-grid,
-  .recognition-badges {
+  .recognition-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contributions-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .contributions-header {
+    margin-bottom: 2rem;
+  }
+  
+  .thank-you-section,
+  .impact-section,
+  .stats-section,
+  .contribute-section,
+  .recognition-section,
+  .donation-section {
+    margin-bottom: 3rem;
+  }
+  
+  .impact-grid,
+  .recognition-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
   
   .step {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
+  }
+  
+  .step-number {
+    align-self: center;
   }
   
   .cta-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
   
   .cta-btn {
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item {
+    padding: 1.25rem 1rem;
+  }
+  
+  .contribute-steps {
+    gap: 1rem;
+  }
+  
+  .step {
+    padding: 1.25rem;
+  }
+  
+  .recognition-grid {
+    gap: 1rem;
   }
 }
 
 /* Adjust card sizing for these sections */
 .impact-grid .card-container,
 .recognition-grid .card-container {
-  width: 280px;
-  height: 320px;
+  width: 100%;
+  max-width: 320px;
+  height: 300px;
 }
 
 @media (max-width: 480px) {
-  .contributions-main-title {
+  .contributions-content {
+    padding: 1rem 0.75rem;
+  }
+  
+  .thank-you-card,
+  .donation-card,
+  .cta-section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .step {
+    padding: 1rem;
+  }
+  
+  .step-content h3 {
+    margin-bottom: 0.25rem;
+  }
+  
+  .impact-grid .card-container,
+  .recognition-grid .card-container {
+    height: 280px;
+  }
+  
+  .cta-btn {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+  
+  .stat-number {
     font-size: 1.8rem;
   }
   
-  .thank-you-card h2 {
-    font-size: 1.5rem;
-  }
-  
-  .impact-section h2,
-  .stats-section h2,
-  .contribute-section h2,
-  .recognition-section h2,
-  .cta-section h2 {
-    font-size: 1.8rem;
+  .donate-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 20px;
   }
 }
