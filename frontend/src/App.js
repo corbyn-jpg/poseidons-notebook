@@ -8,6 +8,9 @@ import SightingsPage from "./pages/sightingsPage";
 import './styles/modals.css';
 import ContributionsPage from "./pages/contributionsPage";
 import AdminPage from './pages/adminPage';
+import TermsOfService from './pages/termsOfService';
+import PrivacyPolicy from './pages/privacyPolicy';
+import CookiePolicy from './pages/cookiePolicy';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
           <Route path="/sightings" element={<SightingsPage />} />
           <Route path="/contributions" element={<ContributionsPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
         </Routes>
       </Router>
     </div>

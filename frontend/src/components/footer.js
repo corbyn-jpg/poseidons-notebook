@@ -13,13 +13,16 @@ const Footer = () => {
         <h4>Explore</h4>
         <ul>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/homePage">Home</Link>
           </li>
           <li>
             <Link to="/species">Species Database</Link>
           </li>
           <li>
-            <Link to="/maps">Dive Maps</Link>
+            <Link to="/sightings">Sightings</Link>
+          </li>
+          <li>
+            <Link to="/contributions">Contributions</Link>
           </li>
         </ul>
       </div>
