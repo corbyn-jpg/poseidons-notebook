@@ -233,10 +233,12 @@ const SightingsPage = () => {
   const handleNewSpeciesSubmit = async (e) => {
     e.preventDefault();
     try {
-  const response = await fetch(apiUrl('/species'), {
+      const token = localStorage.getItem("token");
+      const response = await fetch(apiUrl('/species'), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newSpeciesData),
       });

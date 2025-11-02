@@ -35,8 +35,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//
-router.post('/', authenticateToken, requireAdmin, async (req, res) => {
+// Create new species - any authenticated user can contribute
+router.post('/', authenticateToken, async (req, res) => {
   try {
     const {
       common_name,
