@@ -9,8 +9,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-300) 0%, var(--primary-600) 50%, var(--primary-900) 100%);
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #71c9ff 0%, var(--primary-medium) 50%, var(--primary-dark) 100%);
   padding: var(--space-4);
 }
 
@@ -78,7 +77,7 @@
   margin-bottom: var(--space-2);
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  color: var(--primary-800);
+  color: var(--primary-dark);
   font-size: var(--font-size-sm);
   letter-spacing: 0.01em;
 }
@@ -86,7 +85,7 @@
 .input-group input {
   width: 100%;
   padding: var(--space-4);
-  border: 2px solid var(--primary-200);
+  border: 2px solid #71c9ff;
   border-radius: var(--radius-lg);
   font-size: var(--font-size-base);
   font-family: 'Inter', sans-serif;
@@ -108,7 +107,7 @@
 
 .input-group input:focus {
   outline: none;
-  border-color: var(--accent-500);
+  border-color: var(--accent-main);
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 
     0 0 0 3px rgba(10, 199, 161, 0.15),
@@ -117,7 +116,7 @@
 }
 
 .input-group input:hover:not(:focus) {
-  border-color: var(--primary-300);
+  border-color: #71c9ff;
   background: rgba(255, 255, 255, 0.9);
 }
 
@@ -215,7 +214,7 @@
   font-size: var(--font-size-lg);
   font-weight: 600;
   cursor: pointer;
-  background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-light));
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-normal);
   position: relative;
@@ -235,7 +234,7 @@
 }
 
 .auth-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--accent-400), var(--accent-300));
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-main));
   transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-xl);
 }
@@ -260,18 +259,18 @@
   text-align: center;
   margin-top: var(--space-6);
   font-family: 'Inter', sans-serif;
-  color: var(--primary-800);
+  color: var(--primary-dark);
   font-size: var(--font-size-sm);
 }
 
 .auth-switch a {
-  color: var(--accent-600);
+  color: var(--accent-dark);
   font-weight: 600;
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 .auth-switch a:hover {
-  color: var(--accent-500);
+  color: var(--accent-main);
   text-decoration: underline;
 }
