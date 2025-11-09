@@ -2,13 +2,13 @@ import React from "react";
 import "../styles/bubbles.css";
 
 const Bubbles = () => {
-  // Generate 34 bubbles for optimal performance
-  const bubbles = Array.from({ length: 35 }).map((_, i) => {
+  // Generate 25 bubbles for optimal performance
+  const bubbles = Array.from({ length: 25 }).map((_, i) => {
     const size = Math.floor(Math.random() * 95) + 5; // 5-100px
     const isEven = i % 2 === 0;
     const animationDuration = Math.floor(Math.random() * 10) + 3; // 3-13s
-    const initialBottom = -200; // Always start below the bottom of the screen
-    const finalBottom = Math.floor(Math.random() * 30) + 100; // End 100-130vh (above screen)
+    const initialBottom = -200; // Always start below the page bottom
+    const finalBottom = window.innerHeight + 200; // End above the viewport
     const translateX = Math.floor(Math.random() * 300) - 100; // -100 to 200px
 
     return (
@@ -18,11 +18,11 @@ const Bubbles = () => {
         style={{
           "--size": `${size}px`,
           "--initial-bottom": `${initialBottom}px`,
-          "--final-bottom": `${finalBottom}vh`,
+          "--final-bottom": `${finalBottom}px`,
           "--translate-x": `${translateX}px`,
           "--duration": `${animationDuration}s`,
           "--bg-pos": isEven ? "top right" : "center",
-          left: `${Math.floor(Math.random() * 100)}vw`,
+          left: `${Math.floor(Math.random() * 100)}%`,
         }}
       />
     );
