@@ -1,176 +1,79 @@
-/* Modern Footer Design */
-.footer {
-  background: linear-gradient(135deg, 
-    rgba(15, 24, 73, 0.98) 0%, 
-    rgba(15, 24, 73, 0.95) 50%,
-    rgba(71, 111, 168, 0.95) 100%
-  );
-  backdrop-filter: var(--glass-backdrop);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.footer{
+  background: rgba(15, 24, 73, 0.95);
   color: white;
-  padding: var(--space-16) 5% var(--space-8);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-8);
-  position: relative;
+  padding: clamp(1.25rem, 3.5vh, 3rem) 5%;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
   z-index: 1;
 }
 
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(113, 201, 255, 0.5), 
-    rgba(10, 199, 161, 0.5), 
-    transparent
-  );
-}
-
-.footer-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
 
 .footer-section h4 {
-  color: var(--accent-400);
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  margin: 0;
-  font-size: clamp(var(--font-size-lg), 2vw, var(--font-size-xl));
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
-  padding-bottom: var(--space-2);
-}
-
-.footer-section h4::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-500), var(--primary-400));
-  border-radius: var(--radius-full);
+  color: #0AC7A1;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  margin-bottom: 1rem;
+  font-size: clamp(14px, 1.6vw, 18px);
 }
 
 .footer-section ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
 }
 
 .footer-section li {
-  margin: 0;
+  margin-bottom: 0.5rem;
 }
 
 .footer-section a {
-  color: rgba(255, 255, 255, 0.85);
+  color: white;
   text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  font-size: var(--font-size-sm);
-  font-weight: 400;
-  transition: all var(--transition-normal);
-  position: relative;
-  padding: var(--space-1) 0;
-  display: inline-block;
-}
-
-.footer-section a::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent-400);
-  transition: width var(--transition-normal);
+  transition: color 0.3s;
 }
 
 .footer-section a:hover {
-  color: white;
-  transform: translateX(4px);
+  color: #71c9ff;
 }
 
-.footer-section a:hover::before {
-  width: 100%;
-}
-
-/* Modern social icons container */
+/* Social icons container */
 .footer-section:last-child ul {
-  flex-direction: row;
-  gap: var(--space-4);
+  display: flex;
+  gap: 12px; 
   align-items: center;
-  justify-content: flex-start;
 }
 
 .footer-icon {
-  height: clamp(24px, 4vh, 32px);
+  height: clamp(20px, 4.5vh, 40px);
   width: auto;
-  padding: var(--space-2);
-  border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all var(--transition-normal);
-  filter: brightness(0.9);
+  padding-left: 0.6rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .footer-icon:hover {
-  transform: translateY(-2px) scale(1.1);
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-lg);
-  filter: brightness(1.1);
+  transform: scale(1.05);
+  opacity: 0.95;
 }
 
-.footer-icon:active {
-  transform: translateY(0) scale(1.05);
-  transition: transform var(--transition-fast);
-}
-
-/* Modern responsive footer */
 @media (max-width: 768px) {
   .footer {
-    grid-template-columns: 1fr;
-    padding: var(--space-12) 4% var(--space-6);
-    gap: var(--space-6);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
   }
 
-  .footer-section:last-child ul {
-    justify-content: center;
-    margin-top: var(--space-4);
+  .footer-section {
+    flex: 1 1 100%;
   }
 }
 
 @media (max-width: 480px) {
   .footer {
-    padding: var(--space-8) 3% var(--space-4);
-    gap: var(--space-4);
+    padding: 1rem 4%;
   }
 
   .footer-section h4 {
-    font-size: var(--font-size-base);
-    text-align: center;
-  }
-  
-  .footer-section ul {
-    align-items: center;
-  }
-  
-  .footer-section a {
-    text-align: center;
-  }
-  
-  .footer-icon {
-    height: 28px;
+    margin-bottom: 0.5rem;
   }
 }

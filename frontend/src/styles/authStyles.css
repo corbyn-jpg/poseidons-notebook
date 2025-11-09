@@ -1,7 +1,7 @@
-/* Modern Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@600&family=Raleway:wght@400;500;600&display=swap');
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap');
 
-/* Modern auth container */
+/* Base styles */
 .auth-container {
   min-height: 100vh;
   display: flex;
@@ -9,269 +9,130 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--primary-300) 0%, var(--primary-600) 50%, var(--primary-900) 100%);
-  background-attachment: fixed;
-  padding: var(--space-4);
+  background: linear-gradient(to bottom, #b8dcff, #0f1849);
 }
 
-.auth-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(113, 201, 255, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(10, 199, 161, 0.3) 0%, transparent 50%);
-  animation: floatGradient 20s ease-in-out infinite;
-}
-
-@keyframes floatGradient {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(30px, -30px) rotate(120deg); }
-  66% { transform: translate(-20px, 20px) rotate(240deg); }
-}
-
-/* Modern glassmorphic auth card */
+/* Auth card */
 .auth-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: var(--glass-backdrop);
-  padding: var(--space-10);
-  border-radius: var(--radius-2xl);
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   z-index: 10;
-  box-shadow: 
-    var(--shadow-2xl),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-  transition: all var(--transition-slow);
-}
-
-.auth-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 
-    0 32px 64px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
 }
 
 .logo {
-  height: clamp(60px, 10vh, 80px);
-  margin: 0 auto var(--space-8);
+  height: 10vh;
+  margin: 0 auto 2rem;
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: transform var(--transition-normal);
-}
-
-.logo:hover {
-  transform: scale(1.05);
 }
 
 .input-group {
-  margin-bottom: var(--space-6);
-  position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .input-group label {
   display: block;
-  margin-bottom: var(--space-2);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  color: var(--primary-800);
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.01em;
+  margin-bottom: 0.5rem;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
 }
 
 .input-group input {
-  width: 100%;
-  padding: var(--space-4);
-  border: 2px solid var(--primary-200);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-base);
-  font-family: 'Inter', sans-serif;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  transition: all var(--transition-normal);
-  box-sizing: border-box;
-  position: relative;
-}
-
-.input-group input::placeholder {
-  color: var(--gray-500);
-  transition: opacity var(--transition-normal);
-}
-
-.input-group input:focus::placeholder {
-  opacity: 0.5;
+  width: 93%;
+  padding: 12px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: var(--accent-500);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 
-    0 0 0 3px rgba(10, 199, 161, 0.15),
-    var(--shadow-md);
-  transform: translateY(-1px);
-}
-
-.input-group input:hover:not(:focus) {
-  border-color: var(--primary-300);
-  background: rgba(255, 255, 255, 0.9);
+  border-color: #0AC7A1;
+  box-shadow: 0 0 0 3px rgba(10, 199, 161, 0.1);
 }
 
 .input-group input.error {
-  border-color: var(--error);
-  background: rgba(239, 68, 68, 0.05);
+  border-color: #FF5C87;
 }
 
 .input-group input.error:focus {
-  border-color: var(--error);
-  box-shadow: 
-    0 0 0 3px rgba(239, 68, 68, 0.15),
-    var(--shadow-md);
+  border-color: #FF5C87;
+  box-shadow: 0 0 0 3px rgba(255, 92, 135, 0.1);
 }
 
-/* Modern error message styles */
+/* Error message styles */
 .error-message {
-  color: var(--error);
-  font-size: var(--font-size-sm);
-  margin-top: var(--space-2);
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.error-message::before {
-  content: '⚠';
-  font-size: var(--font-size-base);
+  color: #FF5C87;
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: 'Raleway', sans-serif;
+  display: block;
 }
 
 .general-error {
-  background: rgba(239, 68, 68, 0.05);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  margin-bottom: var(--space-6);
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
   text-align: center;
-  color: var(--error);
-  font-weight: 500;
-  backdrop-filter: blur(10px);
 }
 
-/* Modern password strength indicator */
+/* Password strength indicator */
 .password-strength {
-  font-size: var(--font-size-xs);
-  margin-top: var(--space-2);
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 12px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'Raleway', sans-serif;
+  display: inline-block;
 }
 
 .password-strength.weak {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--error);
-}
-
-.password-strength.weak::before {
-  content: '●';
+  background-color: #fed7d7;
+  color: #c53030;
 }
 
 .password-strength.medium {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--warning);
-}
-
-.password-strength.medium::before {
-  content: '●●';
+  background-color: #fbd38d;
+  color: #d69e2e;
 }
 
 .password-strength.strong {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--success);
+  background-color: #c6f6d5;
+  color: #38a169;
 }
 
-.password-strength.strong::before {
-  content: '●●●';
-}
-
-/* Modern auth button */
 .auth-btn {
   width: 100%;
-  padding: var(--space-4) var(--space-6);
+  padding: 12px;
   border: none;
-  border-radius: var(--radius-xl);
+  border-radius: 8px;
   color: white;
-  font-family: 'Inter', sans-serif;
-  font-size: var(--font-size-lg);
-  font-weight: 600;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 18px;
   cursor: pointer;
-  background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
-  box-shadow: var(--shadow-lg);
-  transition: all var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-  letter-spacing: 0.01em;
-}
-
-.auth-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left var(--transition-slow);
+  transition: all 0.3s ease;
 }
 
 .auth-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--accent-400), var(--accent-300));
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-xl);
-}
-
-.auth-btn:hover:not(:disabled)::before {
-  left: 100%;
-}
-
-.auth-btn:active:not(:disabled) {
-  transform: translateY(0) scale(1);
-  transition: transform var(--transition-fast);
+  background-color: #0fb392;
+  transform: scale(1.05);
 }
 
 .auth-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
-  background: var(--gray-400);
 }
 
 .auth-switch {
   text-align: center;
-  margin-top: var(--space-6);
-  font-family: 'Inter', sans-serif;
-  color: var(--primary-800);
-  font-size: var(--font-size-sm);
-}
-
-.auth-switch a {
-  color: var(--accent-600);
-  font-weight: 600;
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.auth-switch a:hover {
-  color: var(--accent-500);
-  text-decoration: underline;
+  margin-top: 1rem;
+  font-family: 'Raleway', sans-serif;
+  color: #0f1849;
 }
