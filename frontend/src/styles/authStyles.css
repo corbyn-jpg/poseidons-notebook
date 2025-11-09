@@ -1,6 +1,7 @@
-/* Enhanced Authentication Styles */
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Raleway&display=swap');
 
-/* Base styles with modern aesthetics */
+/* Base styles */
 .auth-container {
   min-height: 100vh;
   display: flex;
@@ -8,439 +9,130 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: var(--gradient-ocean);
-  animation: containerEntrance 1s var(--ease-out-quart);
+  background: linear-gradient(to bottom, #b8dcff, #0f1849);
 }
 
-@keyframes containerEntrance {
-  from {
-    opacity: 0;
-    background-position: 0% 0%;
-  }
-  to {
-    opacity: 1;
-    background-position: 100% 100%;
-  }
-}
-
-/* Enhanced Auth Card with Glassmorphism */
+/* Auth card */
 .auth-card {
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: var(--space-2xl);
-  border-radius: var(--radius-2xl);
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   z-index: 10;
-  box-shadow: var(--shadow-strong);
-  position: relative;
-  overflow: hidden;
-  animation: cardEntrance 0.8s var(--ease-spring) 0.2s backwards;
+  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
 }
 
-@keyframes cardEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9);
-    backdrop-filter: blur(0px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    backdrop-filter: blur(20px) saturate(200%);
-  }
-}
-
-.auth-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  transition: left 0.8s var(--ease-out-cubic);
-}
-
-.auth-card:hover::before {
-  left: 100%;
-}
-
-/* Enhanced Logo */
 .logo {
-  height: clamp(60px, 10vh, 80px);
-  margin: 0 auto var(--space-xl);
+  height: 10vh;
+  margin: 0 auto 2rem;
   display: block;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-  transition: all 0.3s var(--ease-out-cubic);
-  animation: logoFloat 3s ease-in-out infinite;
 }
 
-@keyframes logoFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-.logo:hover {
-  filter: drop-shadow(0 8px 16px rgba(10, 199, 161, 0.3));
-  transform: scale(1.05);
-}
-
-/* Enhanced Form Groups */
 .input-group {
-  margin-bottom: var(--space-xl);
-  position: relative;
-  animation: inputGroupEntrance 0.6s var(--ease-out-quart) backwards;
-  animation-delay: calc(var(--input-index, 0) * 0.1s + 0.4s);
-}
-
-@keyframes inputGroupEntrance {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  margin-bottom: 1.5rem;
 }
 
 .input-group label {
   display: block;
-  margin-bottom: var(--space-sm);
-  font-family: var(--font-display);
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: var(--font-size-sm);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s var(--ease-out-cubic);
+  margin-bottom: 0.5rem;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #0F2D4C;
 }
 
-/* Modern Input Styling */
 .input-group input {
-  width: 100%;
-  padding: var(--space-md) var(--space-lg);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(113, 201, 255, 0.3);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-base);
-  font-family: var(--font-primary);
-  color: var(--text-primary);
-  transition: all 0.3s var(--ease-out-cubic);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-}
-
-.input-group input::placeholder {
-  color: var(--text-muted);
-  font-style: italic;
+  width: 93%;
+  padding: 12px;
+  border: 2px solid #71c9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: var(--accent-teal);
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.1),
-    0 0 0 4px rgba(10, 199, 161, 0.2),
-    0 8px 16px rgba(10, 199, 161, 0.15);
-  transform: translateY(-2px);
+  border-color: #0AC7A1;
+  box-shadow: 0 0 0 3px rgba(10, 199, 161, 0.1);
 }
 
-.input-group input:focus + .input-highlight {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.input-highlight {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(135deg, var(--accent-teal), var(--light-blue));
-  border-radius: var(--radius-full);
-  opacity: 0;
-  transform: scaleX(0);
-  transition: all 0.3s var(--ease-out-cubic);
-  z-index: 2;
-}
-
-/* Enhanced Error States */
 .input-group input.error {
   border-color: #FF5C87;
-  background: rgba(255, 92, 135, 0.1);
-  animation: inputError 0.5s var(--ease-out-cubic);
-}
-
-@keyframes inputError {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
 }
 
 .input-group input.error:focus {
   border-color: #FF5C87;
-  box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.1),
-    0 0 0 4px rgba(255, 92, 135, 0.2),
-    0 8px 16px rgba(255, 92, 135, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 92, 135, 0.1);
 }
 
-/* Input Success State */
-.input-group input.success {
-  border-color: var(--accent-teal);
-  background: rgba(10, 199, 161, 0.1);
-}
-
-.input-group input.success:focus {
-  box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.1),
-    0 0 0 4px rgba(10, 199, 161, 0.2),
-    0 8px 16px rgba(10, 199, 161, 0.15);
-}
-
-/* Enhanced Error Message Styles */
+/* Error message styles */
 .error-message {
   color: #FF5C87;
-  font-size: var(--font-size-xs);
-  margin-top: var(--space-xs);
-  font-family: var(--font-primary);
-  font-weight: 500;
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: 'Raleway', sans-serif;
   display: block;
-  animation: errorFadeIn 0.3s var(--ease-out-cubic);
-}
-
-@keyframes errorFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .general-error {
-  backdrop-filter: blur(8px) saturate(150%);
-  -webkit-backdrop-filter: blur(8px) saturate(150%);
-  background: rgba(255, 92, 135, 0.1);
-  border: 2px solid rgba(255, 92, 135, 0.3);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  margin-bottom: var(--space-lg);
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
   text-align: center;
-  animation: errorBounce 0.5s var(--ease-spring);
 }
 
-@keyframes errorBounce {
-  0% {
-    opacity: 0;
-    transform: scale(0.9) translateY(10px);
-  }
-  50% {
-    transform: scale(1.02) translateY(-2px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-/* Enhanced Password Strength Indicator */
+/* Password strength indicator */
 .password-strength {
-  font-size: var(--font-size-xs);
-  margin-top: var(--space-xs);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-primary);
-  font-weight: 600;
+  font-size: 12px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'Raleway', sans-serif;
   display: inline-block;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid transparent;
-  transition: all 0.3s var(--ease-out-cubic);
 }
 
 .password-strength.weak {
-  background: rgba(255, 92, 135, 0.2);
-  color: #FF5C87;
-  border-color: rgba(255, 92, 135, 0.3);
+  background-color: #fed7d7;
+  color: #c53030;
 }
 
 .password-strength.medium {
-  background: rgba(251, 211, 141, 0.2);
-  color: #D69E2E;
-  border-color: rgba(251, 211, 141, 0.3);
+  background-color: #fbd38d;
+  color: #d69e2e;
 }
 
 .password-strength.strong {
-  background: rgba(10, 199, 161, 0.2);
-  color: var(--accent-teal);
-  border-color: rgba(10, 199, 161, 0.3);
+  background-color: #c6f6d5;
+  color: #38a169;
 }
 
-/* Modern Authentication Button */
 .auth-btn {
   width: 100%;
-  padding: var(--space-md) var(--space-lg);
+  padding: 12px;
   border: none;
-  border-radius: var(--radius-xl);
-  color: var(--text-primary);
-  font-family: var(--font-display);
-  font-size: var(--font-size-lg);
-  font-weight: 600;
+  border-radius: 8px;
+  color: white;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 18px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--accent-teal), #0eb399);
-  box-shadow: var(--shadow-medium);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.4s var(--ease-out-cubic);
-  animation: buttonEntrance 0.6s var(--ease-spring) 0.8s backwards;
-}
-
-@keyframes buttonEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.auth-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.6s var(--ease-out-cubic);
+  transition: all 0.3s ease;
 }
 
 .auth-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0eb399, var(--accent-teal));
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 16px 32px rgba(10, 199, 161, 0.4);
+  background-color: #0fb392;
+  transform: scale(1.05);
 }
 
-.auth-btn:hover:not(:disabled)::before {
-  left: 100%;
-}
-
-.auth-btn:active:not(:disabled) {
-  transform: translateY(-1px) scale(0.98);
-  transition: all 0.1s var(--ease-out-cubic);
-}
-
-/* Loading State */
 .auth-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
-  background: linear-gradient(135deg, #666, #888);
-  position: relative;
 }
 
-.auth-btn.loading {
-  color: transparent;
-}
-
-.auth-btn.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid transparent;
-  border-top: 2px solid var(--text-primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-/* Enhanced Auth Switch */
 .auth-switch {
   text-align: center;
-  margin-top: var(--space-xl);
-  font-family: var(--font-primary);
-  color: var(--text-secondary);
-  animation: switchEntrance 0.6s var(--ease-out-cubic) 1s backwards;
-}
-
-@keyframes switchEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.auth-switch a {
-  color: var(--accent-teal);
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s var(--ease-out-cubic);
-  position: relative;
-}
-
-.auth-switch a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(135deg, var(--accent-teal), var(--light-blue));
-  transition: width 0.3s var(--ease-out-cubic);
-}
-
-.auth-switch a:hover {
-  color: var(--light-blue);
-}
-
-.auth-switch a:hover::after {
-  width: 100%;
+  margin-top: 1rem;
+  font-family: 'Raleway', sans-serif;
+  color: #0f1849;
 }

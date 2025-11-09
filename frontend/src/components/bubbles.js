@@ -2,16 +2,14 @@ import React from "react";
 import "../styles/bubbles.css";
 
 const Bubbles = () => {
-  // Generate 40 bubbles with enhanced physics-based properties
-  const bubbles = Array.from({ length: 40 }).map((_, i) => {
-    const size = Math.floor(Math.random() * 80) + 8; // 8-88px
+  // Generate 50 bubbles with random properties
+  const bubbles = Array.from({ length: 50 }).map((_, i) => {
+    const size = Math.floor(Math.random() * 95) + 5; // 5-100px
     const isEven = i % 2 === 0;
-    const animationDuration = Math.floor(Math.random() * 12) + 6; // 6-18s for smoother motion
-    const initialBottom = -120; // Start below screen
-    const finalBottom = Math.floor(Math.random() * 150) + 100; // End above screen
-    const translateX = Math.floor(Math.random() * 400) - 200; // -200 to 200px
-    const delay = Math.random() * 8; // 0-8s staggered start
-    const maxOpacity = Math.random() * 0.4 + 0.3; // 0.3-0.7 opacity variation
+    const animationDuration = Math.floor(Math.random() * 10) + 3; // 3-13s
+    const initialBottom = Math.floor(Math.random() * 100); // 0-100vh
+    const finalBottom = Math.floor(Math.random() * 100); // 0-100vh
+    const translateX = Math.floor(Math.random() * 300) - 100; // -100 to 200px
 
     return (
       <div
@@ -19,14 +17,12 @@ const Bubbles = () => {
         className="bubble"
         style={{
           "--size": `${size}px`,
-          "--initial-bottom": `${initialBottom}px`,
+          "--initial-bottom": `${initialBottom}vh`,
           "--final-bottom": `${finalBottom}vh`,
           "--translate-x": `${translateX}px`,
           "--duration": `${animationDuration}s`,
-          "--delay": `${delay}s`,
-          "--max-opacity": maxOpacity,
-          "--bg-pos": isEven ? "top right" : "center left",
-          left: `${Math.floor(Math.random() * 120) - 10}vw`, // -10vw to 110vw for off-screen start
+          "--bg-pos": isEven ? "top right" : "center",
+          left: `${Math.floor(Math.random() * 100)}vw`,
         }}
       />
     );
