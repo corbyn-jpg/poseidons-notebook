@@ -12,21 +12,23 @@
 .bubble {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.5;
+  opacity: 0.6;
   width: var(--size);
   height: var(--size);
   bottom: var(--initial-bottom);
   background: radial-gradient(
     ellipse at var(--bg-pos),
-    rgba(124, 194, 252, 0.3) 0%,
-    rgba(51, 109, 216, 0.2) 46%,
-    rgba(39, 56, 155, 0.1) 100%
+    rgba(124, 194, 252, 0.4) 0%,
+    rgba(51, 109, 216, 0.3) 46%,
+    rgba(39, 56, 155, 0.2) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 12px rgba(124, 194, 252, 0.08);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(124, 194, 252, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
   animation: float var(--duration) infinite;
-  will-change: transform;
-  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: transform, opacity;
 }
 
 @keyframes float {

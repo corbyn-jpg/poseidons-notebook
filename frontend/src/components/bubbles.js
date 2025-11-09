@@ -3,7 +3,7 @@ import "../styles/bubbles.css";
 
 const Bubbles = () => {
   // Generate 25 bubbles for optimal performance
-  const bubbles = Array.from({ length: 25 }).map((_, i) => {
+  const bubbles = Array.from({ length: 50 }).map((_, i) => {
     const size = Math.floor(Math.random() * 95) + 5; // 5-100px
     const isEven = i % 2 === 0;
     const animationDuration = Math.floor(Math.random() * 10) + 3; // 3-13s
