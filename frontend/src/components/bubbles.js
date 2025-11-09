@@ -2,8 +2,8 @@ import React from "react";
 import "../styles/bubbles.css";
 
 const Bubbles = () => {
-  // Generate 50 bubbles with random properties
-  const bubbles = Array.from({ length: 50 }).map((_, i) => {
+  // Generate 35 bubbles for better performance while maintaining visual appeal
+  const bubbles = Array.from({ length: 35 }).map((_, i) => {
     const size = Math.floor(Math.random() * 95) + 5; // 5-100px
     const isEven = i % 2 === 0;
     const animationDuration = Math.floor(Math.random() * 10) + 3; // 3-13s

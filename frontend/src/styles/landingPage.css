@@ -1,8 +1,8 @@
 .container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #0f1849, #71c9ff);
+  background: linear-gradient(135deg, #0f1849 0%, #2a4a7a 50%, #71c9ff 100%);
   color: #0f1849;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Inter', sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -22,13 +22,25 @@
 }
 
 .get-started-btn button {
-  background-color: #0AC7A1;
+  background: linear-gradient(135deg, #0AC7A1, #0ea5d1);
   color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-family: 'Barlow Semi Condensed', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(10, 199, 161, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(10, 199, 161, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.get-started-btn button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(10, 199, 161, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }

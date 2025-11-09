@@ -1,5 +1,7 @@
 .footer{
-  background: rgba(15, 24, 73, 0.95);
+  background: rgba(15, 24, 73, 0.85);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
   padding: clamp(1.25rem, 3.5vh, 3rem) 5%;
   display: flex;
@@ -8,6 +10,18 @@
   flex-wrap: wrap;
   align-items: flex-start;
   z-index: 1;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
 }
 
 
@@ -48,12 +62,13 @@
   height: clamp(20px, 4.5vh, 40px);
   width: auto;
   padding-left: 0.6rem;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .footer-icon:hover {
-  transform: scale(1.05);
-  opacity: 0.95;
+  transform: scale(1.1) translateY(-2px);
+  filter: drop-shadow(0 4px 8px rgba(113, 201, 255, 0.3));
 }
 
 @media (max-width: 768px) {

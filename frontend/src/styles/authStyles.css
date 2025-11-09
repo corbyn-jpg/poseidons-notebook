@@ -14,13 +14,29 @@
 
 /* Auth card */
 .auth-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2.5rem;
+  border-radius: 24px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   z-index: 10;
-  box-shadow: 0 10px 30px rgba(15, 45, 76, 0.2);
+  box-shadow: 
+    0 25px 45px rgba(15, 24, 73, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
 }
 
 .logo {
@@ -42,17 +58,25 @@
 
 .input-group input {
   width: 93%;
-  padding: 12px;
-  border: 2px solid #71c9ff;
-  border-radius: 8px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(113, 201, 255, 0.5);
+  border-radius: 12px;
   font-size: 16px;
-  transition: border-color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .input-group input:focus {
   outline: none;
+  background: rgba(255, 255, 255, 0.95);
   border-color: #0AC7A1;
-  box-shadow: 0 0 0 3px rgba(10, 199, 161, 0.1);
+  box-shadow: 
+    0 0 0 3px rgba(10, 199, 161, 0.1),
+    0 4px 12px rgba(10, 199, 161, 0.1);
+  transform: translateY(-1px);
 }
 
 .input-group input.error {
