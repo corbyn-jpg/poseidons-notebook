@@ -14,13 +14,11 @@
   margin: 2rem auto;
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .contributions-header {
@@ -147,16 +145,13 @@
 }
 
 .stat-item {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 2rem 1.5rem;
-  border-radius: 20px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 
-    0 8px 32px rgba(15, 45, 76, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(15, 45, 76, 0.08);
+  transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
 }
@@ -172,11 +167,9 @@
 }
 
 .stat-item:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 15px 40px rgba(15, 45, 76, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 45, 76, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .stat-number {

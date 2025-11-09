@@ -75,7 +75,20 @@ body {
 .card,
 .navbar,
 .footer {
-  will-change: transform, opacity;
+  will-change: transform;
+}
+
+/* Reduce motion for better performance on low-end devices */
+@media (max-width: 768px) {
+  .bubble {
+    animation-duration: calc(var(--duration) * 1.5);
+  }
+}
+
+/* Optimize transforms */
+* {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 /* Focus styles for accessibility */
