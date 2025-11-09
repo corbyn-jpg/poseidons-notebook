@@ -81,7 +81,7 @@
 }
 
 .hero-btn {
-  background: linear-gradient(135deg, var(--accent-main), var(--accent-light));
+  background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
   color: white;
   border: none;
   padding: var(--space-4) var(--space-10);
@@ -109,7 +109,7 @@
 }
 
 .hero-btn:hover {
-  background: linear-gradient(135deg, var(--accent-light), var(--accent-main));
+  background: linear-gradient(135deg, var(--accent-400), var(--accent-300));
   transform: translateY(-3px) scale(1.05);
   box-shadow: 
     var(--shadow-2xl),
