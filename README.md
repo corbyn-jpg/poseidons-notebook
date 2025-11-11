@@ -349,10 +349,10 @@ const authorizeAdmin = (req, res, next) => {
 ### Key Screenshots
 
 **Dashboard View**
-![Dashboard]<img width="1881" height="894" alt="image" src="https://github.com/user-attachments/assets/9f49179e-0cfb-4049-a177-50922fb7e017" />
+<img width="1881" height="894" alt="image" src="https://github.com/user-attachments/assets/9f49179e-0cfb-4049-a177-50922fb7e017" />
 
 **Mobile Interface**
-![Mobile View]<img width="489" height="903" alt="image" src="https://github.com/user-attachments/assets/c78545e5-b639-465c-9fb6-95255cc9f0d4" />
+<img width="489" height="903" alt="image" src="https://github.com/user-attachments/assets/c78545e5-b639-465c-9fb6-95255cc9f0d4" />
 
 
 ---
@@ -386,7 +386,7 @@ const authorizeAdmin = (req, res, next) => {
 
 ### Future Improvements
 
-🔮 **Planned Features:**
+ **Planned Features:**
 
 - **Mobile Application:** Native iOS/Android versions for offline field use
 - **AI Integration:** Automated species identification from uploaded photos
@@ -396,7 +396,7 @@ const authorizeAdmin = (req, res, next) => {
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License**. This means you are free to use, modify, and distribute this software, subject to the terms of the license. 
 
@@ -411,14 +411,14 @@ Copyright © 2025 Chloe Robinson. All rights reserved.
 **Chloe Robinson**  
 *Full-Stack Developer & Marine Conservation Enthusiast*
 
-- 📧 **Email:** 241040@virtualwindow.co.za
-- 💼 **LinkedIn:** [linkedin.com/in/chloe-robinson-25b123351](https://www.linkedin.com/in/chloe-robinson-25b123351)
-- 🐙 **GitHub:** [github.com/corbyn-jpg](https://github.com/corbyn-jpg)
-- 🌐 **Portfolio:** [Your Portfolio Link]
+- **Email:** 241040@virtualwindow.co.za
+- **LinkedIn:** [linkedin.com/in/chloe-robinson-25b123351](https://www.linkedin.com/in/chloe-robinson-25b123351)
+- **GitHub:** [github.com/corbyn-jpg](https://github.com/corbyn-jpg)
+- **Portfolio:** [Your Portfolio Link]
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 This project was made possible through the support and resources of several individuals and organizations:
 
