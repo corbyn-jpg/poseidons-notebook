@@ -349,14 +349,15 @@ const authorizeAdmin = (req, res, next) => {
 ### Key Screenshots
 
 **Dashboard View**
-![Dashboard](https://github.com/user-attachments/assets/6daab944-d099-43c9-b089-72093f9b5c09)
+![Dashboard]<img width="1881" height="894" alt="image" src="https://github.com/user-attachments/assets/9f49179e-0cfb-4049-a177-50922fb7e017" />
 
 **Mobile Interface**
-![Mobile View](https://github.com/user-attachments/assets/3e238a4c-53a0-4df7-9fa1-9a7a73bb302a)
+![Mobile View]<img width="489" height="903" alt="image" src="https://github.com/user-attachments/assets/c78545e5-b639-465c-9fb6-95255cc9f0d4" />
+
 
 ---
 
-## 📝 Conclusion
+## Conclusion
 
 ### Project Highlights
 
